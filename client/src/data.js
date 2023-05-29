@@ -88,9 +88,9 @@ export const faq = [
   },
   {
     id: 8,
-    heading: 'Mary Sue',
+    heading: 'Can I choose any amount to withdraw per time?',
     summary:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus fugit voluptatem aliquid ipsum sunt cum, et excepturi, voluptas ipsa veniam tempora similique dolorum, assumenda ut animi. Quia explicabo sed delectus aperiam assumenda, aliquam maiores vel quaerat unde nobis quod mollitia aspernatur iste sit eius. Iste eius similique aut in itaque ab quos animi cupiditate dolorem adipisci eos at voluptates quam voluptatem explicabo, ad, nihil temporibus eveniet',
+      'Yes, you can!\n Simply log into your account and click on the withdraw option, then input the amount you want to withdraw.',
   },
   {
     id: 9,

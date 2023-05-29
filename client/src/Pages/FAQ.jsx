@@ -28,14 +28,14 @@ const FAQ = () => {
   return (
     <div>
       {/* HEADING */}
-      <div className='bg-[#f9f9f9] bg-center z-20 w-full h-96 top-10 relative py-36 flex flex-col object-contain justify-center items-center'>
+      <div className='bg-[#f9f9f9] bg-center z-20 w-full h-96 top relative py-36 flex flex-col object-contain justify-center items-center'>
         <h1 className='text-5xl font-bold text-black my-8 text-center ml-0'>
           Frequently Asked Questions (FAQs)
         </h1>
       </div>
       {/* BODY */}
-      <div className='px-4 py-24 mx-40'>
-        <div className='executives__container w-full'>
+      <div className='px-4 py-24 bg-image bg-left bg-no-repeat bg-fixed bg-cover'>
+        <div className='w-full lg:px-40'>
           {faqData.map(
             ({ id, heading, summary, click, showSummary }) => {
               return (

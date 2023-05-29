@@ -12,6 +12,7 @@ export default {
       colors: {
         yellow: { 450: "#F7D046" },
         purple: { 950: "#5B38E3" },
+        blue: { 950: '#4182AB' },
       },
       boxShadow: {
         card: "0 0 1px 0 rgba(189,192,207,0.06),0 10px 16px -1px rgba(189,192,207,0.2)",
@@ -31,6 +32,7 @@ export default {
         myspin: "myspin 5s linear infinite",
       },
       backgroundImage: {
+        image: 'url(../src/assets/images/bg3.jpg)',
         bg: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg.jpg')",
         bg2: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg3.jpg')",
         mybg: "linear-gradient(to right, #00ccff, #0040ff, #c509f4, #c20b0b)",
