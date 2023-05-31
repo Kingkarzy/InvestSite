@@ -1,23 +1,33 @@
-import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { Link } from 'react-router-dom';
+import { Close, Menu } from '@mui/icons-material';
+import { useState } from 'react';
 
+function Navbar({ onToggleSidebar }) {
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(!click);
+    onToggleSidebar(); // Call the onToggleSidebar function from props
+  };
 
-function Navbar() {
   return (
-    <nav className="flex justify-between">
-      <div className="">
-        {/* BURGER MENU HERE*/}
-        =
-      </div>
+    <nav className='flex justify-between'>
+      <button
+        className=''
+        onClick={handleClick}
+      >
+        {click ? <Menu /> : <Close />}
+      </button>
       <div>
-        <Link to="/">Logo</Link>
+        <Link to='/'>Logo</Link>
       </div>
-      <div className=" flex gap-5">
-        <Link to="/settings">User Account</Link>
-        <Link to="/logout">Logout</Link>
+      <div className=' flex gap-5'>
+        <Link to='/settings'>User Account</Link>
+        <Link to='/logout'>Logout</Link>
       </div>
     </nav>
   );
 }
 
 export default Navbar;
-
