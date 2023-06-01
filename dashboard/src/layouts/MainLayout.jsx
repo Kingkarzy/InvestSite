@@ -10,21 +10,21 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className='w-full h-screen flex flex-col justify-between bg-gray-300 p-5'>
+    <div className="w-full h-full gap-10 flex flex-col justify-evenly bg-gray-300 p-5">
       <Navbar onToggleSidebar={handleToggleSidebar} />
-      <div className='flex gap-5 h-4/5'>
+      <div className="flex gap-5 h-4/5">
         <div
           className={`border border-amber-500 p-5 w-56 ${
-            isSidebarOpen ? '' : 'hidden'
+            isSidebarOpen ? "" : "hidden"
           }`}
         >
           <Sidebar />
         </div>
-        <div className='border flex-grow border-cyan-950 p-5'>
+        <div className="border flex-grow border-cyan-950 p-5">
           <Outlet />
         </div>
       </div>
-      <div className=''>
+      <div className="ju">
         <Footer />
       </div>
     </div>
