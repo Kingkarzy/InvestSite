@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-import Sidebar from "./Sidebar";
+import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { useState } from 'react';
 function Layout() {
@@ -10,11 +10,11 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className='w-full h-screen flex flex-col justify-between bg-gray-300 p-5'>
+    <div className='w-full h-full flex flex-col justify-between bg-gray-300 p-5 gap-10'>
       <Navbar onToggleSidebar={handleToggleSidebar} />
       <div className='flex gap-5 h-4/5'>
         <div
-          className={`border border-amber-500 p-5 w-56 ${
+          className={`border border-amber-500 p-5 w-56 fixed bg-white left-0 lg:relative ${
             isSidebarOpen ? '' : 'hidden'
           }`}
         >
