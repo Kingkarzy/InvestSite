@@ -5,7 +5,6 @@ import { ExpandMore, ExpandLess } from '@mui/icons-material';
 function Sidebar() {
   const [click, setClick] = useState(false);
   const handleclick = () => {
-    // e.preventDefault()
     setClick(!click);
   };
   return (
