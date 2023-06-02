@@ -10,7 +10,7 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className='w-full h-full flex flex-col justify-between bg-gray-300 p-5 gap-10'>
+    <div className='w-full h-full gap-10 flex flex-col justify-evenly bg-gray-300 p-5'>
       <Navbar onToggleSidebar={handleToggleSidebar} />
       <div className='flex gap-5 h-4/5'>
         <div
@@ -24,7 +24,7 @@ function Layout() {
           <Outlet />
         </div>
       </div>
-      <div className=''>
+      <div className='ju'>
         <Footer />
       </div>
     </div>
