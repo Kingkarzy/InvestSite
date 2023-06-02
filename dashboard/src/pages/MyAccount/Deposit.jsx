@@ -1,19 +1,19 @@
-import { AddRounded } from "@mui/icons-material";
-import { PrimaryButton } from "../../components/Button";
+import { AddRounded } from '@mui/icons-material';
+import { PrimaryButton } from '../../components/Button';
 function Deposit() {
   return (
-    <div className="">
-      <div className="black-gradient flex p-5 justify-end">
-        <h1 className="h1 ">Deposit</h1>
+    <div className=''>
+      <div className='black-gradient flex p-5 justify-end'>
+        <h1 className='h1 '>Deposit</h1>
       </div>
-      <div className="w-fit my-6">
-        <PrimaryButton className="">
+      <div className='w-fit my-6'>
+        <PrimaryButton className=''>
           <AddRounded /> New Deposit
         </PrimaryButton>
       </div>
       <div>
-        <table className="table w-full mb-5 border border-solid border-gray-100">
-          <thead className="bg-white">
+        <table className='table w-full mb-5 border border-solid border-gray-100'>
+          <thead className='bg-white'>
             <tr>
               <th>ID</th>
               <th>Amount</th>
