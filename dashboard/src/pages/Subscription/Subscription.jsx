@@ -12,14 +12,26 @@ function Subscription() {
       <div className='black-gradient flex flex-col p-4 items-end'>
         <h1 className='h1'>Subscription Trade</h1>
       </div>
-      <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-8/12 shadow-3xl'>
-        <p className='font-normal text-sm md:text-base'>
-          Don’t have time to trade or learn how to trade? <br />
-          We can help you to manage your account in the financial
-          MARKET with a simple subscription model.
+      <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-11/12 shadow-3xl'>
+        <h2 className='font-semibold'>
+          Apex Trading Services Account Manager
+        </h2>
+        <br />
+        <p className='lg:w-2/3 font-light'>
+          No time to trade or learn how to trade?
         </p>
-        <p className='text-green-700 font font-light text-sm md:text-base'>
-          Terms and Conditions apply
+        <p className='lg:w-2/3 font-light'>
+          Our Account Management Service is The Best Profitable
+          Trading Option for you.
+        </p>
+        <p className='lg:w-2/3 font-light'>
+          We can help you to manage your account in the financial
+          Market with a simple Subscriptionmodel.
+        </p>
+        <br />
+        <h6 className='font-semibold'>Term and Conditions apply</h6>
+        <p className='font-light'>
+          Reach us @support@apexaitrading.com for more info.
         </p>
       </div>
       <div className='w-2/4 gap-5 flex'>
