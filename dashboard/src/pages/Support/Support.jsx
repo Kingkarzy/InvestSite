@@ -1,9 +1,9 @@
 function Support() {
   return (
     <div className='flex flex-col gap-10 md:px-10 h-[75vh] overflow-y-scroll'>
-      <div className='flex flex-col flex-wrap gap-10 md:px-10'>
-        <div className='text-center gap-5 flex-1'>
-          <h1>Support</h1>
+      <div className='flex flex-col flex-wrap gap-10'>
+        <div className='black-gradient flex flex-col p-4 items-end'>
+          <h1 className='h1'>Support</h1>
         </div>
         <div className='bg-white flex flex-1 flex-col px-2 md:px-5 py-7 w-full md:w-8/12 shadow-3xl'>
           <p className='font-bold text-sm md:text-base'>

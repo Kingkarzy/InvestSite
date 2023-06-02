@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '../../components/Box';
+import Box from '../../components/Box';
 import { DangerButton, BlackButton } from '../../components/Button';
 
 function WithDraw() {
@@ -13,7 +13,7 @@ function WithDraw() {
   };
 
   return (
-    <div className=''>
+    <div className='overflow-y-scroll h-[70vh]'>
       <div className='my-3'>
         <div className='black-gradient flex p-4 justify-end'>
           <h1 className='h1'>See Our Withdrawal Methods</h1>

@@ -9,7 +9,7 @@ function Sidebar() {
   };
   return (
     <nav>
-      <ul className='flex flex-col gap-5 h-[75vh]'>
+      <ul className='flex flex-col  justify-evenly h-[75vh]'>
         <li>
           <Link to='/'>Dashboard</Link>
         </li>

@@ -10,21 +10,21 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className='w-full h-full gap-10 flex flex-col justify-evenly bg-gray-300 p-5'>
+    <div className='w-full h-full  flex flex-col justify-evenly bg-gray-300'>
       <Navbar onToggleSidebar={handleToggleSidebar} />
-      <div className='flex gap-5 h-4/5'>
+      <div className='flex h-4/5 min-h-[85vh]'>
         <div
-          className={`border border-amber-500 p-5 w-56 z-50 fixed bg-white left-0 lg:relative ${
+          className={`border-amber-500 p-5 w-56 z-50 fixed bg-white left-0 lg:relative ${
             isSidebarOpen ? '' : 'hidden'
           }`}
         >
           <Sidebar />
         </div>
-        <div className='border flex-grow border-cyan-950 p-5'>
+        <div className='flex-grow border-cyan-950 p-5'>
           <Outlet />
         </div>
       </div>
-      <div className=''>
+      <div className='py-5 bg-slate-200'>
         <Footer />
       </div>
     </div>

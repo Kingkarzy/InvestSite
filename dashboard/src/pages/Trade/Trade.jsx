@@ -2,14 +2,12 @@ import PriceCard from './PricingCard';
 
 function Trade() {
   return (
-    <div className='flex flex-col gap-10 lg:px-10 h-[75vh] overflow-y-scroll'>
-      <div className=''>
-        <h1 className='mt-10 text-4xl text-center font-semibold text-black'>
-          Investment Plans
-        </h1>
+    <div className='flex flex-col gap-10 lg:px-10 h-[80vh] overflow-y-scroll'>
+      <div className='black-gradient flex flex-col p-4 items-end'>
+        <h1 className='h1'>Investment Plans</h1>
       </div>
       <div className='items-center justify-center'>
-        <p className='mb-10 px-5 font-light text-center text-gray-400'>
+        <p className='mb-10 px-5 font-light text-center text-white'>
           No matter the size of your pocket, there is always a Plan
           for you. Explore our investment plans today!
         </p>

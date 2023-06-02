@@ -5,7 +5,7 @@ import { Lock } from '@mui/icons-material';
 
 const Dashboard = () => {
   return (
-    <div className='items-center'>
+    <div className='items-center overflow-y-scroll h-[80vh]'>
       <h1 className='mb-10 text-4xl text-center font-semibold text-black'>
         Dashboard
       </h1>
