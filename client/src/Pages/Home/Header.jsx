@@ -19,8 +19,6 @@ import bg3 from "../../assets/images/bg3.jpg";
 import image1 from "../../assets/images/avatar.png";
 import image2 from "../../assets/images/woman.png";
 import image3 from "../../assets/images/img7.png";
-import { useEffect } from "react";
-
 const Header = () => {
   const [text] = useTypewriter({
     words: ["Trust", "Bank on"],

@@ -155,7 +155,7 @@ function Navbar() {
                 to='/register'
                 className=''
                 onClick={closeMobileMenu}
-              >
+                >
                 <button className='text-base font-medium px-8 bg-slate-50 dark:bg-slate-700 hover:bg-yellow-450 hover:text-black hover:scale-110 dark:text-white'>
                   Create an account
                 </button>

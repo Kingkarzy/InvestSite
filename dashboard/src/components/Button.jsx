@@ -50,7 +50,7 @@ export const SuccessButton = ({ children }) => {
 
 export const OutlineButton = ({ children }) => {
   return (
-    <div className="rounded-sm bg-white border border-black shadow-lg px-6 py-1 cursor-pointer hover:scale-90 hover:bg-black hover:text-white">
+    <div className="rounded-sm bg-white border border-black shadow-lg px-6 py-2 cursor-pointer hover:scale-90 hover:bg-black hover:text-white">
       {children}
     </div>
   );
