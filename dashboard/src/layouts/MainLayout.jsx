@@ -24,7 +24,7 @@ function Layout() {
           <Outlet />
         </div>
       </div>
-      <div className='ju'>
+      <div className=''>
         <Footer />
       </div>
     </div>
