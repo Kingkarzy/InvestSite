@@ -2,7 +2,7 @@ import PriceCard from './PricingCard';
 
 function Trade() {
   return (
-    <div className='flex flex-col gap-10 px-10 h-[75vh] overflow-y-scroll'>
+    <div className='flex flex-col gap-10 lg:px-10 h-[75vh] overflow-y-scroll'>
       <div className=''>
         <h1 className='mt-10 text-4xl text-center font-semibold text-black'>
           Investment Plans
@@ -13,7 +13,7 @@ function Trade() {
           No matter the size of your pocket, there is always a Plan
           for you. Explore our investment plans today!
         </p>
-        <div className='w-[90%] grid grid-cols-1 sm:w-full  md:grid-cols-2 lg:grid-cols-3 justify-between gap-5 mx-auto '>
+        <div className='w-[90%] grid grid-cols-1 sm:w-full md:grid-cols-2 lg:grid-cols-3 justify-between gap-5 mx-0 md:mx-auto'>
           <PriceCard
             heading={'Bronze'}
             price='$1000'
@@ -22,7 +22,7 @@ function Trade() {
             refer='2% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
           <PriceCard
@@ -33,7 +33,7 @@ function Trade() {
             refer='2% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
           <PriceCard
@@ -44,7 +44,7 @@ function Trade() {
             refer='5% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
           <PriceCard
@@ -55,7 +55,7 @@ function Trade() {
             refer='5% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
           <PriceCard
@@ -66,7 +66,7 @@ function Trade() {
             refer='8% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
           <PriceCard
@@ -77,7 +77,7 @@ function Trade() {
             refer='8% referral bonus'
             content={`Capital accessible after investment elapses.`}
             // bgColor='#4182AB'
-            width='20rem'
+            width='18rem'
             height={400}
           />
         </div>

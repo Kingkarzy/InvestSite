@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Box from '../../components/Box';
+import { Box } from '../../components/Box';
 import { DangerButton, BlackButton } from '../../components/Button';
 
 function WithDraw() {
@@ -8,7 +8,7 @@ function WithDraw() {
   const [usdt, setUSDT] = useState('');
 
   return (
-    <div className='h-auto flex flex-col gap-5'>
+    <div className='h-[64.8vh] overflow-y-scroll flex flex-col gap-5'>
       <div className='black-gradient flex p-5 justify-end'>
         <h1 className='h1'>Add your Withdraw info</h1>
       </div>

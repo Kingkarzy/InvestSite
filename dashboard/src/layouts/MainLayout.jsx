@@ -14,7 +14,7 @@ function Layout() {
       <Navbar onToggleSidebar={handleToggleSidebar} />
       <div className='flex gap-5 h-4/5'>
         <div
-          className={`border border-amber-500 p-5 w-56 fixed bg-white left-0 lg:relative ${
+          className={`border border-amber-500 p-5 w-56 z-50 fixed bg-white left-0 lg:relative ${
             isSidebarOpen ? '' : 'hidden'
           }`}
         >
