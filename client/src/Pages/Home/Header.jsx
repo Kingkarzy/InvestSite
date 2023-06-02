@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useTypewriter } from "react-simple-typewriter";
 //Components
 import MyBtn from "../../components/MyBtn";
 // Import Swiper styles
@@ -19,8 +19,31 @@ import bg3 from "../../assets/images/bg3.jpg";
 import image1 from "../../assets/images/avatar.png";
 import image2 from "../../assets/images/woman.png";
 import image3 from "../../assets/images/img7.png";
+import { useEffect } from "react";
 
 const Header = () => {
+  const [text] = useTypewriter({
+    words: ["Trust", "Bank on"],
+    typeSpeed: 80,
+    deleteSpeed: 50,
+    delaySpeed: 800,
+    loop: 0,
+  });
+  const [text2] = useTypewriter({
+    words: ["convenient", "suitable"],
+    // typeSpeed: 100,
+    // deleteSpeed: 50,
+    // delaySpeed: 1000,
+    loop: 3,
+  });
+  const [text3] = useTypewriter({
+    words: ["Better", "Greater", "faster"],
+    //  typeSpeed: 80,
+    //  deleteSpeed: 50,
+    //  delaySpeed: 1000,
+    loop: 2,
+  });
+
   return (
     <div className="h-[70vh] lg:h-[90vh]">
       <Swiper
@@ -46,8 +69,8 @@ const Header = () => {
             <div className="absolute p-5 top-0 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center text-white">
               <div className="p-5 text-left rounded-md shadow-sm">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
-                  Invest With A Firm You Can{" "}
-                  <span className="pink-text-gradient">Trust</span>
+                  Invest With A Firm You Can <br />
+                  <span className="pink-text-gradient">{text}</span>
                 </h1>
                 <p className="text-sm lg:text-lg">
                   24/7 monitoring of your investment is Assured
@@ -73,8 +96,8 @@ const Header = () => {
             <div className="lg:w-[70%] sm:mt-10 lg:mx-auto lg:mt-10 lg:left-[20rem] absolute p-5 top-0  items-center justify-center text-white">
               <div className="black-gradient p-5 text-left rounded-md shadow-2xl">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
-                  More <span className=" blue-text-gradient">convenient</span>{" "}
-                  Than Others
+                  More <span className=" blue-text-gradient">{text2}</span> Than
+                  Others
                 </h1>
                 <p className="text-sm lg:text-lg">
                   <span className="text-xl font-bold pink-text-gradient">
@@ -103,8 +126,8 @@ const Header = () => {
             <div className="absolute p-5 top-10 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center ">
               <div className="p-5 text-left rounded-md shadow-xl">
                 <h1 className="text-3xl font-bold mb-4 sm:text-5xl lg:text-7xl text-black">
-                  We Serve You{" "}
-                  <span className="orange-text-gradient">Better</span>
+                  We Serve You <br />
+                  <span className="orange-text-gradient">{text3}</span>
                 </h1>
                 <p className="text-sm lg:text-lg text-black">
                   We hire the best traders to serve you better

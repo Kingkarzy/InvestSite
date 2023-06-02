@@ -29,6 +29,13 @@
 .h1 {
   @apply text-xl font-bold text-[var(--yellow-color)];
 }
+.h2 {
+  @apply text-xl font-bold text-[var(--ghost)];
+}
+th,
+td {
+  @apply py-2 px-3;
+}
 
 /* gradient colors */
 .background-indigo-gradient {
