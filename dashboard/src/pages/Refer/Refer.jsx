@@ -1,14 +1,20 @@
 import {Box} from "../../components/Box"
 function Refer() {
   return (
-    <div className="h-screen flex flex-col gap-5">
+    <div className="h-screen flex flex-col gap-4">
       <div className="black-gradient flex p-4 justify-end">
         <h1 className="h2">Refer Users to Apex Trading Services Community</h1>
       </div>
       <div>
         <Box>
-          <h2 className="font:semibold">You can refer users by sharing your referral link:</h2>
-          <div>[http://apexaitrading.com/ref/{1644}]</div>
+          <div className="w-full bg-white flex justify-between">
+            <h2 className="font:semibold">
+              You can refer users by sharing your referral link: 
+            </h2>
+            <div className="text-green-700 font-semibold">
+              [http://apexaitrading.com/ref/{1644}]
+            </div>
+          </div>
         </Box>
       </div>
       <div>
