@@ -19,7 +19,7 @@ import Packages from './Pages/Packages';
 import FAQ from './Pages/FAQ';
 import Terms from './Pages/Terms';
 import Login from './Pages/Login';
-import Register from './Pages/Home/Register';
+import Register from './Pages /Home/Register';
 
 const App = () => {
   return (
