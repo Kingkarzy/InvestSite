@@ -17,6 +17,12 @@ function Layout() {
           className={`border-amber-500 p-5 w-56 z-50 fixed bg-white left-0 lg:relative ${
             isSidebarOpen ? '' : 'hidden'
           }`}
+          style={{
+            height: '85vh',
+            '@media (minWidth: 768px)': {
+              height: 'auto',
+            },
+          }}
         >
           <Sidebar />
         </div>

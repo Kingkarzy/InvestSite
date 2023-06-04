@@ -26,7 +26,7 @@ function Subscription() {
         </p>
         <p className='lg:w-2/3 font-light'>
           We can help you to manage your account in the financial
-          Market with a simple Subscriptionmodel.
+          Market with a simple Subscription model.
         </p>
         <br />
         <h6 className='font-semibold'>Term and Conditions apply</h6>
