@@ -30,7 +30,7 @@ function Navbar({ onToggleSidebar }) {
       </div>
       <div className=' flex gap-5'>
         <Link to='/settings'>User Account</Link>
-        <h2></h2>
+        <h2>{user.username}</h2>
         <button onClick={() => dispatch(setLogout())}>Logout</button>
       </div>
     </nav>
