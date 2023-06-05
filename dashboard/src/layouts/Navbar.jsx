@@ -12,7 +12,7 @@ function Navbar({ onToggleSidebar }) {
   };
 
   return (
-    <nav className='flex justify-between'>
+    <nav className='flex justify-between px-5 py-5 bg-slate-200'>
       <button
         className=''
         onClick={handleClick}

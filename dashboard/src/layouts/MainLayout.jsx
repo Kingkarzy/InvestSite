@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-import Sidebar from "./Sidebar";
+import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { useState } from 'react';
 function Layout() {
@@ -10,21 +10,27 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className="w-full h-full gap-10 flex flex-col justify-evenly bg-gray-300 p-5">
+    <div className='w-full h-full  flex flex-col justify-evenly bg-gray-300'>
       <Navbar onToggleSidebar={handleToggleSidebar} />
-      <div className="flex gap-5 h-4/5">
+      <div className='flex h-4/5 min-h-[85vh]'>
         <div
-          className={`border border-amber-500 p-5 w-56 ${
-            isSidebarOpen ? "" : "hidden"
+          className={`border-amber-500 p-5 w-56 z-50 fixed bg-white left-0 lg:relative ${
+            isSidebarOpen ? '' : 'hidden'
           }`}
+          style={{
+            height: '85vh',
+            '@media (minWidth: 768px)': {
+              height: 'auto',
+            },
+          }}
         >
           <Sidebar />
         </div>
-        <div className="border flex-grow border-cyan-950 p-5">
+        <div className='flex-grow border-cyan-950 p-5'>
           <Outlet />
         </div>
       </div>
-      <div className="ju">
+      <div className='py-5 bg-slate-200'>
         <Footer />
       </div>
     </div>

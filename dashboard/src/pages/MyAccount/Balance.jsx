@@ -1,4 +1,3 @@
-
 function Balance() {
   return (
     <div>
@@ -12,4 +11,4 @@ function Balance() {
   );
 }
 
-export default Balance
+export default Balance;

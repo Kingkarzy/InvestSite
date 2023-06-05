@@ -1,37 +1,75 @@
-import { useEffect } from "react";
-import { UseBox } from "../../components/Box";
-import embedTradingViewWidget from "../../utils/helpers";
-import TradingViewWidget from "../../utils/TradingViewWidget";
-import TickerWidget from "../../utils/tickerWidget";
+import { CryptoCurrencyMarket } from 'react-ts-tradingview-widgets';
+import { Timeline } from 'react-ts-tradingview-widgets';
+import Card from './Card';
+import { Lock } from '@mui/icons-material';
+
 const Dashboard = () => {
-  useEffect(embedTradingViewWidget, []);
   return (
-    <div className="">
-      {/* TradingView Widget */}
-      <div className="tradingview-widget-container">
-        <div className="tradingview-widget-container__widget"></div>
+    <div className='items-center overflow-y-scroll h-[80vh]'>
+      <h1 className='mb-10 text-4xl text-center font-semibold text-black'>
+        Dashboard
+      </h1>
+      <div className='flex flex-wrap gap-3 justify-center items-center'>
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'DEPOSITED'}
+          value={'$0.00'}
+        />
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'PROFIT'}
+          value={'$0.00'}
+        />
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'BONUS'}
+          value={'$0.00'}
+        />
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'BALANCE'}
+          value={'$0.00'}
+        />
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'PACKAGE'}
+          value={'$0.00'}
+        />
+        <Card
+          logo={
+            <Lock className='p-1 rounded-full bg-white text-black' />
+          }
+          heading={'WITHDRAWN'}
+          value={'$0.00'}
+        />
       </div>
-
-      <div>
-        <div className="flex flex-row flex-wrap gap-1 lg:justify-between my-5">
-          <UseBox icon="0" name="Balance" amount={"$" + 0 + ".00"} />
-
-          <UseBox icon="0" name="Withdraw" amount={"$" + 0 + ".00"} />
-
-          <UseBox icon="0" name="Profit" amount={"$"} />
-
-          <UseBox icon="0" name="Bonus" amount={"$" + 0 + ".00"} />
-
-          <UseBox icon="0" name="Bonus" amount={"$" + 0 + ".00"} />
-
-          <UseBox icon="0" name="Bonus" amount={"$" + 0 + ".00"} />
+      <div className='container p-10 lg:w-[90%] flex items-center mx-auto flex-col sm:p-3 gap-2'>
+        <div className='w-11/12 mx-auto '>
+          <Timeline
+            colorTheme='dark'
+            feedMode='market'
+            market='crypto'
+            height={400}
+            width='100%'
+          ></Timeline>
         </div>
-        <div className="">
-          
-          <div className="">
-            {/* <TickerWidget /> */}
-            <TradingViewWidget />
-          </div>
+        <div className='w-11/12 mx-auto '>
+          <CryptoCurrencyMarket
+            className=''
+            colorTheme='dark'
+            width='100%'
+            height={400}
+          ></CryptoCurrencyMarket>
         </div>
       </div>
     </div>

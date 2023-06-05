@@ -1,53 +1,47 @@
-import {Box} from "../../components/Box"
-function Refer() {
+import { Person } from '@mui/icons-material';
+
+const Refer = () => {
   return (
-    <div className="h-screen flex flex-col gap-4">
-      <div className="black-gradient flex p-4 justify-end">
-        <h1 className="h2">Refer Users to Apex Trading Services Community</h1>
+    <div className='flex flex-col gap-10 md:px-10 h-[75vh] overflow-x-hidden md:w-full overflow-y-scroll'>
+      <div className='black-gradient flex flex-col p-4 items-end'>
+        <h1 className='h1'>Referrals</h1>
+        <p className='text-white'>Refer users to ApexAI</p>
+      </div>
+      <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-8/12 shadow-3xl'>
+        <p className='font-bold text-sm md:text-base'>
+          You can refer users by sharing your referral link:
+        </p>
+        <p className='text-green-700 text-sm md:text-base'>
+          https://ApexAi.com/ref
+        </p>
       </div>
       <div>
-        <Box>
-          <div className="w-full bg-white flex justify-between">
-            <h2 className="font:semibold">
-              You can refer users by sharing your referral link: 
-            </h2>
-            <div className="text-green-700 font-semibold">
-              [http://apexaitrading.com/ref/{1644}]
-            </div>
-          </div>
-        </Box>
+        <h3 className='text-center mb-1 text-2xl lg:text-3xl'>
+          <small>Your sponsor</small>
+          <br />
+          <Person />
+          <br />
+          <small>null</small>
+        </h3>
       </div>
-      <div>
-        <Box>
-          <h2>[Your Sponsor]</h2>
-          <div>[Avatar]</div>
-          <div>[null]</div>
-        </Box>
-      </div>
-      <div>
-        <table className="table w-full my-5 border text-center border-solid border-gray-100">
-          <thead className="bg-white">
+      <div className='shadow-3xl'>
+        <table className='table w-full mb-5 border border-solid border-gray-100'>
+          <thead className='bg-white border-b-4 border-solid border-b-gray-300'>
             <tr>
-              <th>Client Name</th>
-              <th>Client Inv. Plan</th>
-              <th>Client Status</th>
-              <th>Ref Level</th>
-              <th>Date Registered</th>
+              <th className='text-xs md:text-base'>Client</th>
+              <th className='text-xs md:text-base'>Client Plan</th>
+              <th className='text-xs md:text-base'>Client Status</th>
+              <th className='text-xs md:text-base'>Ref Level</th>
+              <th className='text-xs md:text-base'>
+                Date Registered
+              </th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>{1}</td>
-              <td>{200}</td>
-              <td>{"BTC"}</td>
-              <td>{"Paid"}</td>
-              <td>{"20-10-2023"}</td>
-            </tr>
-          </tbody>
+          <tbody className='bg-white'></tbody>
         </table>
       </div>
     </div>
   );
-}
+};
 
 export default Refer;
