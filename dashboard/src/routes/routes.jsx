@@ -1,65 +1,70 @@
-import { createBrowserRouter } from "react-router-dom";
-import Layout from "../layouts/MainLayout";
-import Account from "../pages/MyAccount/Account";
-import Balance from "../pages/MyAccount/Balance";
-import Withdraw from "../pages/MyAccount/WithDraw";
-import Deposit from "../pages/MyAccount/Deposit";
-import Refer from "../pages/Refer/Refer";
-import Subscription from "../pages/Subscription/Subscription";
-import Support from "../pages/Support/Support";
-import Trade from "../pages/Trade/Trade";
-import Setting from "../pages/AcctDetails/MyAccount";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import NotFound from "../pages/NotFound/NotFound";
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from '../layouts/MainLayout';
+import Account from '../pages/MyAccount/Account';
+import Balance from '../pages/MyAccount/Balance';
+import Withdraw from '../pages/MyAccount/WithDraw';
+import Deposit from '../pages/MyAccount/Deposit';
+import Refer from '../pages/Refer/Refer';
+import Subscription from '../pages/Subscription/Subscription';
+import Support from '../pages/Support/Support';
+import Trade from '../pages/Trade/Trade';
+import Setting from '../pages/AcctDetails/MyAccount';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import NotFound from '../pages/NotFound/NotFound';
+import Login from '../pages/Login';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/',
     element: <Layout />,
     errorElement: <NotFound />,
     children: [
       {
         index: true,
-        path: "/",
+        path: '/',
         element: <Dashboard />,
       },
       {
-        path: "/myaccount",
+        path: '/myaccount',
         element: <Account />,
         children: [
           {
-            path: "balance",
+            path: 'balance',
             element: <Balance />,
           },
           {
-            path: "withdraw",
+            path: 'withdraw',
             element: <Withdraw />,
           },
           {
-            path: "deposit",
+            path: 'deposit',
             element: <Deposit />,
           },
         ],
       },
 
       {
-        path: "/trade",
+        path: '/trade',
         element: <Trade />,
       },
       {
-        path: "/subscription",
+        path: '/subscription',
         element: <Subscription />,
       },
       {
-        path: "/refer",
+        path: '/refer',
         element: <Refer />,
       },
       {
-        path: "/support",
+        path: '/support',
         element: <Support />,
       },
       {
-        path: "/settings",
+        path: '/settings',
         element: <Setting />,
       },
     ],

@@ -3,8 +3,14 @@
 import { Link } from 'react-router-dom';
 import { Close, Menu } from '@mui/icons-material';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogout } from '../state/index';
 
 function Navbar({ onToggleSidebar }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  console.log(user);
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(!click);
@@ -24,7 +30,8 @@ function Navbar({ onToggleSidebar }) {
       </div>
       <div className=' flex gap-5'>
         <Link to='/settings'>User Account</Link>
-        <Link to='/logout'>Logout</Link>
+        <h2></h2>
+        <button onClick={() => dispatch(setLogout())}>Logout</button>
       </div>
     </nav>
   );

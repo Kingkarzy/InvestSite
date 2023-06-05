@@ -18,8 +18,6 @@ import Footer from './components/Footer';
 import Packages from './Pages/Packages';
 import FAQ from './Pages/FAQ';
 import Terms from './Pages/Terms';
-import Login from './Pages/Login';
-import Register from './Pages /Home/Register';
 
 const App = () => {
   return (
@@ -47,14 +45,6 @@ const App = () => {
           <Route
             path='/terms'
             element={<Terms />}
-          />
-          <Route
-            path='/login'
-            element={<Login />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
           />
           <Route
             path='*'
