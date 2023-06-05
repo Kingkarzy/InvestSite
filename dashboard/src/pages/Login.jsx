@@ -42,7 +42,6 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState('login');
-  // const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -80,12 +79,13 @@ const Form = () => {
       );
       const loggedIn = response.data;
 
+      console.log(loggedIn);
       onSubmitProps.resetForm();
 
       if (loggedIn) {
         dispatch(
           setLogin({
-            user: loggedIn.user,
+            user: loggedIn,
             token: loggedIn.token,
           })
         );
