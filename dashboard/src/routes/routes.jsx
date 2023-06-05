@@ -15,7 +15,8 @@ import Login from '../pages/Login';
 
 const router = createBrowserRouter([
   {
-    path: '/login',
+    path: '/',
+    index: true,
     element: <Login />,
   },
   {
@@ -24,7 +25,6 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        index: true,
         path: '/',
         element: <Dashboard />,
       },
