@@ -16,10 +16,10 @@ import axios from 'axios';
 
 const registerSchema = yup.object().shape({
   username: yup.string().required('required'),
-  firstName: yup.string().required('required'),
-  lastName: yup.string().required('required'),
   email: yup.string().email('invalid email').required('required'),
   password: yup.string().required('required'),
+  firstName: yup.string().required('required'),
+  lastName: yup.string().required('required'),
 });
 
 const loginSchema = yup.object().shape({
@@ -40,25 +40,29 @@ const initialValuesLogin = {
   password: '',
 };
 
-const Form = () => {
+const Login = () => {
   const [pageType, setPageType] = useState('login');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const isLogin = pageType === 'login';
   const isRegister = pageType === 'register';
+  const [errorss, setError] = useState(false);
+  const [errMessage, setErrMessage] = useState('');
 
   const register = async (values, onSubmitProps) => {
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
+      console.log(value);
     }
-
+    console.log(formData);
     try {
       const response = await axios.post(
         'http://localhost:3001/api/auth/register',
         formData
       );
+      console.log(response);
       const savedUser = response.data;
 
       onSubmitProps.resetForm();
@@ -66,8 +70,8 @@ const Form = () => {
       if (savedUser) {
         setPageType('login');
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -79,7 +83,7 @@ const Form = () => {
       );
       const loggedIn = response.data;
 
-      console.log(loggedIn);
+      // console.log(loggedIn);
       onSubmitProps.resetForm();
 
       if (loggedIn) {
@@ -91,8 +95,12 @@ const Form = () => {
         );
         navigate('/');
       }
-    } catch (error) {
-      // console.log(error);
+    } catch (err) {
+      // console.log(err);
+      setError(!errorss);
+      console.log(errMessage);
+      setErrMessage('Invalid Credentials');
+      console.log(errMessage);
     }
   };
 
@@ -203,6 +211,9 @@ const Form = () => {
                 sx={{ gridColumn: 'span 4' }}
               />
             </Box>
+            {errorss && (
+              <h1 className='text-red-500'>{errMessage}</h1>
+            )}
             {/* BUTTONS */}
             <Box>
               <Button
@@ -244,4 +255,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default Login;

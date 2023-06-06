@@ -32,6 +32,7 @@ const UserSchema = new mongoose.Schema(
       min: 2,
       max: 25,
     },
+    isApproved: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false, },
   },
   { timestamps: true }

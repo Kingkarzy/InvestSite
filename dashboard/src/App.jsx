@@ -17,7 +17,8 @@ import Trade from './pages/Trade/Trade';
 import Setting from './pages/AcctDetails/MyAccount';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NotFound from './pages/NotFound/NotFound';
-import Login from './pages/Login';
+import Login from './pages/Form/Login';
+import Register from './pages/Form/Register';
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -29,6 +30,10 @@ function App() {
             path='/login'
             index
             element={<Login />}
+          />
+          <Route
+            path='/register'
+            element={<Register />}
           />
           <Route
             path='/'
