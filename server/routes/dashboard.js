@@ -1,13 +1,13 @@
 import express from 'express'
 
 // IMPORT VERIFICATION TOKENS
-import { verifyUserToken, verifyTokenAndAuthorization } from './verifyToken'
+import { verifyTokenAndAuthorization } from './verifyToken.js'
 
 // IMPORT MONGOOSE SCHEMAS
-import Deposit from '../models/deposit'
-import Withdraw from '../models/withdraw'
-import Referral from '../models/referral'
-import Plan from '../models/plan'
+import Deposit from '../models/deposit.js'
+import Withdraw from '../models/withdraw.js'
+import Referral from '../models/referral.js'
+import Plan from '../models/plan.js'
 
 const router = express.Router()
 
