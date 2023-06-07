@@ -40,7 +40,7 @@ const Register = () => {
     });
   };
   return (
-    <div className='w-screen h-screen flex items-center justify-center bg-gradient-to-b from-white to-[#9b51e0] bg-cover'>
+    <div className='w-screen h-screen flex items-center justify-center bg-gradient-to-r from-[#e0e0e0] to-[#9b51e0] bg-cover'>
       <div className='p-16  lg:w-2/4 bg-white shadow-2xl'>
         <h1 className='text-center text-2xl font-semibold'>
           CREATE AN ACCOUNT

@@ -2,10 +2,7 @@ import mongoose from "mongoose";
 
 const WithdrawSchema = mongoose.Schema(
     {
-        withdrawId: {
-            type: Number,
-            unique: true,
-        },
+        userId: { type: String, required: true },
         amount: { type: Number, default: 0 },
         mode: { type: String, default: "BTC" },
         status: { type: String, default: "pending" },

@@ -2,10 +2,7 @@ import mongoose from "mongoose";
 
 const DepositSchema = mongoose.Schema(
     {
-        depositId: {
-            type: Number,
-            unique: true,
-        },
+        userId: { type: String, required: true },
         amount: { type: Number, default: 0 },
         mode: { type: String, default: "BTC" },
         status: { type: String, default: "pending" },

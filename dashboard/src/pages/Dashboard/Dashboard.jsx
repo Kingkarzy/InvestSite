@@ -2,8 +2,10 @@ import { CryptoCurrencyMarket } from 'react-ts-tradingview-widgets';
 import { Timeline } from 'react-ts-tradingview-widgets';
 import Card from './Card';
 import { Lock } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+  const user = useSelector((state) => state.user);
   return (
     <div className='items-center overflow-y-scroll h-[80vh]'>
       <h1 className='mb-10 text-4xl text-center font-semibold text-black'>
@@ -15,7 +17,7 @@ const Dashboard = () => {
             <Lock className='p-1 rounded-full bg-white text-black' />
           }
           heading={'DEPOSITED'}
-          value={'$0.00'}
+          value={`$${user.deposited}`}
         />
         <Card
           logo={
@@ -36,21 +38,21 @@ const Dashboard = () => {
             <Lock className='p-1 rounded-full bg-white text-black' />
           }
           heading={'BALANCE'}
-          value={'$0.00'}
+          value={`$${user.balance}`}
         />
         <Card
           logo={
             <Lock className='p-1 rounded-full bg-white text-black' />
           }
-          heading={'PACKAGE'}
-          value={'$0.00'}
+          heading={'PLAN'}
+          value={user.plan}
         />
         <Card
           logo={
             <Lock className='p-1 rounded-full bg-white text-black' />
           }
           heading={'WITHDRAWN'}
-          value={'$0.00'}
+          value={`$${user.withdrawn}`}
         />
       </div>
       <div className='container p-10 lg:w-[90%] flex items-center mx-auto flex-col sm:p-3 gap-2'>
