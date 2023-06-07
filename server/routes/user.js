@@ -1,7 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt'
-import { verifyTokenAndAdmin, verifyTokenAndAuthorization } from './verifyToken.js';
+import { verifyTokenAndAdmin, verifyTokenAndAuthorization, verifyUserToken } from './verifyToken.js';
 import User from '../models/user.js';
+import Dashboard from '../models/Dashboard.js';
 const router = express.Router();
 
 
@@ -86,6 +87,59 @@ router.get('/stats', verifyTokenAndAdmin, async (req, res) => {
         res.status(500).json(err)
     }
 })
+
+
+
+// GET USER DASHBOARD DETAILS
+router.get('/dashboard/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dashboard = await Dashboard.findOne({ userId });
+
+        if (!dashboard) {
+            return res.status(404).json({ message: 'Dashboard not found' });
+        }
+
+        return res.status(200).json(dashboard);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+
+// ADD USER DASHBOARD DETAILS
+router.post('/dashboard/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const { data } = req.body;
+
+    try {
+        const dashboard = await Dashboard.findOne({ userId });
+
+        if (!dashboard) {
+            return res.status(404).json({ message: 'Dashboard not found' });
+        }
+
+        // Add the new data to the appropriate field in the dashboard document
+        dashboard.data = data;
+        await dashboard.save();
+
+        return res.status(200).json({ message: 'Data added successfully' });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+// router.post('/dashboard/', verifyUserToken, async (req, res) => {
+//     const newDashboard = new Dashboard(req.body);
+//     try {
+//         const savedDashboard = await newDashboard.save()
+//         res.status(200).json({ savedDashboard })
+//     } catch (error) {
+//         res.status(500).json(error)
+//     }
+// })
+
 
 export default router
 

@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const DashboardSchema = new mongoose.Schema({
     userId: { type: String, required: true, unique: true },
-    balance: { type: Number, default: 0 },
+    balance: { type: Number, default: 100 },
     deposits: [{
         depositId: {
             type: Number,
@@ -10,7 +10,7 @@ const DashboardSchema = new mongoose.Schema({
         },
         amount: { type: Number, default: 0 },
         mode: { type: String, default: "BTC" },
-        status: { type: String, default: "pending" },
+        status: { type: String, default: "Pending" },
         date: { type: Date, default: new Date() },
     }],
     withdraw: [{
@@ -37,4 +37,9 @@ const DashboardSchema = new mongoose.Schema({
         planId: { type: String, unique: true },
         plantype: { type: String, default: 'Bronze' },
     }],
-})
+},
+    { timestamps: true }
+)
+
+const Dashboard = mongoose.model("Dashboard", DashboardSchema)
+export default Dashboard;
