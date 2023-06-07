@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoute from './routes/user.js';
 import authRoute from './routes/auth.js';
+import dashboardRoute from './routes/dashboard.js';
 import cors from 'cors'
 
 dotenv.config();
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(cors());
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
+app.use('/api/dashboard', dashboardRoute)
 
 
 const PORT = process.env.PORT || 5501;
