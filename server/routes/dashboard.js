@@ -8,7 +8,6 @@ import Deposit from '../models/deposit'
 import Withdraw from '../models/withdraw'
 import Referral from '../models/referral'
 import Plan from '../models/plan'
-import User from '../models/user'
 
 const router = express.Router()
 

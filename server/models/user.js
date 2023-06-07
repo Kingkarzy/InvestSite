@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema(
     balance: { type: Number, default: 100 },
     deposited: { type: Number, default: 100 },
     withdrawn: { type: Number, default: 100 },
+    plan: { type: String, default: "None" },
     isApproved: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false, },
   },
