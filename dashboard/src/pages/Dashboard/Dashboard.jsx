@@ -3,9 +3,13 @@ import { Timeline } from 'react-ts-tradingview-widgets';
 import Card from './Card';
 import { Lock } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.user);
+  useEffect(() => {
+    user;
+  });
   return (
     <div className='items-center overflow-y-scroll h-[80vh]'>
       <h1 className='mb-10 text-4xl text-center font-semibold text-black'>
