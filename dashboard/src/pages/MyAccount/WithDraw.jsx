@@ -1,16 +1,81 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import { DangerButton, BlackButton } from '../../components/Button';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function WithDraw() {
+  const user = useSelector((state) => state.user);
+
+  const getCurrentDate = () => {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
   const [amount, setAmount] = useState('');
+  const [mode, setMode] = useState('');
   const [btc, setBtc] = useState('');
   const [eth, setETH] = useState('');
   const [usdt, setUSDT] = useState('');
 
-  const payNow = () => {
-    alert('Withdraw Successful!');
+  const [result, setResult] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = JSON.stringify({
+      userId: user._id,
+      amount: amount,
+      mode: mode,
+      status: 'pending',
+      date: getCurrentDate(),
+    });
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3001/api/dashboard/withdraw',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        alert('Withdraw Successful!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/dashboard/${user._id}/withdrawals`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setResult(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className='overflow-y-scroll h-[70vh]'>
@@ -93,6 +158,21 @@ function WithDraw() {
           <h4> Withdrawal Account: </h4>
           <form>
             <div className='mt-5 mb-10 flex flex-col gap-5'>
+              <select
+                onChange={(e) => {
+                  setMode(e.target.value);
+                }}
+              >
+                <option
+                  value='default'
+                  default
+                >
+                  Select a Currency
+                </option>
+                <option value='BTC'>BTC</option>
+                <option value='ETH'>ETH</option>
+                <option value='USDT'>USDT</option>
+              </select>
               <input
                 type='text'
                 className='bg-slate-100 p-3'
@@ -119,7 +199,7 @@ function WithDraw() {
               <BlackButton>
                 <button
                   className=''
-                  onClick={payNow}
+                  onClick={handleSubmit}
                 >
                   Submit
                 </button>
@@ -145,13 +225,17 @@ function WithDraw() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{1}</td>
-              <td>{200}</td>
-              <td>{'BTC'}</td>
-              <td>{'Paid'}</td>
-              <td>{'20-10-2023'}</td>
-            </tr>
+            {result.map((item, index) => (
+              <tr key={item._id}>
+                <td>{index + 1}</td>
+                <td>{item.amount}</td>
+                <td>{item.mode}</td>
+                <td>{item.status}</td>
+                <td>
+                  {new Date(item.date).toLocaleDateString('en-GB')}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

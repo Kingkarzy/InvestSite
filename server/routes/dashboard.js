@@ -27,6 +27,7 @@ router.post("/deposit", verifyUserToken, async (req, res) => {
     try {
         const { userId, amount, mode, status, date } = req.body;
         const user = await User.findById(userId);
+
         const newDeposit = new Deposit({
             userId,
             amount,
@@ -35,6 +36,8 @@ router.post("/deposit", verifyUserToken, async (req, res) => {
             date,
         });
         await newDeposit.save();
+        user.deposited += newDeposit.amount;
+        await user.save();
 
         const deposit = await Deposit.find();
 
@@ -49,6 +52,10 @@ router.post("/withdraw", verifyUserToken, async (req, res) => {
     const newWithdraw = new Withdraw(req.body)
     try {
         const savedWithdraw = await newWithdraw.save()
+        const user = await User.findById(req.body.userId);
+        user.withdrawn += savedWithdraw.amount;
+        await user.save();
+
         res.status(200).json(savedWithdraw)
     } catch (error) {
         res.status(500).send(error)
