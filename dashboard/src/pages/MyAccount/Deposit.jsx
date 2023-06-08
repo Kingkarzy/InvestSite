@@ -107,12 +107,12 @@ function Deposit() {
       >
         <div className='h-auto flex flex-col gap-5'>
           <div className='black-gradient flex p-4 justify-center'>
-            <h1 className='h1'>Add your Withdraw Info</h1>
+            <h1 className='h1'>Make a Deposit</h1>
           </div>
 
           <Box>
             <div className='w-full my-3'>
-              <h4> Withdrawal Account: </h4>
+              <h4> Deposit Amount: </h4>
               <input
                 type='number'
                 className='w-3/4 bg-slate-100 border border-black p-3 my-2'
@@ -121,7 +121,7 @@ function Deposit() {
                 placeholder='Amount'
               />
             </div>
-            <h4> Withdrawal Account: </h4>
+            <h4> deposit Account: </h4>
             <form>
               <div className='mt-5 mb-10 flex flex-col gap-5'>
                 <select
@@ -143,22 +143,25 @@ function Deposit() {
                   type='text'
                   className='bg-slate-100 p-3'
                   value={btc}
+                  disabled
                   onChange={(e) => setBtc(e.target.value)}
-                  placeholder='Bitcoin'
+                  placeholder='Bitcoin Wallet: o34iurhk3ri3ru4uih4r8qfihfb87hifwn3849'
                 />
                 <input
                   type='text'
                   className='bg-slate-100 p-3'
                   value={eth}
+                  disabled
                   onChange={(e) => setETH(e.target.value)}
-                  placeholder='Ethereum'
+                  placeholder='Ethereum Wallet: hr8934ho8r7fuihk3vbfyrf7834yfh3keirh'
                 />
                 <input
                   type='text'
                   className='bg-slate-100 p-2'
                   value={usdt}
+                  disabled
                   onChange={(e) => setUSDT(e.target.value)}
-                  placeholder='USDT'
+                  placeholder='USDT Wallet: ie38994ptyhqp349orr0349urhliufb3k4ugfyu'
                 />
               </div>
               <div className='flex justify-center gap-5'>

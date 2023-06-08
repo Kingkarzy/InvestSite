@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
-import { DangerButton, BlackButton } from '../../components/Button';
+import {
+  DangerButton,
+  BlackButton,
+  PrimaryButton,
+} from '../../components/Button';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { AddRounded } from '@mui/icons-material';
+import {
+  Modal,
+  // TextField
+} from '@mui/material';
 
 function WithDraw() {
   const user = useSelector((state) => state.user);
+  const balance = user.balance;
 
   const getCurrentDate = () => {
     const date = new Date();
@@ -16,16 +26,28 @@ function WithDraw() {
     return `${day}-${month}-${year}`;
   };
 
-  const [amount, setAmount] = useState('');
-  const [mode, setMode] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [mode, setMode] = useState('BTC');
   const [btc, setBtc] = useState('');
   const [eth, setETH] = useState('');
   const [usdt, setUSDT] = useState('');
 
   const [result, setResult] = useState([]);
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (amount > balance) {
+      return alert('Withdrawal amount greater than balance');
+    }
+    if (amount < 100) {
+      return alert('Withdrawal amount less than $100');
+    }
+
     const data = JSON.stringify({
       userId: user._id,
       amount: amount,
@@ -54,7 +76,11 @@ function WithDraw() {
       .catch((error) => {
         console.log(error);
       });
+
+    handleClose();
+    setAmount(0);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,14 +94,13 @@ function WithDraw() {
           }
         );
         setResult(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [user._id, user.token]);
 
   return (
     <div className='overflow-y-scroll h-[70vh]'>
@@ -139,76 +164,120 @@ function WithDraw() {
         </div>
       </div>
 
-      <div className='h-auto flex flex-col gap-5'>
-        <div className='black-gradient flex p-4 justify-center'>
-          <h1 className='h1'>Add your Withdraw Info</h1>
-        </div>
-
-        <Box>
-          <div className='w-full my-3'>
-            <h4> Withdrawal Account: </h4>
-            <input
-              type='number'
-              className='w-3/4 bg-slate-100 border border-black p-3 my-2'
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder='Amount'
-            />
-          </div>
-          <h4> Withdrawal Account: </h4>
-          <form>
-            <div className='mt-5 mb-10 flex flex-col gap-5'>
-              <select
-                onChange={(e) => {
-                  setMode(e.target.value);
-                }}
-              >
-                <option
-                  value='default'
-                  default
-                >
-                  Select a Currency
-                </option>
-                <option value='BTC'>BTC</option>
-                <option value='ETH'>ETH</option>
-                <option value='USDT'>USDT</option>
-              </select>
-              <input
-                type='text'
-                className='bg-slate-100 p-3'
-                value={btc}
-                onChange={(e) => setBtc(e.target.value)}
-                placeholder='Bitcoin'
-              />
-              <input
-                type='text'
-                className='bg-slate-100 p-3'
-                value={eth}
-                onChange={(e) => setETH(e.target.value)}
-                placeholder='Ethereum'
-              />
-              <input
-                type='text'
-                className='bg-slate-100 p-2'
-                value={usdt}
-                onChange={(e) => setUSDT(e.target.value)}
-                placeholder='USDT'
-              />
-            </div>
-            <div className='flex justify-center gap-5'>
-              <BlackButton>
-                <button
-                  className=''
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </button>
-              </BlackButton>
-              <DangerButton className=''>Cancel</DangerButton>
-            </div>
-          </form>
-        </Box>
+      <div
+        className='w-fit my-6'
+        onClick={handleOpen}
+      >
+        <PrimaryButton className=''>
+          <AddRounded /> New Deposit
+        </PrimaryButton>
       </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='h-auto flex flex-col gap-5'>
+          <div className='black-gradient flex p-4 justify-center'>
+            <h1 className='h1'>Add your Withdraw Info</h1>
+          </div>
+
+          <Box>
+            <div className='w-full my-3'>
+              <h4> Withdrawal Amount: </h4>
+              <input
+                type='number'
+                className='w-3/4 bg-slate-100 border border-black p-3 my-2'
+                value={amount}
+                min={100}
+                max={balance}
+                step={1}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder='Amount'
+              />
+              {/* <TextField id='amount'
+              label='Enter Amount'
+              type='number'
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{ min: 1, max: 1000000 }}
+              name='amount'
+              value={amount}
+              onChange={(event) => setAmount(parseInt(event.target.value))}
+              required
+            /> */}
+            </div>
+            <h4> Withdrawal Account: </h4>
+            <form>
+              <div className='mt-5 mb-10 flex flex-col gap-5'>
+                <select
+                  onChange={(e) => {
+                    setMode(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                >
+                  <option
+                    value='default'
+                    selected
+                    disabled
+                  >
+                    Select a Currency
+                  </option>
+                  <option value='BTC'>BTC Wallet</option>
+                  <option value='ETH'>ETH Wallet</option>
+                  <option value='USDT'>USDT Wallet</option>
+                </select>
+                {mode === 'BTC' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-3'
+                    value={btc}
+                    onChange={(e) => setBtc(e.target.value)}
+                    placeholder='Bitcoin Wallet'
+                    required
+                  />
+                )}
+                {mode === 'ETH' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-3'
+                    value={eth}
+                    onChange={(e) => setETH(e.target.value)}
+                    placeholder='Ethereum'
+                    required
+                  />
+                )}
+                {mode === 'USDT' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-2'
+                    value={usdt}
+                    onChange={(e) => setUSDT(e.target.value)}
+                    placeholder='USDT'
+                    required
+                  />
+                )}
+              </div>
+              <div className='flex justify-center gap-5'>
+                <BlackButton>
+                  <button
+                    className=''
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </BlackButton>
+                <button onClick={handleClose}>
+                  <DangerButton className=''>Cancel</DangerButton>
+                </button>
+              </div>
+            </form>
+          </Box>
+        </div>
+      </Modal>
       <div className='py-5'>
         <div className='black-gradient flex p-4 justify-start'>
           <h1 className='h2'>Withdraw History</h1>
