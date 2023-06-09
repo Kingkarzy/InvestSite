@@ -31,27 +31,36 @@ function Deposit() {
   const [eth, setETH] = useState('');
   const [usdt, setUSDT] = useState('');
 
-  const [result, setResult] = useState([]);
+  const [picturePath, setPicturePath] = useState('');
 
+  const [result, setResult] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = JSON.stringify({
-      userId: user._id,
-      amount: amount,
-      mode: mode,
-      status: 'pending',
-      date: getCurrentDate(),
-    });
+    if (amount > 100000) {
+      return alert('Deposit amount greater than $100,000');
+    }
+    if (amount < 500) {
+      return alert('Deposit amount less than $500');
+    }
+
+    // Create a FormData object to handle the file upload
+    const formData = new FormData();
+    formData.append('userId', user._id);
+    formData.append('amount', amount);
+    formData.append('mode', mode);
+    formData.append('status', 'pending');
+    formData.append('date', getCurrentDate());
+    formData.append('picture', picturePath);
 
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
       url: 'http://localhost:3001/api/dashboard/deposit',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${user.token}`,
       },
-      data: data,
+      data: formData,
     };
 
     axios
@@ -59,6 +68,7 @@ function Deposit() {
       .then((response) => {
         console.log(JSON.stringify(response.data));
         alert('Deposit Successful!');
+        handleClose();
       })
       .catch((error) => {
         console.log(error);
@@ -121,7 +131,7 @@ function Deposit() {
                 placeholder='Amount'
               />
             </div>
-            <h4> deposit Account: </h4>
+            <h4 className='font-medium'> Deposit Account: </h4>
             <form>
               <div className='mt-5 mb-10 flex flex-col gap-5'>
                 <select
@@ -131,7 +141,9 @@ function Deposit() {
                 >
                   <option
                     value='default'
-                    default
+                    disabled
+                    selected
+                    required
                   >
                     Select a Currency
                   </option>
@@ -139,30 +151,50 @@ function Deposit() {
                   <option value='ETH'>ETH</option>
                   <option value='USDT'>USDT</option>
                 </select>
-                <input
-                  type='text'
-                  className='bg-slate-100 p-3'
-                  value={btc}
-                  disabled
-                  onChange={(e) => setBtc(e.target.value)}
-                  placeholder='Bitcoin Wallet: o34iurhk3ri3ru4uih4r8qfihfb87hifwn3849'
-                />
-                <input
-                  type='text'
-                  className='bg-slate-100 p-3'
-                  value={eth}
-                  disabled
-                  onChange={(e) => setETH(e.target.value)}
-                  placeholder='Ethereum Wallet: hr8934ho8r7fuihk3vbfyrf7834yfh3keirh'
-                />
-                <input
-                  type='text'
-                  className='bg-slate-100 p-2'
-                  value={usdt}
-                  disabled
-                  onChange={(e) => setUSDT(e.target.value)}
-                  placeholder='USDT Wallet: ie38994ptyhqp349orr0349urhliufb3k4ugfyu'
-                />
+                {mode === 'BTC' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-3'
+                    value={btc}
+                    disabled
+                    onChange={(e) => setBtc(e.target.value)}
+                    placeholder='Bitcoin Wallet: o34iurhk3ri3ru4uih4r8qfihfb87hifwn3849'
+                  />
+                )}
+                {mode === 'ETH' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-3'
+                    value={eth}
+                    disabled
+                    onChange={(e) => setETH(e.target.value)}
+                    placeholder='Ethereum Wallet: hr8934ho8r7fuihk3vbfyrf7834yfh3keirh'
+                  />
+                )}
+                {mode === 'USDT' && (
+                  <input
+                    type='text'
+                    className='bg-slate-100 p-2'
+                    value={usdt}
+                    disabled
+                    onChange={(e) => setUSDT(e.target.value)}
+                    placeholder='USDT Wallet: ie38994ptyhqp349orr0349urhliufb3k4ugfyu'
+                  />
+                )}
+                <label htmlFor=''>
+                  Upload Proof (.jpg, .jpeg, .png, .pdf only)
+                </label>
+                {(mode === 'USDT' || 'BTC' || 'ETH') && (
+                  <input
+                    type='file'
+                    className='bg-slate-100 p-3'
+                    required
+                    accept='.jpg, .jpeg, .png, .pdf'
+                    onChange={(e) =>
+                      setPicturePath(e.target.files[0])
+                    }
+                  />
+                )}
               </div>
               <div className='flex justify-center gap-5'>
                 <BlackButton>
@@ -195,11 +227,11 @@ function Deposit() {
           <tbody>
             {result.map((item, index) => (
               <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>{item.amount}</td>
-                <td>{item.mode}</td>
-                <td>{item.status}</td>
-                <td>
+                <td className='text-center'>{index + 1}</td>
+                <td className='text-center'>{item.amount}</td>
+                <td className='text-center'>{item.mode}</td>
+                <td className='text-center'>{item.status}</td>
+                <td className='text-center'>
                   {new Date(item.date).toLocaleDateString('en-GB')}
                 </td>
               </tr>

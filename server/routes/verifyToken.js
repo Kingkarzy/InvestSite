@@ -51,16 +51,6 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
     })
 }
 
-export const verifyTokenAndAdmin = (req, res, next) => {
-    verifyToken(req, res, () => {
-        if (req.user.isAdmin) {
-            next()
-        } else {
-            res.status(403).json("Access Denied")
-        }
-    })
-}
-
 export const verifyUserToken = async (req, res, next) => {
     try {
         //header("Access-Control-Allow-Origin: *");
@@ -81,3 +71,13 @@ export const verifyUserToken = async (req, res, next) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+export const verifyTokenAndAdmin = (req, res, next) => {
+    verifyUserToken(req, res, () => {
+        if (req.user.isAdmin) {
+            next()
+        } else {
+            res.status(403).json("Access Denied")
+        }
+    })
+}

@@ -6,6 +6,7 @@ const DepositSchema = mongoose.Schema(
         amount: { type: Number, default: 0 },
         mode: { type: String, default: "BTC" },
         status: { type: String, default: "pending" },
+        picturePath: String,
         date: { type: Date, default: new Date() },
     }, { timestamps: true }
 )

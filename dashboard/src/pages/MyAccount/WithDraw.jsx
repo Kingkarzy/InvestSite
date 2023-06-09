@@ -169,7 +169,7 @@ function WithDraw() {
         onClick={handleOpen}
       >
         <PrimaryButton className=''>
-          <AddRounded /> New Deposit
+          <AddRounded /> Request Withdrawal
         </PrimaryButton>
       </div>
 
