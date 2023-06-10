@@ -14,8 +14,9 @@ const performBalanceUpdate = async () => {
             // Perform balance update for each plan
             for (const plan of plans) {
                 // Check if balance update is needed
-                if (plan.status !== 'Completed') {
-                    user.balance += plan.amount * 1.25;
+                if (plan.status !== 'Completed' && plan.duration !== 0) {
+                    user.balance += plan.amount * (plan.gain / 100);
+                    plan.duration -= 1
                     plan.status = 'Completed';
                     await user.save();
                     await plan.save();

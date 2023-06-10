@@ -15,39 +15,47 @@ const PriceCard = ({
   height,
 }) => {
   const user = useSelector((state) => state.user);
-  const [amount, setAmount] = useState(0);
-  const [gain, setGain] = useState(0);
-  const [plan, setPlan] = useState('');
+  // const [amount, setAmount] = useState(0);
+
+  const [count, setCount] = useState(0);
   // const handleChange = (e) => {
   //   setAmount(e.target.value);
   // };
 
   const [days, setDays] = useState(0);
-  const cb = () => {
+  const cb = (duration) => {
     const currentDate = new Date();
     const futureDate = new Date(
       currentDate.getTime() + duration * 24 * 60 * 60 * 1000
     );
-    setDays(futureDate);
+    const timeDifference = futureDate - currentDate.getTime();
+    const daysDifference = Math.ceil(
+      timeDifference / (1000 * 60 * 60 * 24)
+    );
+    setDays(daysDifference);
+    console.log(daysDifference);
   };
+  if (count === 0) {
+    // cb(duration);
 
+    setCount(1);
+  }
   const handlesubmit = (e) => {
     e.preventDefault();
-    setPlan(heading);
-    setAmount(price);
-    setGain(percent);
-    cb();
+    cb(duration);
 
-    if (amount < user.balance) {
+    if (price > user.balance) {
       return alert('Current Balance Not Enough For This Plan');
     }
     const data = JSON.stringify({
       userId: user._id,
-      planType: plan,
-      amount: amount,
+      planType: heading,
+      amount: price,
       duration: days,
-      gain: gain,
+      gain: percent,
     });
+
+    console.log(data);
 
     const config = {
       method: 'post',

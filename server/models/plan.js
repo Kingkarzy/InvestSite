@@ -6,12 +6,12 @@ const PlanSchema = mongoose.Schema(
         planType: { type: String, default: 'None' },
         amount: { type: Number },
         duration: {
-            type: Date,
-            default: function () {
+            type: Number,
+            /* default: function () {
                 const currentDate = new Date();
                 const futureDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000); // Add 30 days
                 return futureDate;
-            },
+            }, */
         },
         gain: { type: Number },
         status: { type: String, default: "Ongoing" },

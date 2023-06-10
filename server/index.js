@@ -24,7 +24,9 @@ app.use('/api/dashboard', dashboardRoute)
 
 cron.schedule('0 0 * * *', () => {
   // Run the balance update task
+  console.log('Running scheduled task...');
   performBalanceUpdate();
+  console.log('Ran scheduled task...');
 });
 
 const PORT = process.env.PORT || 5501;

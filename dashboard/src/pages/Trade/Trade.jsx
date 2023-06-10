@@ -5,7 +5,7 @@ import PriceCard from './PricingCard';
 
 function Trade() {
   // FUNCTION TO RETRIEVE TIME TILL PLAN COMPLETION
-  const cb = (futureDate) => {
+  /* const cb = (futureDate) => {
     const currentDate = new Date();
     const timeDifference = futureDate - currentDate.getTime();
     const daysDifference = Math.ceil(
@@ -15,7 +15,7 @@ function Trade() {
       return 0;
     }
     return daysDifference;
-  };
+  }; */
 
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
@@ -49,7 +49,8 @@ function Trade() {
       {result.map((item) => (
         <div key={item._id}>
           <h1>{item.planType}</h1>
-          <h2>{cb(new Date(item.duration))} days</h2>
+          {/* <h2>{cb(new Date(item.duration))} days</h2> */}
+          <h2>{item.duration} days</h2>
         </div>
       ))}
 
