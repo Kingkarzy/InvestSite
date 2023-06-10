@@ -14,12 +14,15 @@ const performBalanceUpdate = async () => {
             // Perform balance update for each plan
             for (const plan of plans) {
                 // Check if balance update is needed
-                if (plan.status !== 'Completed' && plan.duration !== 0) {
+                if (plan.status !== 'Completed') {
                     user.balance += plan.amount * (plan.gain / 100);
-                    plan.duration -= 1
-                    plan.status = 'Completed';
-                    await user.save();
-                    await plan.save();
+                    plan.duration--;
+
+                    if (plan.duration === 0) {
+                        plan.status = 'Completed';
+                    }
+
+                    await Promise.all([user.save(), plan.save()]);
                 }
             }
         }
