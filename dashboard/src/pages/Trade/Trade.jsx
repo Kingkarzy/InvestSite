@@ -49,7 +49,7 @@ function Trade() {
       {result.map((item) => (
         <div key={item._id}>
           <h1>{item.planType}</h1>
-          {/* <h2>{cb(new Date(item.duration))} days</h2> */}
+          <h1>{item.amount}</h1>
           <h2>{item.duration} days</h2>
         </div>
       ))}

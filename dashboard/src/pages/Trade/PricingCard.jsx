@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -14,48 +13,51 @@ const PriceCard = ({
   width,
   height,
 }) => {
+  // IMPORT USER STATE
   const user = useSelector((state) => state.user);
-  // const [amount, setAmount] = useState(0);
 
-  const [count, setCount] = useState(0);
-  // const handleChange = (e) => {
-  //   setAmount(e.target.value);
-  // };
+  // SET STATES
+  const [amount, setAmount] = useState(0);
 
-  const [days, setDays] = useState(0);
-  const cb = (duration) => {
-    const currentDate = new Date();
-    const futureDate = new Date(
-      currentDate.getTime() + duration * 24 * 60 * 60 * 1000
-    );
-    const timeDifference = futureDate - currentDate.getTime();
-    const daysDifference = Math.ceil(
-      timeDifference / (1000 * 60 * 60 * 24)
-    );
-    setDays(daysDifference);
-    console.log(daysDifference);
+  // HANDLE INPUT CHANGE
+  const handleChange = (e) => {
+    const inputValue = parseInt(e.target.value);
+    const max =
+      heading === 'Bronze'
+        ? 4999
+        : heading === 'Silver'
+        ? 9999
+        : heading === 'Gold'
+        ? 24999
+        : heading === 'Diamond'
+        ? 49999
+        : 99999;
+    if (inputValue > max) {
+      setAmount(max);
+    } else if (inputValue < price) {
+      setAmount(price);
+    } else {
+      setAmount(inputValue);
+    }
   };
-  if (count === 0) {
-    // cb(duration);
 
-    setCount(1);
-  }
-  const handlesubmit = (e) => {
+  // HANDLE FORM SUBMISSION
+  const handlesubmit = async (e) => {
     e.preventDefault();
-    cb(duration);
-
+    if (amount == 0) {
+      alert('Amount is required.');
+      return;
+    }
     if (price > user.balance) {
       return alert('Current Balance Not Enough For This Plan');
     }
     const data = JSON.stringify({
       userId: user._id,
       planType: heading,
-      amount: price,
-      duration: days,
+      amount: amount,
+      duration: duration,
       gain: percent,
     });
-
-    console.log(data);
 
     const config = {
       method: 'post',
@@ -68,7 +70,7 @@ const PriceCard = ({
       data: data,
     };
 
-    axios
+    await axios
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
@@ -99,15 +101,26 @@ const PriceCard = ({
       <p className='text-sm mb-5 font-light text-center text-dark'>
         {content}
       </p>
-      {/* <input
+      <input
         type='number'
+        required
         min={price}
-        max='4999'
-        name='iamount'
+        max={`${
+          heading == 'Bronze'
+            ? 4999
+            : heading == 'Silver'
+            ? 9999
+            : heading == 'Gold'
+            ? 24999
+            : heading == 'Diamond'
+            ? 49999
+            : 99999
+        }`}
+        name='amount'
         placeholder={price}
         className='block w-9/12 h-9 py-1 px-3 text-sm text-gray-600 bg-white border border-solid border-gray-300'
         onChange={handleChange}
-      /> */}
+      />
       <button
         onClick={handlesubmit}
         className='bg-indigo-600 mt-6 px-0 py-1 rounded-md w-5/12 text-white hover:scale-110'
