@@ -190,9 +190,19 @@ function Deposit() {
                     className='bg-slate-100 p-3'
                     required
                     accept='.jpg, .jpeg, .png, .pdf'
-                    onChange={(e) =>
-                      setPicturePath(e.target.files[0])
-                    }
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      const fileName = file.name.replace(
+                        /\s/g,
+                        '%20'
+                      );
+                      const modifiedFile = new File(
+                        [file],
+                        fileName,
+                        { type: file.type }
+                      );
+                      setPicturePath(modifiedFile);
+                    }}
                   />
                 )}
               </div>

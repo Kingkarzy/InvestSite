@@ -2,10 +2,14 @@ import express from 'express'
 import multer from 'multer'
 import path, { dirname } from "path"
 import { fileURLToPath } from 'url';
+// import { Url } from 'url';
+import { URL } from 'url';
+
+
 
 
 // IMPORT VERIFICATION TOKENS
-import { verifyTokenAndAuthorization, verifyUserToken } from './verifyToken.js'
+import { verifyTokenAndAdmin, verifyTokenAndAuthorization, verifyUserToken } from './verifyToken.js'
 
 // IMPORT MONGOOSE SCHEMAS
 import Deposit from '../models/deposit.js'
@@ -110,6 +114,39 @@ router.get('/:userId/deposits', verifyUserToken, async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 })
+//READ ALLUSER DEPOSITS
+router.get('/deposits', verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const query = req.query.new;
+        let deposits;
+        if (query) {
+            deposits = await Deposit.find().sort({ _id: -1 });
+        } else {
+            deposits = await Deposit.find();
+        }
+
+        // Map over deposits and add image URL to each deposit
+        const depositsWithImages = deposits.map((deposit) => {
+            const depositWithImage = deposit.toObject();
+            const imageName = deposit.picturePath; // Assuming the image field in the Deposit model stores the image name
+
+            // Get the server's public URL
+            const serverUrl = new URL(req.protocol + '://' + req.get('host'));
+
+            // Construct the image URL based on the server's public URL and the image path
+            const imageUrl = new URL('/assets/' + imageName, serverUrl).toString();
+
+            depositWithImage.imageUrl = imageUrl; // Add the image URL to the deposit object
+            return depositWithImage;
+        });
+
+        res.status(200).json({ deposits: depositsWithImages });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
 //READ USER WITHDRAWALS
 router.get('/:userId/withdrawals', verifyUserToken, async (req, res) => {
     try {
@@ -139,6 +176,8 @@ router.get('/:userId/plans', verifyUserToken, async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 })
+
+
 
 
 // UPDATE BALANCE AT THE END OF PLAN

@@ -21,6 +21,7 @@ app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/dashboard', dashboardRoute)
+app.use(express.static('public'));
 
 cron.schedule('0 0 * * *', () => {
   // Run the balance update task

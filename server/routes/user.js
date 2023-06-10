@@ -54,16 +54,23 @@ router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
 // GET ALL USERs
 router.get('/', verifyTokenAndAdmin, async (req, res) => {
     try {
-        const query = req.query.new
-        const users = query
-            ? await User.find().sort({ _id: -1 }).limit(5)
-            : await User.find()
-        // delete user._doc.password;
+        const query = req.query.new;
+        let users;
+        if (query) {
+            users = await User.find()
+                .sort({ _id: -1 })
+                .limit(5)
+                .select('id username email firstName lastName isApproved');
+        } else {
+            users = await User.find().select('id username email firstName lastName isApproved');
+        }
+
         res.status(200).json({ users });
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
 });
+
 
 // // GET USER STATS
 // router.get('/stats', verifyTokenAndAdmin, async (req, res) => {

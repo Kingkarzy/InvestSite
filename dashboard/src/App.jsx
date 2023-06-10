@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   BrowserRouter,
   Navigate,
@@ -19,9 +20,16 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Form/Login';
 import Register from './pages/Form/Register';
+import Home from './pages/Admin/Home';
+import User from './pages/Admin/User';
+import UserList from './pages/Admin/UserList';
+import Deposits from './pages/Admin/Deposits';
+import Sidebar from './pages/Admin/Sidebar';
 
 function App() {
-  const isAuth = Boolean(useSelector((state) => state.token));
+  const isAuth = useSelector((state) => Boolean(state.token));
+  const user = useSelector((state) => state.user);
+  const isAdmin = user && user.isAdmin;
   return (
     <div className='app'>
       <BrowserRouter>
@@ -35,6 +43,27 @@ function App() {
             path='/register'
             element={<Register />}
           />
+          <Route
+            path='/admin'
+            element={isAdmin ? <Sidebar /> : <Navigate to='/' />}
+          >
+            <Route
+              path='/admin'
+              element={isAdmin ? <Home /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/admin/users'
+              element={isAdmin ? <UserList /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/admin/user/:id'
+              element={isAdmin ? <User /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/admin/deposits'
+              element={isAdmin ? <Deposits /> : <Navigate to='/' />}
+            />
+          </Route>
           <Route
             path='/'
             element={isAuth ? <Layout /> : <Navigate to='/login' />}
