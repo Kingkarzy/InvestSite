@@ -15,6 +15,13 @@ export const SecondaryButton = ({ children }) => {
     </div>
   );
 };
+export const DisabledButton = ({ children }) => {
+  return (
+    <div className='rounded-sm bg-gray-200 shadow-lg px-6 py-1 cursor-default'>
+      {children}
+    </div>
+  );
+};
 
 export const BlackButton = ({ children }) => {
   return (

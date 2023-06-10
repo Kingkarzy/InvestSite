@@ -6,8 +6,6 @@ import { fileURLToPath } from 'url';
 import { URL } from 'url';
 
 
-
-
 // IMPORT VERIFICATION TOKENS
 import { verifyTokenAndAdmin, verifyTokenAndAuthorization, verifyUserToken } from './verifyToken.js'
 
@@ -51,8 +49,8 @@ router.post("/deposit", verifyUserToken, upload.single('picture'), async (req, r
             date,
         });
         await newDeposit.save();
-        user.deposited += newDeposit.amount;
-        user.balance += newDeposit.amount;
+        // user.deposited += newDeposit.amount;
+        // user.balance += newDeposit.amount;
         await user.save();
 
         const deposit = await Deposit.find();
@@ -179,33 +177,30 @@ router.get('/:userId/plans', verifyUserToken, async (req, res) => {
 
 
 
-
-// UPDATE BALANCE AT THE END OF PLAN
-/* router.patch('/:userId/balanceUpdate', verifyUserToken, async (req, res) => {
+// UPDATE DEPOSIT STATUS
+router.patch('/deposit/:depositId/:userId/users', verifyTokenAndAdmin, async (req, res) => {
     try {
-        const { userId } = req.params;
-        const user = await User.findById({ userId });
-        const plan = await Plan.findOne({ userId });
+        console.log('Hello World')
+        const { userId, depositId } = req.params;
+        console.log('Hello World 2')
+        const user = await User.findById(userId);
+        console.log('Hello World 3')
+        const deposit = await Deposit.findById(depositId);
+        console.log('Hello World 4')
 
-        const cb = (futureDate) => {
-            const currentDate = new Date();
-            const timeDifference = futureDate - currentDate.getTime();
-            const daysDifference = Math.ceil(
-                timeDifference / (1000 * 60 * 60 * 24)
-            );
-            if (daysDifference == 0) {
-                return 0;
-            }
-            return daysDifference;
+        if (deposit.status === 'pending') {
+            deposit.status = 'Approved';
+            user.balance += deposit.amount;
+            user.deposited += deposit.amount;
         }
-        if ((cb(new Date(plan.duration)) == 0) && (plan.status !== "Completed")) {
-            user.balance += (plan.amount * 1.25)
-            plan.status = "Completed"
-        }
+
+        await Promise.all([user.save(), deposit.save()]);
+        res.status(200).json({ message: 'Deposit update successful' });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
-}) */
+});
+
 
 // ...
 
