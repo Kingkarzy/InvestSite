@@ -4,19 +4,6 @@ import axios from 'axios';
 import PriceCard from './PricingCard';
 
 function Trade() {
-  // FUNCTION TO RETRIEVE TIME TILL PLAN COMPLETION
-  /* const cb = (futureDate) => {
-    const currentDate = new Date();
-    const timeDifference = futureDate - currentDate.getTime();
-    const daysDifference = Math.ceil(
-      timeDifference / (1000 * 60 * 60 * 24)
-    );
-    if (daysDifference == 0) {
-      return 0;
-    }
-    return daysDifference;
-  }; */
-
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
 
@@ -24,7 +11,7 @@ function Trade() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/dashboard/${user._id}/plans`,
+          `http://localhost:3001/api/plan/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

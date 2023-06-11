@@ -7,14 +7,14 @@ import {
 } from '../../components/Button';
 import { Link } from 'react-router-dom';
 
-const Deposits = () => {
+const Withdrawals = () => {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/admin/deposits',
+          'http://localhost:3001/api/admin/withdrawals',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const Deposits = () => {
             },
           }
         );
-        setResult(response.data.deposits);
+        setResult(response.data.withdrawals);
         // console.log(result);
       } catch (error) {
         console.log(error);
@@ -30,13 +30,13 @@ const Deposits = () => {
     };
 
     fetchData();
-  }, []);
+  }, [user.token]);
 
-  const handlesubmit = (userId, depositId) => {
+  const handlesubmit = (userId, withdrawalId) => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/api/admin/deposits/${depositId}/${userId}/users`,
+      url: `http://localhost:3001/api/admin/withdrawals/${withdrawalId}/${userId}/users`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -54,7 +54,7 @@ const Deposits = () => {
 
   return (
     <div className='flex justify-center items-center'>
-      <div className='mb-10 w-3/4 flex flex-col justify-center items-center'>
+      <div className='mb-10 w-full flex flex-col justify-center items-center'>
         <table className='table w-full mb-5 border border-solid border-gray-100'>
           <thead className='bg-white'>
             <tr>
@@ -109,4 +109,4 @@ const Deposits = () => {
   );
 };
 
-export default Deposits;
+export default Withdrawals;

@@ -55,7 +55,7 @@ function Deposit() {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/api/dashboard/deposit',
+      url: 'http://localhost:3001/api/deposit',
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${user.token}`,
@@ -78,7 +78,7 @@ function Deposit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/dashboard/${user._id}/deposits`,
+          `http://localhost:3001/api/deposit/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

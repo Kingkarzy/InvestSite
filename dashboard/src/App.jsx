@@ -21,10 +21,11 @@ import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Form/Login';
 import Register from './pages/Form/Register';
 import Home from './pages/Admin/Home';
-import User from './pages/Admin/User';
 import UserList from './pages/Admin/UserList';
 import Deposits from './pages/Admin/Deposits';
 import Sidebar from './pages/Admin/Sidebar';
+import Withdrawals from './pages/Admin/Withdrawals';
+import Plans from './pages/Admin/Plans';
 
 function App() {
   const isAuth = useSelector((state) => Boolean(state.token));
@@ -43,6 +44,8 @@ function App() {
             path='/register'
             element={<Register />}
           />
+
+          {/* ========== SET ADMIN ROUTES ========== */}
           <Route
             path='/admin'
             element={isAdmin ? <Sidebar /> : <Navigate to='/' />}
@@ -56,14 +59,22 @@ function App() {
               element={isAdmin ? <UserList /> : <Navigate to='/' />}
             />
             <Route
-              path='/admin/user/:id'
-              element={isAdmin ? <User /> : <Navigate to='/' />}
+              path='/admin/withdrawals/'
+              element={
+                isAdmin ? <Withdrawals /> : <Navigate to='/' />
+              }
             />
             <Route
               path='/admin/deposits'
               element={isAdmin ? <Deposits /> : <Navigate to='/' />}
             />
+            <Route
+              path='/admin/plans'
+              element={isAdmin ? <Plans /> : <Navigate to='/' />}
+            />
           </Route>
+
+          {/* ========== SET USER ROUTES ========== */}
           <Route
             path='/'
             element={isAuth ? <Layout /> : <Navigate to='/login' />}
@@ -126,6 +137,8 @@ function App() {
               }
             />
           </Route>
+
+          {/* ========== SET NOTFOUND ROUTES ========== */}
           <Route
             path='*'
             element={isAuth ? <NotFound /> : <Navigate to='/login' />}

@@ -59,7 +59,7 @@ function WithDraw() {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/api/dashboard/withdraw',
+      url: 'http://localhost:3001/api/withdraw',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
@@ -85,7 +85,7 @@ function WithDraw() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/dashboard/${user._id}/withdrawals`,
+          `http://localhost:3001/api/withdraw/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

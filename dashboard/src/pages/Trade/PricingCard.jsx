@@ -62,7 +62,7 @@ const PriceCard = ({
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/api/dashboard/plan',
+      url: 'http://localhost:3001/api/plan',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
