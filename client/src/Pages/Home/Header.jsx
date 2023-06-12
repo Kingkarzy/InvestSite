@@ -1,6 +1,7 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useTypewriter } from "react-simple-typewriter";
+import MyImage from "../../components/LazyLoad";
 //Components
 import MyBtn from "../../components/MyBtn";
 // Import Swiper styles
@@ -17,33 +18,33 @@ import bg1 from "../../assets/images/bg.jpg";
 import bg2 from "../../assets/images/bg2.jpg";
 import bg3 from "../../assets/images/bg3.jpg";
 import image1 from "../../assets/images/avatar.png";
-import image2 from "../../assets/images/woman.png";
-import image3 from "../../assets/images/img7.png";
+// import image2 from "../../assets/images/woman.png";
+// import image3 from "../../assets/images/bank.png";
 const Header = () => {
   const [text] = useTypewriter({
-    words: ["Trust", "Bank on"],
-    typeSpeed: 80,
+    words: ["Trust", "Bank on", "depend on"],
+    typeSpeed: 120,
     deleteSpeed: 50,
-    delaySpeed: 800,
+    delaySpeed: 500,
     loop: 0,
   });
   const [text2] = useTypewriter({
     words: ["convenient", "suitable"],
-    // typeSpeed: 100,
-    // deleteSpeed: 50,
-    // delaySpeed: 1000,
-    loop: 3,
+    typeSpeed: 200,
+    deleteSpeed: 50,
+    delaySpeed: 500,
+    loop: 0,
   });
   const [text3] = useTypewriter({
     words: ["Better", "Greater", "faster"],
-    //  typeSpeed: 80,
-    //  deleteSpeed: 50,
-    //  delaySpeed: 1000,
-    loop: 2,
+    typeSpeed: 100,
+    deleteSpeed: 50,
+    delaySpeed: 500,
+    loop: 0,
   });
 
   return (
-    <div className="h-[70vh] lg:h-[90vh]">
+    <div className="h-[85vh] lg:h-[90vh] sm:h-[80vh] xs:mt-5 lg:mt-0">
       <Swiper
         spaceBetween={30}
         // slidesPerView={1}
@@ -51,7 +52,7 @@ const Header = () => {
         effect={"fade"}
         centeredSlides={true}
         autoplay={{
-          delay: 4000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -62,8 +63,12 @@ const Header = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="relative h-full w-full">
-            <img className="h-full w-full object-cover" src={bg1} alt="" />
+          <div className="sm:h-[70vh]  h-full w-full bg-pink-400">
+            <MyImage
+              className="h-full w-full object-cover sm:hidden"
+              src={bg1}
+              alt="Background Image"
+            />
             <div className="absolute p-5 top-0 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center text-white">
               <div className="p-5 text-left rounded-md shadow-sm">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
@@ -78,7 +83,7 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <img
+                <MyImage
                   className="ml-5"
                   src={image1}
                   alt=""
@@ -90,7 +95,11 @@ const Header = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative h-full w-full">
-            <img className="h-full w-full object-cover " src={bg2} alt="" />
+            <MyImage
+              className="h-full w-full object-cover "
+              src={bg2}
+              alt="Background Image"
+            />
             <div className="lg:w-[70%] sm:mt-10 lg:mx-auto lg:mt-10 lg:left-[20rem] absolute p-5 top-0  items-center justify-center text-white">
               <div className="black-gradient p-5 text-left rounded-md shadow-2xl">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
@@ -108,19 +117,23 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex lg:mr-[200px] items-center justify-left">
-                <img
+                {/* <img
                   className="sm:hidden"
                   src={image3}
                   alt=""
-                  style={{ width: "50%", height: "" }}
-                />
+                  style={{ width: "35%", height: "" }}
+                /> */}
               </div>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative h-full w-full">
-            <img className="h-full w-full object-cover" src={bg3} alt="" />
+            <MyImage
+              className="h-full w-full object-cover"
+              src={bg3}
+              alt="Background Image"
+            />
             <div className="absolute p-5 top-10 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center ">
               <div className="p-5 text-left rounded-md shadow-xl">
                 <h1 className="text-3xl font-bold mb-4 sm:text-5xl lg:text-7xl text-black">
@@ -135,12 +148,12 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center object-contain">
-                <img
+                {/* <img
                   className=""
                   src={image2}
                   alt=""
                   style={{ width: "50%", height: "" }}
-                />
+                /> */}
               </div>
             </div>
           </div>

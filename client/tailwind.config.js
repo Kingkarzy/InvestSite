@@ -5,6 +5,7 @@ export default {
     extend: {
       screens: {
         xs: "480px",
+        sm: "480px"
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

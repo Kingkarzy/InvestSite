@@ -6,8 +6,8 @@ function Chart() {
       <h1 className="mb-10 text-4xl text-center font-semibold text-black">
         Market News
       </h1>
-      <div className="container p-10 lg:w-[90%] flex items-center mx-auto sm:flex-col sm:p-3 lg:flex-row gap-2">
-        <div className="w-1/2 mx-auto ">
+      <div className="container p-5 lg:w-[90%] flex items-center mx-auto flex-wrap sm:p-3 gap-2">
+        <div className="w-2/2 lg:w-1/3 mx-auto ">
           <Timeline
             colorTheme="dark"
             feedMode="market"
@@ -16,7 +16,7 @@ function Chart() {
             width="100%"
           ></Timeline>
         </div>
-        <div className="w-1/2 mx-auto ">
+        <div className="w-2/2 lg:w-1/3 mx-auto ">
           <CryptoCurrencyMarket
             className=""
             colorTheme="dark"

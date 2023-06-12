@@ -148,7 +148,7 @@
   );
     left: 0;
     opacity: 1;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
     z-index: 5;
   }
 
@@ -202,7 +202,7 @@
     color: #fff;
     padding: 14px 20px;
     border: 1px solid #fff;
-    transition: all 0.3s ease-out;
+    transition: all 1s ease-out;
   }
 
   .nav-links-mobile:hover {

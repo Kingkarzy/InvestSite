@@ -14,7 +14,7 @@ const Why = () => {
               <h2 className="mb-2 font-semibold text-lg text-white">
                 Unique design
               </h2>
-              <p className="text-base text-white">
+              <p className="text-sm lg:text-base text-white">
                 Investment Trading has a user-friendly and intelligible
                 interface so that you can make the most of our investment
                 platform without any hassle.
@@ -29,7 +29,7 @@ const Why = () => {
               <h2 className="mb-2 font-semibold text-lg text-white">
                 Professional team
               </h2>
-              <p className="text-base text-white">
+              <p className="text-sm lg:text-base text-white">
                 Our team has extensive experience in the field of cryptocurrency
                 & forex trading and use flexible strategies to generate maximum
                 profits.
@@ -44,7 +44,7 @@ const Why = () => {
               <h2 className="mb-2 font-semibold text-lg text-white">
                 Secure platform
               </h2>
-              <p className="text-base text-white">
+              <p className="text-sm lg:text-base text-white">
                 Our site is within a dedicated & DDOS protected server.
               </p>
             </div>
@@ -57,7 +57,7 @@ const Why = () => {
               <h2 className="mb-2 font-semibold text-lg text-white">
                 24/7 Live Support
               </h2>
-              <p className="text-base text-white">
+              <p className="text-sm lg:text-base text-white">
                 We provide 24x7 client support.
               </p>
             </div>
