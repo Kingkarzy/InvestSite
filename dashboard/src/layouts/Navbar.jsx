@@ -5,6 +5,8 @@ import { Close, Menu, Settings } from '@mui/icons-material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../state/index';
+import logo from "../assets/images/black_logo.png"
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Navbar({ onToggleSidebar }) {
   const dispatch = useDispatch();
@@ -17,22 +19,28 @@ function Navbar({ onToggleSidebar }) {
   };
 
   return (
-    <nav className='flex justify-between px-5 py-5 bg-slate-200'>
-      <button
-        className=''
-        onClick={handleClick}
-      >
+    <nav className="flex justify-between px-5 py-5 bg-white">
+      <button className="" onClick={handleClick}>
         {click ? <Menu /> : <Close />}
       </button>
       <div>
-        <Link to='/'>Logo</Link>
-      </div>
-      <div className=' flex gap-5'>
-        <Link to='/settings'>
-          <Settings />
+        <Link to="/">
+          <img src={logo} className="w-[25px]" alt="logo" />
         </Link>
-        <h2>{user.username}</h2>
-        <button onClick={() => dispatch(setLogout())}>Logout</button>
+      </div>
+      <div className="flex gap-5">
+        <Link to="/settings" className="flex gap-5 hover:scale-95">
+          <Settings />
+        </Link>{" "}
+        <span className="">
+          <h2>{user.username}</h2>
+        </span>
+        <button
+          className="px-3 hover:font-semibold hover:text-red-500"
+          onClick={() => dispatch(setLogout())}
+        >
+          Logout <LogoutIcon/>
+        </button>
       </div>
     </nav>
   );

@@ -10,7 +10,7 @@ function Layout() {
     setSidebarOpen(!isSidebarOpen);
   };
   return (
-    <div className='w-full h-full  flex flex-col justify-evenly bg-gray-300'>
+    <div className='w-full h-full flex flex-col justify-evenly bg-gray-100'>
       <Navbar onToggleSidebar={handleToggleSidebar} />
       <div className='flex h-4/5 min-h-[85vh]'>
         <div
@@ -26,7 +26,7 @@ function Layout() {
         >
           <Sidebar />
         </div>
-        <div className='flex-grow border-cyan-950 p-5'>
+        <div className='flex-grow border-cyan-950 p-3 rounded-xl'>
           <Outlet />
         </div>
       </div>

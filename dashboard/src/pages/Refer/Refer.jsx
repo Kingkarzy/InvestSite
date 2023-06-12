@@ -3,7 +3,7 @@ import { Person } from '@mui/icons-material';
 const Refer = () => {
   return (
     <div className='flex flex-col gap-10 md:px-10 h-[75vh] overflow-x-hidden md:w-full overflow-y-scroll'>
-      <div className='black-gradient flex flex-col p-4 items-end'>
+      <div className='background-gradient flex flex-col p-4 items-end'>
         <h1 className='h1'>Referrals</h1>
         <p className='text-white'>Refer users to ApexAI</p>
       </div>

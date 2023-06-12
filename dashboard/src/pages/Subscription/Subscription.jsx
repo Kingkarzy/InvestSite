@@ -9,8 +9,8 @@ function Subscription() {
   const handleClose = () => setOpen(false);
   return (
     <div className='flex flex-col gap-10 md:px-10 h-[75vh] overflow-x-hidden md:w-full overflow-y-scroll'>
-      <div className='black-gradient flex flex-col p-4 items-end'>
-        <h1 className='h1'>Subscription Trade</h1>
+      <div className='black-gradient flex flex-col p-4 items-start'>
+        <h1 className='h1 orange-text-gradient'>Subscription Trade</h1>
       </div>
       <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-11/12 shadow-3xl'>
         <h2 className='font-semibold'>

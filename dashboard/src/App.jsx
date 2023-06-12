@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Layout from './layouts/MainLayout';
-import Account from './pages/MyAccount/Account';
+// import Account from './pages/MyAccount/Account';
 import Balance from './pages/MyAccount/Balance';
 import Withdraw from './pages/MyAccount/WithDraw';
 import Deposit from './pages/MyAccount/Deposit';
@@ -31,104 +31,78 @@ function App() {
   const user = useSelector((state) => state.user);
   const isAdmin = user && user.isAdmin;
   return (
-    <div className='app'>
+    <div className="app">
       <BrowserRouter>
         <Routes>
+          <Route path="/login" index element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
-            path='/login'
-            index
-            element={<Login />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
-          />
-          <Route
-            path='/admin'
-            element={isAdmin ? <Sidebar /> : <Navigate to='/' />}
+            path="/admin"
+            element={isAdmin ? <Sidebar /> : <Navigate to="/" />}
           >
             <Route
-              path='/admin'
-              element={isAdmin ? <Home /> : <Navigate to='/' />}
+              path="/admin"
+              element={isAdmin ? <Home /> : <Navigate to="/" />}
             />
             <Route
-              path='/admin/users'
-              element={isAdmin ? <UserList /> : <Navigate to='/' />}
+              path="/admin/users"
+              element={isAdmin ? <UserList /> : <Navigate to="/" />}
             />
             <Route
-              path='/admin/user/:id'
-              element={isAdmin ? <User /> : <Navigate to='/' />}
+              path="/admin/user/:id"
+              element={isAdmin ? <User /> : <Navigate to="/" />}
             />
             <Route
-              path='/admin/deposits'
-              element={isAdmin ? <Deposits /> : <Navigate to='/' />}
+              path="/admin/deposits"
+              element={isAdmin ? <Deposits /> : <Navigate to="/" />}
             />
           </Route>
           <Route
-            path='/'
-            element={isAuth ? <Layout /> : <Navigate to='/login' />}
+            path="/"
+            element={isAuth ? <Layout /> : <Navigate to="/login" />}
           >
             <Route
-              path='/'
-              element={
-                isAuth ? <Dashboard /> : <Navigate to='/login' />
-              }
+              path="/"
+              element={isAuth ? <Dashboard /> : <Navigate to="/login" />}
             />
-            <Route
-              path='/myaccount'
-              element={
-                isAuth ? <Account /> : <Navigate to='/login' />
-              }
-            >
+            <Route path="/myaccount">
               <Route
-                path='withdraw'
-                element={
-                  isAuth ? <Withdraw /> : <Navigate to='/login' />
-                }
+                index
+                element={isAuth ? <Balance /> : <Navigate to="/login" />}
               />
               <Route
-                path='deposit'
-                element={
-                  isAuth ? <Deposit /> : <Navigate to='/login' />
-                }
+                path="withdraw"
+                element={isAuth ? <Withdraw /> : <Navigate to="/login" />}
               />
               <Route
-                path='balance'
-                element={
-                  isAuth ? <Balance /> : <Navigate to='/login' />
-                }
+                path="deposit"
+                element={isAuth ? <Deposit /> : <Navigate to="/login" />}
               />
             </Route>
             <Route
-              path='/refer'
-              element={isAuth ? <Refer /> : <Navigate to='/login' />}
+              path="/refer"
+              element={isAuth ? <Refer /> : <Navigate to="/login" />}
             />
             <Route
-              path='/trade'
-              element={isAuth ? <Trade /> : <Navigate to='/login' />}
+              path="/trade"
+              element={isAuth ? <Trade /> : <Navigate to="/login" />}
             />
             <Route
-              path='/subscription'
-              element={
-                isAuth ? <Subscription /> : <Navigate to='/login' />
-              }
+              path="/subscription"
+              element={isAuth ? <Subscription /> : <Navigate to="/login" />}
             />
             <Route
-              path='/setting'
-              element={
-                isAuth ? <Setting /> : <Navigate to='/login' />
-              }
+              path="/settings"
+              element={isAuth ? <Setting /> : <Navigate to="/login" />}
             />
             <Route
-              path='/support'
-              element={
-                isAuth ? <Support /> : <Navigate to='/login' />
-              }
+              path="/support"
+              element={isAuth ? <Support /> : <Navigate to="/login" />}
             />
           </Route>
           <Route
-            path='*'
-            element={isAuth ? <NotFound /> : <Navigate to='/login' />}
+            path="*"
+            element={isAuth ? <NotFound /> : <Navigate to="/login" />}
           />
         </Routes>
       </BrowserRouter>
