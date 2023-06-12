@@ -38,11 +38,27 @@ function App() {
           <Route
             path='/login'
             index
-            element={isAuth ? <Navigate to='/' /> : <Login />}
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Navigate to='/' />
+              ) : (
+                <Login />
+              )
+            }
           />
           <Route
             path='/register'
-            element={isAuth ? <Navigate to='/' /> : <Register />}
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Navigate to='/' />
+              ) : (
+                <Register />
+              )
+            }
           />
 
           {/* ========== SET ADMIN ROUTES ========== */}
@@ -93,15 +109,15 @@ function App() {
                 }
               />
               <Route
-                path='withdraw'
-                element={
-                  isAuth ? <Withdraw /> : <Navigate to='/login' />
-                }
-              />
-              <Route
                 path='deposit'
                 element={
                   isAuth ? <Deposit /> : <Navigate to='/login' />
+                }
+              />
+              <Route
+                path='withdraw'
+                element={
+                  isAuth ? <Withdraw /> : <Navigate to='/login' />
                 }
               />
             </Route>
