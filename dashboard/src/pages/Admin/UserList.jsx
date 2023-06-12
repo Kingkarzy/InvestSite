@@ -115,8 +115,8 @@ const UserList = () => {
               onClick={() => handlesubmit(params.row.id)}
               className={`border-none rounded-lg px-2 py-1 ${
                 params.row.isApproved
-                  ? 'bg-gray-100  text-black cursor-default'
-                  : 'bg-green-400  text-white cursor-pointer'
+                  ? 'bg-gray-100  text-black'
+                  : 'bg-green-400  text-white'
               } cursor-pointer mr-5`}
             >
               {params.row.isApproved
