@@ -2,7 +2,7 @@
 const PriceCard = ({ heading, price, percent, duration, refer, content, width, height }) => {
   return (
     <div
-      className="text-black flex flex-col justify-center items-center border-solid bg-gray-300 shadow-xl p-5 mx-auto  transition-all rounded-xl"
+      className="text-black flex flex-col justify-center items-center border-solid my-10 bg-gray-300 shadow-xl p-5 mx-auto   transition-all rounded-xl"
       style={{
         width: width,
         height: height,
