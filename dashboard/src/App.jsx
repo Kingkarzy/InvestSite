@@ -109,15 +109,15 @@ function App() {
                 }
               />
               <Route
-                path='deposit'
-                element={
-                  isAuth ? <Deposit /> : <Navigate to='/login' />
-                }
-              />
-              <Route
                 path='withdraw'
                 element={
                   isAuth ? <Withdraw /> : <Navigate to='/login' />
+                }
+              />
+              <Route
+                path='deposit'
+                element={
+                  isAuth ? <Deposit /> : <Navigate to='/login' />
                 }
               />
             </Route>
