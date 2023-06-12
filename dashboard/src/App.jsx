@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Layout from './layouts/MainLayout';
-import Account from './pages/MyAccount/Account';
+// import Account from './pages/MyAccount/Account';
 import Balance from './pages/MyAccount/Balance';
 import Withdraw from './pages/MyAccount/WithDraw';
 import Deposit from './pages/MyAccount/Deposit';
@@ -35,6 +35,15 @@ function App() {
     <div className='app'>
       <BrowserRouter>
         <Routes>
+          <Route
+            path='/login'
+            index
+            element={<Login />}
+          />
+          <Route
+            path='/register'
+            element={<Register />}
+          />
           <Route
             path='/login'
             index
@@ -85,12 +94,13 @@ function App() {
                 isAuth ? <Dashboard /> : <Navigate to='/login' />
               }
             />
-            <Route
-              path='/myaccount'
-              element={
-                isAuth ? <Account /> : <Navigate to='/login' />
-              }
-            >
+            <Route path='/myaccount'>
+              <Route
+                index
+                element={
+                  isAuth ? <Balance /> : <Navigate to='/login' />
+                }
+              />
               <Route
                 path='withdraw'
                 element={
@@ -101,12 +111,6 @@ function App() {
                 path='deposit'
                 element={
                   isAuth ? <Deposit /> : <Navigate to='/login' />
-                }
-              />
-              <Route
-                path='balance'
-                element={
-                  isAuth ? <Balance /> : <Navigate to='/login' />
                 }
               />
             </Route>
@@ -125,7 +129,7 @@ function App() {
               }
             />
             <Route
-              path='/setting'
+              path='/settings'
               element={
                 isAuth ? <Setting /> : <Navigate to='/login' />
               }

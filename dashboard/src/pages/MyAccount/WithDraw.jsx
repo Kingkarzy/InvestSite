@@ -4,6 +4,7 @@ import {
   DangerButton,
   BlackButton,
   PrimaryButton,
+  Button,
 } from '../../components/Button';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -12,7 +13,8 @@ import {
   Modal,
   // TextField
 } from '@mui/material';
-
+import { Link } from 'react-router-dom';
+import { CSVLink } from 'react-csv';
 function WithDraw() {
   const user = useSelector((state) => state.user);
   const balance = user.balance;
@@ -105,7 +107,7 @@ function WithDraw() {
   return (
     <div className='overflow-y-scroll h-[70vh]'>
       <div className='my-3'>
-        <div className='black-gradient flex p-4 justify-end'>
+        <div className='background-gradient flex p-4 justify-end'>
           <h1 className='h1'>See Our Withdrawal Methods</h1>
         </div>
         <div className='flex flex-row gap-5 flex-wrap lg:flex-nowrap my-5'>
@@ -115,7 +117,7 @@ function WithDraw() {
               <div className='flex justify-between'>
                 <div>Minimum amount:</div>
                 <div>
-                  <b>$20</b>
+                  <b>$100</b>
                 </div>
               </div>
               <div className='flex justify-between'>
@@ -141,7 +143,7 @@ function WithDraw() {
             <div className=' flex  flex-col gap-2'>
               <div className='flex justify-between'>
                 <div>Minimum amount:</div>
-                <b>$20</b>
+                <b>$100</b>
               </div>
               <div className='flex justify-between'>
                 <div>Maximum amount:</div>
@@ -165,7 +167,7 @@ function WithDraw() {
       </div>
 
       <div
-        className='w-fit my-6'
+        className='w-fit my-6 text-white'
         onClick={handleOpen}
       >
         <PrimaryButton className=''>
@@ -236,7 +238,7 @@ function WithDraw() {
                     className='bg-slate-100 p-3'
                     value={btc}
                     onChange={(e) => setBtc(e.target.value)}
-                    placeholder='Bitcoin Wallet'
+                    placeholder='Wallet Address'
                     required
                   />
                 )}
@@ -282,7 +284,16 @@ function WithDraw() {
         <div className='black-gradient flex p-4 justify-start'>
           <h1 className='h2'>Withdraw History</h1>
         </div>
-
+        <div className='w-full flex justify-end'>
+          <div className='w-fit my-5'>
+            <CSVLink
+              data={result}
+              className='text-white'
+            >
+              <PrimaryButton>Download as .xls/.xlsx </PrimaryButton>
+            </CSVLink>
+          </div>
+        </div>
         <table className='table w-full my-5 border text-center border-solid border-gray-100'>
           <thead className='bg-white'>
             <tr>
