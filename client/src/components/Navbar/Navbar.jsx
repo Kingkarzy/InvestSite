@@ -141,7 +141,7 @@ function Navbar() {
             </li>
             <li className='nav-item flex items-center justify-center'>
               <NavLink
-                to='http://dashboard.goobull.com'
+                to='http://dashboard.goobull.com/login'
                 className=''
                 onClick={closeMobileMenu}
               >

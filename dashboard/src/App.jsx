@@ -38,20 +38,11 @@ function App() {
           <Route
             path='/login'
             index
-            element={<Login />}
+            element={isAuth ? <Navigate to='/' /> : <Login />}
           />
           <Route
             path='/register'
-            element={<Register />}
-          />
-          <Route
-            path='/login'
-            index
-            element={<Login />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
+            element={isAuth ? <Navigate to='/' /> : <Register />}
           />
 
           {/* ========== SET ADMIN ROUTES ========== */}
