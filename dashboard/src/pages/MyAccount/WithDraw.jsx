@@ -61,7 +61,7 @@ function WithDraw() {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/api/withdraw',
+      url: 'https://server.goobull.com/api/withdraw',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
@@ -87,7 +87,7 @@ function WithDraw() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/withdraw/${user._id}`,
+          `https://server.goobull.com/api/withdraw/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

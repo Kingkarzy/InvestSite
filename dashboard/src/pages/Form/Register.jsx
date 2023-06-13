@@ -16,7 +16,7 @@ const Register = () => {
   const register = async (dispatch, values) => {
     try {
       const response = await axios.post(
-        'http://localhost:3001/api/auth/register',
+        'https://server.goobull.com/api/auth/register',
         values
       );
       const savedUser = response.data;
@@ -50,7 +50,9 @@ const Register = () => {
             className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'
             type='text'
             placeholder='Username'
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) =>
+              setUsername(e.target.value.toLowerCase())
+            }
           />
           <input
             className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'

@@ -14,7 +14,7 @@ const Withdrawals = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/admin/withdrawals',
+          'https://server.goobull.com/api/admin/withdrawals',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Withdrawals = () => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/api/admin/withdrawals/${withdrawalId}/${userId}/users`,
+      url: `https://server.goobull.com/api/admin/withdrawals/${withdrawalId}/${userId}/users`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

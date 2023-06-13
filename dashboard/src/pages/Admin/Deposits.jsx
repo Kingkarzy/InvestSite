@@ -14,7 +14,7 @@ const Deposits = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/admin/deposits',
+          'https://server.goobull.com/api/admin/deposits',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Deposits = () => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/api/admin/deposits/${depositId}/${userId}/users`,
+      url: `https://server.goobull.com/api/admin/deposits/${depositId}/${userId}/users`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

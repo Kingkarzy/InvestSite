@@ -11,7 +11,7 @@ const Plans = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/admin/plans',
+          'https://server.goobull.com/api/admin/plans',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const Plans = () => {
   const fetchUsername = async (userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/admin/users/${userId}`,
+        `https://server.goobull.com/api/admin/users/${userId}`,
         {
           headers: {
             'Content-Type': 'application/json',

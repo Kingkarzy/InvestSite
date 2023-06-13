@@ -15,7 +15,7 @@ const Login = () => {
   const login = async (values) => {
     try {
       const response = await axios.post(
-        'http://localhost:3001/api/auth/login',
+        'https://server.goobull.com/api/auth/login',
         values
       );
       const loggedIn = response.data;
@@ -53,7 +53,9 @@ const Login = () => {
             className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'
             type='text'
             placeholder='Username'
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) =>
+              setUsername(e.target.value.toLowerCase())
+            }
           />
           <input
             className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'

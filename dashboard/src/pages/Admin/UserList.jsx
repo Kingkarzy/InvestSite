@@ -14,7 +14,7 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/admin/users',
+          'https://server.goobull.com/api/admin/users',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const UserList = () => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/api/admin/users/approve/${userId}`,
+      url: `https://server.goobull.com/api/admin/users/approve/${userId}`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
