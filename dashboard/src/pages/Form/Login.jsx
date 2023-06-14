@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { setLogin } from '../../state/index';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorss, setError] = useState(false);
@@ -42,39 +44,57 @@ const Login = () => {
       password,
     });
   };
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className='w-screen h-screen flex items-center justify-center background-gradient bg-cover'>
-      <div className='p-16  lg:w-2/4 bg-white shadow-2xl'>
-        <h1 className='text-center text-2xl font-semibold'>
-          LOGIN TO YOUR ACCOUNT
-        </h1>
+      <div className='m-8 lg:m-0 p-6 lg:p-16 w-10/12 md:w-7/12 lg:w-5/12 bg-white shadow-2xl rounded-t-3xl rounded-br-3xl'>
+        <h1 className='text-center text-2xl font-semibold'>LOGIN</h1>
         <form className='flex flex-wrap flex-col justify-center mt-5'>
           <input
-            className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'
+            className='flex-1 min-w-[40%] m-2 p-2 border border-solid border-gray-300 focus:border-blue-900 text-sm'
             type='text'
             placeholder='Username'
+            required
             onChange={(e) =>
               setUsername(e.target.value.toLowerCase())
             }
           />
-          <input
-            className='flex-1 min-w-40% m-2 p-2 border border-solid border-gray-300 focus:border-blue-900'
-            type='password'
-            placeholder='Password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className='flex flex-col w-full items-center mt-5'>
-            {errorss && (
-              <span className='text-red-400'>
-                Something went wrong...
-              </span>
-            )}
+          <div className='relative flex-1 mr-2 pr-2'>
+            <input
+              className='flex-1 min-w-[40%] w-full m-2 p-2 border border-solid border-gray-300 focus:border-blue-900 text-sm md:text-base pr-[2.5rem]'
+              type={showPassword ? 'text' : 'password'}
+              placeholder='Password'
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button
-              className='w-40% px-4 text-lg py-2 bg-teal-500 text-white hover:scale-105'
+              type='button'
+              name='togglePassword'
+              onClick={handleTogglePassword}
+              className='absolute right-0 top-1/2 transform -translate-y-1/2 mr-2'
+            >
+              {showPassword ? (
+                <VisibilityOff sx={{ fontSize: '1.2rem' }} />
+              ) : (
+                <Visibility sx={{ fontSize: '1.2rem' }} />
+              )}
+            </button>
+          </div>
+          <div className='flex flex-col w-full items-center mt-5 px-2'>
+            <button
+              className='w-full px-4 text-lg py-2 bg-[#2d21d3] text-white hover:scale-105 rounded-t-xl rounded-br-xl'
               onClick={handleClick}
             >
               LOGIN
             </button>
+            {errorss && (
+              <span className='text-red-400 text-sm lg:text-base'>
+                Something went wrong...
+              </span>
+            )}
             <a
               className='m-1 text-xs underline cursor-pointer'
               href='/register'
