@@ -14,15 +14,16 @@ import "swiper/css/navigation";
 import { Autoplay, EffectFade, Navigation } from "swiper";
 
 // import images
-import bg1 from "../../assets/images/bg.jpg";
-import bg2 from "../../assets/images/bg2.jpg";
-import bg3 from "../../assets/images/bg3.jpg";
-import image1 from "../../assets/images/avatar.png";
+import bg1 from "../../assets/images/bg.webp";
+import bg2 from "../../assets/images/bg2.webp";
+import bg3 from "../../assets/images/bg3.webp";
+import image1 from "../../assets/images/avatar.webp";
+import { Link } from "react-router-dom";
 // import image2 from "../../assets/images/woman.png";
 // import image3 from "../../assets/images/bank.png";
 const Header = () => {
   const [text] = useTypewriter({
-    words: ["Trust", "Bank on", "depend on"],
+    words: ["Trust", "Bank on"],
     typeSpeed: 120,
     deleteSpeed: 50,
     delaySpeed: 500,
@@ -44,7 +45,7 @@ const Header = () => {
   });
 
   return (
-    <div className="h-[85vh] lg:h-[90vh] sm:h-[80vh] xs:mt-5 lg:mt-0">
+    <div className="h-[70vh] lg:h-[90vh] xs:mt-5 lg:mt-0">
       <Swiper
         spaceBetween={30}
         // slidesPerView={1}
@@ -63,13 +64,13 @@ const Header = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="sm:h-[70vh]  h-full w-full bg-pink-400">
-            <MyImage
-              className="h-full w-full object-cover sm:hidden"
+          <div className="relative h-full w-full bg-pink-400">
+            <img
+              className="h-full w-full object-cover"
               src={bg1}
               alt="Background Image"
             />
-            <div className="absolute p-5 top-0 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center text-white">
+            <div className="absolute p-5 top-0 mt-10 lg:mt-0 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center text-white">
               <div className="p-5 text-left rounded-md shadow-sm">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
                   Invest With A Firm You Can <br />
@@ -79,10 +80,12 @@ const Header = () => {
                   24/7 monitoring of your investment is Assured
                 </p>
                 <div className="mt-5">
-                  <MyBtn child="Get Started" />
+                  <Link to="/login">
+                    <MyBtn child="Get Started" />
+                  </Link>
                 </div>
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center lg:mt-6">
                 <MyImage
                   className="ml-5"
                   src={image1}
@@ -95,12 +98,12 @@ const Header = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative h-full w-full">
-            <MyImage
+            <img
               className="h-full w-full object-cover "
               src={bg2}
               alt="Background Image"
             />
-            <div className="lg:w-[70%] sm:mt-10 lg:mx-auto lg:mt-10 lg:left-[20rem] absolute p-5 top-0  items-center justify-center text-white">
+            <div className="lg:w-[70%] mt-10 lg:mx-auto lg:mt-10 lg:left-[20rem] absolute p-5 top-0  items-center justify-center text-white">
               <div className="black-gradient p-5 text-left rounded-md shadow-2xl">
                 <h1 className="text-2xl font-bold mb-4 sm:text-4xl lg:text-6xl">
                   More <span className=" blue-text-gradient">{text2}</span> Than
@@ -113,7 +116,9 @@ const Header = () => {
                   Let your money do the hardwork.
                 </p>
                 <div className="mt-5">
-                  <MyBtn child="Get Started" />
+                  <Link to="/login">
+                    <MyBtn child="Get Started" />
+                  </Link>
                 </div>
               </div>
               <div className="flex lg:mr-[200px] items-center justify-left">
@@ -129,13 +134,13 @@ const Header = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative h-full w-full">
-            <MyImage
+            <img
               className="h-full w-full object-cover"
               src={bg3}
               alt="Background Image"
             />
-            <div className="absolute p-5 top-10 sm:mt-10 lg:left-20 grid grid-cols-2 gap-5 items-center justify-center ">
-              <div className="p-5 text-left rounded-md shadow-xl">
+            <div className="absolute p-5 top-10 sm:mt-10 lg:left-20 grid grid-cols-2 gap-3 items-center justify-center ">
+              <div className="p-5 text-left rounded-md shadow-sm">
                 <h1 className="text-3xl font-bold mb-4 sm:text-5xl lg:text-7xl text-black">
                   We Serve You <br />
                   <span className="orange-text-gradient">{text3}</span>
@@ -144,10 +149,12 @@ const Header = () => {
                   We hire the best traders to serve you better
                 </p>
                 <div className="mt-5">
-                  <MyBtn child="Get Started" />
+                  <Link to="/login">
+                    <MyBtn child="Get Started" />
+                  </Link>
                 </div>
               </div>
-              <div className="flex items-center justify-center object-contain">
+              <div className="flex w-1/3 items-center justify-center object-contain">
                 {/* <img
                   className=""
                   src={image2}

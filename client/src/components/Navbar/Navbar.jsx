@@ -1,65 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import { Button } from './Button';
 import { Menu, Close } from '@mui/icons-material';
-import Logo from '../../assets/images/black_logo.png';
+import Logo from "../../assets/images/1-removebg.png";
 // import Logo2 from "../../assets/images/white_logo.png";
 import './Navbar.css';
 import '../../index.css';
 
-function embedTradingViewWidget() {
-  window.onload = function () {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src =
-      'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-    script.async = true;
-    script.innerHTML = `
-    {
-      "symbols": [
-        {
-          "proName": "BITSTAMP:BTCUSD",
-          "title": "Bitcoin"
-        },
-        {
-          "proName": "BITSTAMP:ETHUSD",
-          "title": "Ethereum"
-        },
-        {
-          "description": "TESLA",
-          "proName": "NASDAQ:TSLA"
-        },
-        {
-          "description": "Doge",
-          "proName": "BINANCE:DOGEUSD"
-        },
-        {
-          "description": "APPLE",
-          "proName": "NASDAQ:AAPL"
-        },
-        {
-          "description": "NVIDIA",
-          "proName": "NASDAQ:NVDA"
-        }
-      ],
-      "showSymbolLogo": true,
-      "colorTheme": "light",
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "en"
-    }`;
 
-    const container = document.querySelector(
-      '.tradingview-widget-container__widget'
-    );
-    container.appendChild(script);
-  };
-
-  return undefined;
-}
 
 function Navbar() {
-  useEffect(embedTradingViewWidget, []);
 
   const [click, setClick] = useState(false);
 
@@ -164,10 +114,7 @@ function Navbar() {
           </ul>
         </div>
       </nav>
-      {/* TradingView Widget */}
-      <div className='tradingview-widget-container fixed left-0 right-0 top-[4.95rem] z-[99]'>
-        <div className='tradingview-widget-container__widget'></div>
-      </div>
+      
     </div>
   );
 }
