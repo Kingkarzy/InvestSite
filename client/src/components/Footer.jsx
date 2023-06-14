@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 // import { Button } from './Button';
-import Logo from "../assets/images/black_logo.png";
+import Logo from '../assets/images/black_logo.png';
 import './Footer.css';
 
 function Footer() {
@@ -33,9 +33,9 @@ function Footer() {
           <div className='footer-link-items'>
             <h2>About Us</h2>
             <Link to='/'>How it works</Link>
-            <Link to='/'>Testimonials</Link>
-            <Link to='/'>Investors</Link>
-            <Link to='/'>Terms of Service</Link>
+            <a href='#testimonials'>Testimonials</a>
+            <Link to='/faq'>FAQs</Link>
+            <Link to='/terms'>Terms of Service</Link>
           </div>
           <div className='footer-link-items'>
             <h2>Contact Us</h2>

@@ -7,67 +7,68 @@ import {
   TrendingUp,
 } from '@mui/icons-material';
 import Card from '../../components/Card';
-import {Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 const Features = () => {
   return (
-    <div className="flex justify-center items-center flex-col ">
-      <h1 className="mb-10 text-4xl font-semibold text-black">Features</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-around gap-5">
-        <Link to="/register">
+    <div className='flex justify-center items-center flex-col '>
+      <h1 className='mb-10 text-4xl font-semibold text-black'>
+        Features
+      </h1>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-around gap-5'>
+        <Link to='https://dashboard.goobull.com/register'>
           <Card
             logo={<PersonAdd />}
-            heading={"Register"}
+            heading={'Register'}
             content={`Join our global network`}
             // bgColor='#4182AB'
-            width="15rem"
-            height="13rem"
+            width='15rem'
+            height='13rem'
           />
         </Link>
-        <Link to="/login">
-          {" "}
+        <Link to='https://dashboard.goobull.com/login'>
           <Card
             logo={<Login />}
-            heading={"Login"}
+            heading={'Login'}
             content={`Enjoy high profits regularly.`}
             // bgColor='#4182AB'
-            width="15rem"
-            height="13rem"
+            width='15rem'
+            height='13rem'
           />
         </Link>
 
         <Card
           logo={<Money />}
-          heading={"Deposits"}
+          heading={'Deposits'}
           content={`Make Seemless Deposits`}
           // bgColor='#4182AB'
-          width="15rem"
-          height="13rem"
+          width='15rem'
+          height='13rem'
         />
         <Card
           logo={<CreditCard />}
-          heading={"Withdrawal"}
+          heading={'Withdrawal'}
           content={`Make Easy Withdrawals`}
           // bgColor='#4182AB'
-          width="15rem"
-          height="13rem"
+          width='15rem'
+          height='13rem'
         />
-        <Link to="/packages">
+        <Link to='https://dashboard.goobull.com/login'>
           <Card
             logo={<TrendingUp />}
-            heading={"Investments"}
+            heading={'Investments'}
             content={`Good Quality Investments`}
             // bgColor='#4182AB'
-            width="15rem"
-            height="13rem"
+            width='15rem'
+            height='13rem'
           />
         </Link>
         <Card
           logo={<Groups />}
-          heading={"Referrals"}
+          heading={'Referrals'}
           content={`Earn amazing 8%-5%-2% referrals.`}
           // bgColor='#4182AB'
-          width="15rem"
-          height="13rem"
+          width='15rem'
+          height='13rem'
         />
       </div>
     </div>

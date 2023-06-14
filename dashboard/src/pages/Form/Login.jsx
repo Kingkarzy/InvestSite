@@ -96,7 +96,7 @@ const Login = () => {
               </span>
             )}
             <a
-              className='m-1 text-xs underline cursor-pointer'
+              className='m-3 text-xs underline cursor-pointer'
               href='/register'
             >
               No Existing Account? Register

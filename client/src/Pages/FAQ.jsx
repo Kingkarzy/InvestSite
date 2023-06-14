@@ -47,7 +47,7 @@ const FAQ = () => {
                     className='cursor-pointer items-center flex flex-row justify-between py-6 px-10'
                     onClick={() => handleButtonClick(id)}
                   >
-                    <h4 className='pr-1 text-gray-900 text-2xl font-medium'>
+                    <h4 className='pr-1 text-gray-900 text-lg md:text-2xl font-medium'>
                       {heading}
                     </h4>
                     {click ? (

@@ -93,58 +93,124 @@ function App() {
           {/* ========== SET USER ROUTES ========== */}
           <Route
             path='/'
-            element={isAuth ? <Layout /> : <Navigate to='/login' />}
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Layout />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           >
             <Route
               path='/'
               element={
-                isAuth ? <Dashboard /> : <Navigate to='/login' />
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Dashboard />
+                ) : (
+                  <Navigate to='/login' />
+                )
               }
             />
             <Route path='/myaccount'>
               <Route
                 index
                 element={
-                  isAuth ? <Balance /> : <Navigate to='/login' />
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Balance />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
                 }
               />
               <Route
                 path='withdraw'
                 element={
-                  isAuth ? <Withdraw /> : <Navigate to='/login' />
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Withdraw />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
                 }
               />
               <Route
                 path='deposit'
                 element={
-                  isAuth ? <Deposit /> : <Navigate to='/login' />
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Deposit />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
                 }
               />
             </Route>
             <Route
               path='/refer'
-              element={isAuth ? <Refer /> : <Navigate to='/login' />}
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Refer />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
               path='/trade'
-              element={isAuth ? <Trade /> : <Navigate to='/login' />}
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Trade />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
               path='/subscription'
               element={
-                isAuth ? <Subscription /> : <Navigate to='/login' />
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Subscription />
+                ) : (
+                  <Navigate to='/login' />
+                )
               }
             />
             <Route
               path='/settings'
               element={
-                isAuth ? <Setting /> : <Navigate to='/login' />
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Setting />
+                ) : (
+                  <Navigate to='/login' />
+                )
               }
             />
             <Route
               path='/support'
               element={
-                isAuth ? <Support /> : <Navigate to='/login' />
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Support />
+                ) : (
+                  <Navigate to='/login' />
+                )
               }
             />
           </Route>
@@ -152,7 +218,15 @@ function App() {
           {/* ========== SET NOTFOUND ROUTES ========== */}
           <Route
             path='*'
-            element={isAuth ? <NotFound /> : <Navigate to='/login' />}
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <NotFound />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           />
         </Routes>
       </BrowserRouter>

@@ -11,9 +11,9 @@ const Why = () => {
             animateIn='animate__fadeInUp'
             delay='200'
             duration={200}
-            className=' w-2/3 '
+            className=' lg:w-2/3 '
           >
-            <div className='flex flex-row mb-14 w-2/3 border-solid border-2 rounded-md border-purple-500 p-4'>
+            <div className='flex flex-row mb-14 lg:w-2/3 border-solid border-2 rounded-md border-purple-500 p-4'>
               <h1 className='background-gradient py-1.5 px-3 h-9 rounded-full font-semibold text-lg mr-6 text-white'>
                 1. &nbsp;
               </h1>
@@ -33,9 +33,9 @@ const Why = () => {
             animateIn='animate__fadeInUp'
             delay='200'
             duration={200}
-            className=' w-2/3 '
+            className=' lg:w-2/3 '
           >
-            <div className='flex flex-row mb-14 w-2/3 border-solid border-2 rounded-md border-green-400 p-4'>
+            <div className='flex flex-row mb-14 lg:w-2/3 border-solid border-2 rounded-md border-green-400 p-4'>
               <h1 className='background-gradient py-1.5 px-3 h-9 rounded-full font-semibold text-lg mr-6 text-white'>
                 2. &nbsp;
               </h1>
@@ -55,9 +55,9 @@ const Why = () => {
             animateIn='animate__fadeInUp'
             delay='200'
             duration={200}
-            className=' w-2/3 '
+            className=' lg:w-2/3 '
           >
-            <div className='flex flex-row mb-14 w-2/3 border-solid border-2 rounded-md border-orange-400 p-4'>
+            <div className='flex flex-row mb-14 lg:w-2/3 border-solid border-2 rounded-md border-orange-400 p-4'>
               <h1 className='background-mixed-gradient py-1.5 px-3 h-10 rounded-full font-semibold text-lg mr-6 text-white'>
                 3. &nbsp;
               </h1>
@@ -76,9 +76,9 @@ const Why = () => {
             animateIn='animate__fadeInUp'
             delay='200'
             duration={200}
-            className=' w-2/3 '
+            className=' lg:w-2/3 '
           >
-            <div className='flex flex-row mb-14 w-2/3 border-solid border-2 rounded-md border-sky-400 p-4'>
+            <div className='flex flex-row mb-14 lg:w-2/3 border-solid border-2 rounded-md border-sky-400 p-4'>
               <h1 className='background-indigo-gradient py-1.5 pl-3 pr-1.5 h-10 rounded-full font-semibold text-lg mr-6 text-white'>
                 4. &nbsp;
               </h1>
