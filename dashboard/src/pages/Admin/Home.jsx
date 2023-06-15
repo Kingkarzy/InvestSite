@@ -1,7 +1,9 @@
 const Home = () => {
   return (
-    <div>
-      <div></div>
+    <div className='w-full'>
+      <div>
+        <h1>Welcome to the Admin Dashboard</h1>
+      </div>
     </div>
   );
 };

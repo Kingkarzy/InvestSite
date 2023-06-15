@@ -2,15 +2,12 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import { Button } from './Button';
 import { Menu, Close } from '@mui/icons-material';
-import Logo from "../../assets/images/1-removebg.png";
+import Logo from '../../assets/images/1-removebg.png';
 // import Logo2 from "../../assets/images/white_logo.png";
 import './Navbar.css';
 import '../../index.css';
 
-
-
 function Navbar() {
-
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -91,7 +88,7 @@ function Navbar() {
             </li>
             <li className='nav-item flex items-center justify-center'>
               <NavLink
-                to='/login'
+                to='https://dashboard.goobull.com/login'
                 className=''
                 onClick={closeMobileMenu}
               >
@@ -102,10 +99,10 @@ function Navbar() {
             </li>
             <li className='nav-item flex items-center justify-center'>
               <NavLink
-                to='/register'
+                to='https://dashboard.goobull.com/register'
                 className=''
                 onClick={closeMobileMenu}
-                >
+              >
                 <button className='text-base font-medium px-8 bg-slate-50 dark:bg-slate-700 hover:bg-yellow-450 hover:text-black hover:scale-110 dark:text-white'>
                   Create an account
                 </button>
@@ -114,7 +111,6 @@ function Navbar() {
           </ul>
         </div>
       </nav>
-      
     </div>
   );
 }

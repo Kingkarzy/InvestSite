@@ -14,7 +14,7 @@ const Deposits = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/dashboard/deposits',
+          'https://server.goobull.com/api/admin/deposits',
           {
             headers: {
               'Content-Type': 'application/json',
@@ -36,11 +36,10 @@ const Deposits = () => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/api/dashboard/deposit/${depositId}/${userId}/users`,
+      url: `https://server.goobull.com/api/admin/deposits/${depositId}/${userId}/users`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
-      //   data: data,
     };
 
     axios
@@ -54,8 +53,8 @@ const Deposits = () => {
   };
 
   return (
-    <div className='flex justify-center items-center ml-80'>
-      <div className='mb-10 w-2/4 flex flex-col justify-center items-center'>
+    <div className='flex justify-center items-center'>
+      <div className='mb-10 w-3/4 flex flex-col justify-center items-center'>
         <table className='table w-full mb-5 border border-solid border-gray-100'>
           <thead className='bg-white'>
             <tr>

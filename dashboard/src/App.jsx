@@ -21,88 +21,212 @@ import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Form/Login';
 import Register from './pages/Form/Register';
 import Home from './pages/Admin/Home';
-import User from './pages/Admin/User';
 import UserList from './pages/Admin/UserList';
 import Deposits from './pages/Admin/Deposits';
 import Sidebar from './pages/Admin/Sidebar';
+import Withdrawals from './pages/Admin/Withdrawals';
+import Plans from './pages/Admin/Plans';
 
 function App() {
   const isAuth = useSelector((state) => Boolean(state.token));
   const user = useSelector((state) => state.user);
   const isAdmin = user && user.isAdmin;
   return (
-    <div className="app">
+    <div className='app'>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" index element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route
-            path="/admin"
-            element={isAdmin ? <Sidebar /> : <Navigate to="/" />}
+            path='/login'
+            index
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Navigate to='/' />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route
+            path='/register'
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Navigate to='/' />
+              ) : (
+                <Register />
+              )
+            }
+          />
+
+          {/* ========== SET ADMIN ROUTES ========== */}
+          <Route
+            path='/admin'
+            element={isAdmin ? <Sidebar /> : <Navigate to='/' />}
           >
             <Route
-              path="/admin"
-              element={isAdmin ? <Home /> : <Navigate to="/" />}
+              path='/admin'
+              element={isAdmin ? <Home /> : <Navigate to='/' />}
             />
             <Route
-              path="/admin/users"
-              element={isAdmin ? <UserList /> : <Navigate to="/" />}
+              path='/admin/users'
+              element={isAdmin ? <UserList /> : <Navigate to='/' />}
             />
             <Route
-              path="/admin/user/:id"
-              element={isAdmin ? <User /> : <Navigate to="/" />}
+              path='/admin/withdrawals/'
+              element={
+                isAdmin ? <Withdrawals /> : <Navigate to='/' />
+              }
             />
             <Route
-              path="/admin/deposits"
-              element={isAdmin ? <Deposits /> : <Navigate to="/" />}
+              path='/admin/deposits'
+              element={isAdmin ? <Deposits /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/admin/plans'
+              element={isAdmin ? <Plans /> : <Navigate to='/' />}
             />
           </Route>
+
+          {/* ========== SET USER ROUTES ========== */}
           <Route
-            path="/"
-            element={isAuth ? <Layout /> : <Navigate to="/login" />}
+            path='/'
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <Layout />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           >
             <Route
-              path="/"
-              element={isAuth ? <Dashboard /> : <Navigate to="/login" />}
+              path='/'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Dashboard />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
-            <Route path="/myaccount">
+            <Route path='/myaccount'>
               <Route
                 index
-                element={isAuth ? <Balance /> : <Navigate to="/login" />}
+                element={
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Balance />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
+                }
               />
               <Route
-                path="withdraw"
-                element={isAuth ? <Withdraw /> : <Navigate to="/login" />}
+                path='withdraw'
+                element={
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Withdraw />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
+                }
               />
               <Route
-                path="deposit"
-                element={isAuth ? <Deposit /> : <Navigate to="/login" />}
+                path='deposit'
+                element={
+                  isAdmin ? (
+                    <Navigate to='/admin' />
+                  ) : isAuth ? (
+                    <Deposit />
+                  ) : (
+                    <Navigate to='/login' />
+                  )
+                }
               />
             </Route>
             <Route
-              path="/refer"
-              element={isAuth ? <Refer /> : <Navigate to="/login" />}
+              path='/refer'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Refer />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
-              path="/trade"
-              element={isAuth ? <Trade /> : <Navigate to="/login" />}
+              path='/trade'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Trade />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
-              path="/subscription"
-              element={isAuth ? <Subscription /> : <Navigate to="/login" />}
+              path='/subscription'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Subscription />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
-              path="/settings"
-              element={isAuth ? <Setting /> : <Navigate to="/login" />}
+              path='/settings'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Setting />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
             <Route
-              path="/support"
-              element={isAuth ? <Support /> : <Navigate to="/login" />}
+              path='/support'
+              element={
+                isAdmin ? (
+                  <Navigate to='/admin' />
+                ) : isAuth ? (
+                  <Support />
+                ) : (
+                  <Navigate to='/login' />
+                )
+              }
             />
           </Route>
+
+          {/* ========== SET NOTFOUND ROUTES ========== */}
           <Route
-            path="*"
-            element={isAuth ? <NotFound /> : <Navigate to="/login" />}
+            path='*'
+            element={
+              isAdmin ? (
+                <Navigate to='/admin' />
+              ) : isAuth ? (
+                <NotFound />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           />
         </Routes>
       </BrowserRouter>

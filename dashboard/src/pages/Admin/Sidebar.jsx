@@ -12,8 +12,8 @@ import { Link, Outlet } from 'react-router-dom';
 
 export default function Sidebar() {
   return (
-    <div className='flex h-screen bg-[rgb(251,251,255)] sticky top-[50px] justify-between'>
-      <div className='p-5 text-[#555] flex flex-col gap-10 justify-center fixed bg-yellow-400 top-0 bottom-0'>
+    <div className='flex w-screen h-screen bg-[rgb(251,251,255)] top-[50px] justify-evenly'>
+      <div className='p-5 w-[15%] text-[#555] flex flex-col gap-10 justify-center  bg-yellow-450 top-0 bottom-0 left-0'>
         <div className='mb-[10px]'>
           <h3 className='text-sm text-[rgb(187,186,186)]'>
             Dashboard
@@ -28,10 +28,15 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
-            <li className='p-[5px] cursor-pointer flex items-center rounded-[10px] hover:bg-[rgb(24,240,255)]'>
-              <TrendingUp className='mr-[5px] text-xl' />
-              Plans
-            </li>
+            <Link
+              to='plans'
+              className='link'
+            >
+              <li className='p-[5px] cursor-pointer flex items-center rounded-[10px] hover:bg-[rgb(24,240,255)]'>
+                <TrendingUp className='mr-[5px] text-xl' />
+                Plans
+              </li>
+            </Link>
           </ul>
         </div>
         <div className='mb-[10px]'>
@@ -89,7 +94,7 @@ export default function Sidebar() {
           </ul>
         </div>
       </div>
-      <div>
+      <div className='w-[100%] p-10'>
         <Outlet />
       </div>
     </div>

@@ -53,7 +53,7 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
 
 export const verifyUserToken = async (req, res, next) => {
     try {
-        //header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Origin: *");
         let token = req.header("Authorization");
 
         if (!token) {
@@ -81,3 +81,13 @@ export const verifyTokenAndAdmin = (req, res, next) => {
         }
     })
 }
+
+/*
+RewriteEngine On
+RewriteRule ^$ http://127.0.0.1:3001/ [P,L]
+RewriteCond %{REQUEST_FILENAME}!-f
+RewriteCond %{REQUEST_FILENAME}!-d
+RewriteRule ^(.*)$ http://127.0.0.1:3001/$1 [P,L]
+*/
+
+// source /home/goobzhuk/nodevenv/server.goobull.com/14/bin/activate && cd /home/goobzhuk/server.goobull.com

@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import {
   LazyLoadImage,
-} from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+  // trackWindowScroll,
+} from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const MyImage = ({ src, alt, scrollPosition }) => (
   <div>
     <LazyLoadImage
-      effect="blur"
+      effect='blur'
       alt={alt}
       scrollPosition={scrollPosition}
       // height={image.height}

@@ -20,6 +20,7 @@ const performBalanceUpdate = async () => {
 
                     if (plan.duration === 0) {
                         plan.status = 'Completed';
+                        user.balance += plan.amount;
                     }
 
                     await Promise.all([user.save(), plan.save()]);
