@@ -14,96 +14,98 @@ function Navbar() {
   const closeMobileMenu = () => setClick(false);
 
   return (
-    <div className='mb-20'>
-      <nav className='background-gradient navbar'>
-        <div className='navbar-container'>
+    <div className="mb-20">
+      <nav className="background-gradient navbar">
+        <div className="navbar-container">
           <NavLink
-            to='/'
-            className='navbar-logo cursor-pointer'
+            to="/"
+            className="navbar-logo cursor-pointer"
             onClick={closeMobileMenu}
           >
             <img
               src={Logo}
-              alt=' '
-              className='logo-img lg:mt-1 mt-4 w-[50px] h-[50px]'
+              alt=" "
+              className="logo-img lg:mt-1 mt-4 w-[50px] h-[50px]"
             />
           </NavLink>
 
-          <div
-            className='menu-icon text-lg'
-            onClick={handleClick}
-          >
+          <div className="menu-icon text-lg" onClick={handleClick}>
             {click ? (
-              <Close sx={{ color: 'white' }} />
+              <Close sx={{ color: "white" }} />
             ) : (
-              <Menu sx={{ color: 'white' }} />
+              <Menu sx={{ color: "white" }} />
             )}
           </div>
 
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <NavLink
-                to='/'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink to="/" className="nav-links" onClick={closeMobileMenu}>
                 Home
               </NavLink>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <NavLink
-                to='/About'
-                className='nav-links'
+                to="/About"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 About Us
               </NavLink>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <NavLink
-                to='/packages'
-                className='nav-links'
+                to="/packages"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Packages
               </NavLink>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <NavLink
-                to='/faq'
-                className='nav-links'
+                to="/contact"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Contact Us
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/faq"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 FAQ
               </NavLink>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <NavLink
-                to='/terms'
-                className='nav-links'
+                to="/terms"
+                className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Terms
               </NavLink>
             </li>
-            <li className='nav-item flex items-center justify-center'>
+            <li className="nav-item flex items-center justify-center">
               <NavLink
-                to='https://dashboard.goobull.com/login'
-                className=''
+                to="https://dashboard.goobull.com/login"
+                className=""
                 onClick={closeMobileMenu}
               >
-                <button className='text-base px-10 lg:ml-4 lg:mr-2 font-medium hover:border-transparent border  hover:border-indigo-450 bg-black  text-white hover:text-black hover:scale-110 hover:bg-yellow-450'>
+                <button className="text-base px-10 lg:ml-4 lg:mr-2 font-medium hover:border-transparent border  hover:border-indigo-450 bg-black  text-white hover:text-black hover:scale-110 hover:bg-yellow-450">
                   Login
                 </button>
               </NavLink>
             </li>
-            <li className='nav-item flex items-center justify-center'>
+            <li className="nav-item flex items-center justify-center">
               <NavLink
-                to='https://dashboard.goobull.com/register'
-                className=''
+                to="https://dashboard.goobull.com/register"
+                className=""
                 onClick={closeMobileMenu}
               >
-                <button className='text-base font-medium px-8 bg-slate-50 dark:bg-slate-700 hover:bg-yellow-450 hover:text-black hover:scale-110 dark:text-white'>
+                <button className="text-base font-medium px-8 bg-slate-50 dark:bg-slate-700 hover:bg-yellow-450 hover:text-black hover:scale-110 dark:text-white">
                   Create an account
                 </button>
               </NavLink>

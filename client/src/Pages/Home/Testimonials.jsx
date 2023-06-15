@@ -42,7 +42,7 @@ const Testimonials = () => {
         {testimonials.map((item) => (
           <div
             key={item.id}
-            className='flex-shrink-0 w-full min-h-90vh'
+            className='flex-shrink-0 w-full min-h-20vh'
           >
             <div className='flex-1 justify-center flex items-center '>
               <div className='p-12 flex items-center justify-center flex-col w-full max-w-full md:w-8/12'>

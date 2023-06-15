@@ -115,7 +115,6 @@
   transition: color 0.2s ease-in-out;
 }
 
-
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
@@ -125,30 +124,29 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-
     position: absolute;
     top: 80px;
     left: -100%;
     opacity: 1;
-    transition: all 0.5s ease;
+    transition: 0.4s ease;
     padding-bottom: 20px;
   }
 
   .nav-menu.active {
     background: var(--first-theme-color); /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    var(--first-theme-color),
-    var(--second-theme-color)
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    var(--first-theme-color),
-    var(--second-theme-color)
-  );
+    background: -webkit-linear-gradient(
+      to right,
+      var(--first-theme-color),
+      var(--second-theme-color)
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      var(--first-theme-color),
+      var(--second-theme-color)
+    );
     left: 0;
     opacity: 1;
-    transition: all 0.2s ease;
+    transition: all 0.5s ease;
     z-index: 5;
   }
 
@@ -202,7 +200,7 @@
     color: #fff;
     padding: 14px 20px;
     border: 1px solid #fff;
-    transition: all 1s ease-out;
+    transition: all 0.1s ease-out;
   }
 
   .nav-links-mobile:hover {

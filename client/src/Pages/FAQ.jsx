@@ -59,7 +59,7 @@ const FAQ = () => {
                   {showSummary && (
                     <div className='flex flex-col md:flex-row mt-8 mb-8 px-10 bg-white w-full items-center'>
                       <div className='mt-0 sm:mt-6 md:mt-0 bg-white'>
-                        <p className='text-xs text-justify mb-1'>
+                        <p className='text-xs text-black text-justify mb-1'>
                           {summary}
                         </p>
                       </div>

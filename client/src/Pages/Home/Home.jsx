@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       {/* TradingView Widget */}
-      <div className='tradingview-widget-container fixed left-0 right-0 top-[4.95rem] z-[99]'>
+      <div className='tradingview-widget-container left-0 right-0 top-[4.95rem] z-[99]'>
         <TickerTape
           colorTheme='dark'
           displayMode='adaptive'

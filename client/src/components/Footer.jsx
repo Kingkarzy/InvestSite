@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 // import { Button } from './Button';
-import Logo from '../assets/images/black_logo.png';
+import Logo from "../assets/images/1-removebg.png";
 import './Footer.css';
 
 function Footer() {
@@ -32,14 +32,14 @@ function Footer() {
         <div className='footer-link-wrapper'>
           <div className='footer-link-items'>
             <h2>About Us</h2>
-            <Link to='/'>How it works</Link>
-            <a href='#testimonials'>Testimonials</a>
+            <Link to='/about'>How it works</Link>
+            <a href='/#testimonials'>Testimonials</a>
             <Link to='/faq'>FAQs</Link>
             <Link to='/terms'>Terms of Service</Link>
           </div>
           <div className='footer-link-items'>
             <h2>Contact Us</h2>
-            <Link to='/'>Contact</Link>
+            <Link to='/contact'>Contact</Link>
             <Link to='/'>Support</Link>
             <Link to='/'>Destinations</Link>
             <Link to='/'>Sponsorships</Link>

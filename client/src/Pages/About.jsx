@@ -1,6 +1,9 @@
 import Divider from '../components/Divider';
 import TeamCard from '../components/TeamCard';
 import img1 from '../assets/images/img3.webp';
+import pp1 from "../assets/images/ceo.jpg";
+import pp2 from "../assets/images/lio.jpg";
+import pp3 from "../assets/images/cto.jpg";
 
 const About = () => {
   return (
@@ -26,7 +29,7 @@ const About = () => {
                   Who We Are?
                 </h2>
                 <p className='text-l lg:text-xl sm:text-sm font-light text-justify sm:text-left leading-normal  mb-5 md:mb-3'>
-                  We are strong supporters of Cryptocurrency,
+                  We Goobull are strong supporters of Cryptocurrency,
                   blockchain technology and forex trading. We hope to
                   contribute as much as possible to keep the
                   investment community alive and growing. Our vision
@@ -57,17 +60,17 @@ const About = () => {
           </p>
           <div className='w-full justify-center items-center mx-auto flex lg:flex-row lg:col-span-4 gap-5 md:col-span-2  flex-col'>
             <TeamCard
-              image={img1}
+              image={pp1}
               name='Ryan Williams'
               title='CEO'
             />
             <TeamCard
-              image={img1}
-              name='Tom Wesley'
+              image={pp2}
+              name='Mary Wesley'
               title='Lead Investment Officer'
             />
             <TeamCard
-              image={img1}
+              image={pp3}
               name='Alexander Jeffrey'
               title='CTO'
             />

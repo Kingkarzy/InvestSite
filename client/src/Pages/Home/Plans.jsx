@@ -11,7 +11,7 @@ function Plans() {
         you. Explore our investment plans today!
       </p>
       <div className='w-[90%] grid grid-cols-1 sm:w-full sm:  md:grid-cols-2 lg:grid-cols-3 justify-between md:gap-5 mx-auto '>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Bronze'}
             price='$1000'
@@ -24,7 +24,7 @@ function Plans() {
             height={400}
           />
         </Link>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Silver'}
             price='$5000'
@@ -37,7 +37,7 @@ function Plans() {
             height={400}
           />
         </Link>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Gold'}
             price='$10000'
@@ -50,7 +50,7 @@ function Plans() {
             height={400}
           />
         </Link>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Diamond'}
             price='$25000'
@@ -63,7 +63,7 @@ function Plans() {
             height={400}
           />
         </Link>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Emerald'}
             price='$50000'
@@ -76,7 +76,7 @@ function Plans() {
             height={400}
           />
         </Link>
-        <Link to='/login'>
+        <Link to='https://dashboard.goobull.com/login'>
           <PriceCard
             heading={'Ruby'}
             price='$100000'
