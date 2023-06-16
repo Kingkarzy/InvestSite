@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 function Sidebar() {
   const [click, setClick] = useState(false);
   const handleclick = () => {
@@ -9,26 +9,23 @@ function Sidebar() {
   };
   return (
     <nav>
-      <ul className='flex flex-col justify-evenly h-[75vh]'>
+      <ul className="flex flex-col justify-evenly h-[75vh]">
         <li>
-          <Link
-            to='/'
-            className='sidebarlinks'
-          >
+          <Link to="/" className="sidebarlinks">
             Dashboard
           </Link>
         </li>
         <li>
           <Link
-            to='/myaccount'
-            className='sidebarlinks flex justify-between '
+            to="/myaccount"
+            className="sidebarlinks flex justify-between "
             onClick={handleclick}
           >
             My Account
             {click ? <ExpandLess /> : <ExpandMore />}
           </Link>
           {
-            <ul className={`${click ? '' : 'hidden'} mt-3`}>
+            <ul className={`${click ? "" : "hidden"} mt-3`}>
               {/* <li>
                 <Link
                   to='myaccount/balance'
@@ -39,16 +36,16 @@ function Sidebar() {
               </li> */}
               <li>
                 <Link
-                  to='/myaccount/withdraw'
-                  className='sidebarlinks text-gray-700 block px-4 py-2 text-sm'
+                  to="/myaccount/withdraw"
+                  className="sidebarlinks text-gray-700 block px-4 py-2 text-sm"
                 >
                   Account Withdraw
                 </Link>
               </li>
               <li>
                 <Link
-                  to='/myaccount/deposit'
-                  className='sidebarlinks text-gray-700 block px-4 py-2 text-sm'
+                  to="/myaccount/deposit"
+                  className="sidebarlinks text-gray-700 block px-4 py-2 text-sm"
                 >
                   Account Deposit
                 </Link>
@@ -57,10 +54,7 @@ function Sidebar() {
           }
         </li>
         <li>
-          <Link
-            to='/trade'
-            className='sidebarlinks'
-          >
+          <Link to="/trade" className="sidebarlinks">
             Start Trade
           </Link>
         </li>
@@ -70,19 +64,19 @@ function Sidebar() {
           </Link>
         </li> */}
         <li>
-          <Link
-            to='/support'
-            className='sidebarlinks'
-          >
+          <Link to="/support" className="sidebarlinks">
             Support
           </Link>
         </li>
         <li>
-          <Link
-            to='/subscription'
-            className='sidebarlinks'
-          >
+          <Link to="/subscription" className="sidebarlinks">
             Subscription
+          </Link>
+        </li>
+        <li>
+          <Link to="https://goobull.com">
+           <ArrowBackIcon/> {""}
+            return home
           </Link>
         </li>
       </ul>

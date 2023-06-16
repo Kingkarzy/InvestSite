@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Plans = () => {
   const user = useSelector((state) => state.user);
@@ -11,10 +11,10 @@ const Plans = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://server.goobull.com/api/admin/plans',
+          "https://server.goobull.com/api/admin/plans",
           {
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Bearer ${user.token}`,
             },
           }
@@ -45,7 +45,7 @@ const Plans = () => {
         `https://server.goobull.com/api/admin/users/${userId}`,
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         }
@@ -57,10 +57,10 @@ const Plans = () => {
   };
 
   return (
-    <div className='flex justify-center items-center'>
-      <div className='mb-10 w-full flex flex-col justify-center items-center'>
-        <table className='table w-full mb-5 border border-solid border-gray-100'>
-          <thead className='bg-white'>
+    <div className="flex justify-center items-center">
+      <div className="mb-10 w-full flex flex-col justify-center items-center">
+        <table className="table w-full mb-5 border border-solid border-gray-100">
+          <thead className="bg-white">
             <tr>
               <th>ID</th>
               <th>Username</th>
@@ -75,26 +75,34 @@ const Plans = () => {
             {result.length !== 0 &&
               result.map((item, index) => (
                 <tr key={item._id}>
-                  <td className='text-center'>{index + 1}</td>
-                  <td className='text-center'>
-                    {usernames[item.userId]}
-                  </td>
-                  <td className='text-center'>{item.planType}</td>
-                  <td className='text-center'>{item.amount}</td>
-                  <td className='text-center'>{item.duration}</td>
+                  <td className="text-center">{index + 1}</td>
+                  <td className="text-center">{usernames[item.userId]}</td>
+                  <td className="text-center">{item.planType}</td>
+                  <td className="text-center">{item.amount}</td>
+                  <td className="text-center">{item.duration}</td>
                   <td
                     className={`text-center ${
-                      item.status === 'ongoing'
-                        ? ''
-                        : 'text-green-500'
+                      item.status === "ongoing" ? "" : "text-green-500"
                     }`}
                   >
                     {item.status}
                   </td>
-                  <td className='text-center'>
-                    {new Date(item.createdAt).toLocaleDateString(
-                      'en-GB'
-                    )}
+                  <td className="text-center">
+                    {new Date(item.createdAt).toLocaleDateString("en-GB")}
+                  </td>
+                  <td className="text-center flex gap-3">
+                    <button
+                      className="px-3 py-1 bg-yellow-500 rounded-sm text-white hover:scale-95"
+                      onClick={() => {}}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="px-3 py-1 bg-red-600 rounded-sm text-white hover:scale-95"
+                      onClick={() => {}}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

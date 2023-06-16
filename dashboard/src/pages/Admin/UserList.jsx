@@ -103,7 +103,7 @@ const UserList = () => {
           </div>
         );
       },
-    },
+    }, 
     {
       field: 'action',
       headerName: 'Action',

@@ -54,7 +54,7 @@ const Deposits = () => {
 
   return (
     <div className='flex justify-center items-center'>
-      <div className='mb-10 w-3/4 flex flex-col justify-center items-center'>
+      <div className='mb-10 w-auto flex flex-col justify-center items-center'>
         <table className='table w-full mb-5 border border-solid border-gray-100'>
           <thead className='bg-white'>
             <tr>

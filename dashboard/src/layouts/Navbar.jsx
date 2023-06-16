@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { Link } from 'react-router-dom';
-import { Close, Menu, Settings } from '@mui/icons-material';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLogout } from '../state/index';
-import logo from "../assets/images/black_logo.png"
+import { Link } from "react-router-dom";
+import { Close, Menu, Settings } from "@mui/icons-material";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../state/index";
+import logo from "../assets/images/3-removebg-preview.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 function Navbar({ onToggleSidebar }) {
@@ -24,7 +24,7 @@ function Navbar({ onToggleSidebar }) {
         {click ? <Menu /> : <Close />}
       </button>
       <div>
-        <Link to="/">
+        <Link to="https://goobull.com">
           <img src={logo} className="w-[25px]" alt="logo" />
         </Link>
       </div>
@@ -39,7 +39,7 @@ function Navbar({ onToggleSidebar }) {
           className="px-3 hover:font-semibold hover:text-red-500"
           onClick={() => dispatch(setLogout())}
         >
-          Logout <LogoutIcon/>
+          Logout <LogoutIcon />
         </button>
       </div>
     </nav>

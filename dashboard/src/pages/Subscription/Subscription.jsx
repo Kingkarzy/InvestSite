@@ -14,7 +14,7 @@ function Subscription() {
       </div>
       <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-11/12 shadow-3xl'>
         <h2 className='font-semibold'>
-          Apex Trading Services Account Manager
+            Goobull Investment Trading Services Account Manager
         </h2>
         <br />
         <p className='lg:w-2/3 font-light'>
@@ -31,7 +31,7 @@ function Subscription() {
         <br />
         <h6 className='font-semibold'>Term and Conditions apply</h6>
         <p className='font-light'>
-          Reach us @support@apexaitrading.com for more info.
+          Reach us at support@goobull.com for more info.
         </p>
       </div>
       <div className='w-2/4 gap-5 flex'>
@@ -50,7 +50,7 @@ function Subscription() {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <div></div>
+        <div className='text-center font-semibold text-black bg-yellow-500 p-5'>Not available</div>
       </Modal>
     </div>
   );
