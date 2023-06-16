@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { AddRounded } from "@mui/icons-material";
+import { PrimaryButton } from "../../components/Button";
 
 const Plans = () => {
   const user = useSelector((state) => state.user);
@@ -58,7 +60,12 @@ const Plans = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="mb-10 w-full flex flex-col justify-center items-center">
+      <div className="mb-10 w-full flex flex-col gap-5 justify-center ">
+        <div className="w-fit font-semibold text-white">
+          <PrimaryButton className="">
+            <AddRounded /> Create Plan
+          </PrimaryButton>
+        </div>
         <table className="table w-full mb-5 border border-solid border-gray-100">
           <thead className="bg-white">
             <tr>
