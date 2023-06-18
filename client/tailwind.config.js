@@ -33,9 +33,9 @@ export default {
         myspin: "myspin 5s linear infinite",
       },
       backgroundImage: {
-        image: 'url(../src/assets/images/bg3.jpg)',
-        bg: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg.jpg')",
-        bg2: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg3.jpg')",
+        image: 'url(../src/assets/images/bg3.webp)',
+        bg: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg.webp')",
+        bg2: "linear-gradient(90deg, rgba(0, 34, 36, 0.7) 1%, rgba(0, 0, 0, 0.7) 56%, rgba(15, 103, 53, 0.7) 100%), url('../src/assets/images/bg3.webp')",
         mybg: "linear-gradient(to right, #00ccff, #0040ff, #c509f4, #c20b0b)",
         cardbg:
           "linear-gradient(to top, #4182AB 0%, #38AB99 50%, #F7D046 100%)",
