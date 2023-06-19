@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,7 +12,7 @@ import Navbar from './components/Navbar/Navbar';
 // Pages Import
 import Home from './Pages/Home/Home';
 import About from './Pages/About';
-import Contact from "./Pages/Contact";
+import Contact from './Pages/Contact';
 import NotFound from './Pages/NotFound';
 import Footer from './components/Footer';
 import Packages from './Pages/Packages';
@@ -26,13 +25,35 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/packages" element={<Packages />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path='/'
+            exact
+            element={<Home />}
+          />
+          <Route
+            path='/about'
+            element={<About />}
+          />
+          <Route
+            path='/contact'
+            element={<Contact />}
+          />
+          <Route
+            path='/packages'
+            element={<Packages />}
+          />
+          <Route
+            path='/faq'
+            element={<FAQ />}
+          />
+          <Route
+            path='/terms'
+            element={<Terms />}
+          />
+          <Route
+            path='*'
+            element={<NotFound />}
+          />
         </Routes>
         <Footer />
         <ScrollToTop />

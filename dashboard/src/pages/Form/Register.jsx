@@ -21,10 +21,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
+    console.log(username);
     if (password !== confirmPassword) {
       setPasswordMatch(false);
       return;
     }
+    console.log(password);
+    console.log(email);
 
     try {
       const response = await axios.post(

@@ -9,31 +9,25 @@ import axios from 'axios';
 import { Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
+import emailjs from '@emailjs/browser';
+
+emailjs.init('KttVShQuK7ehuvHKB');
 
 function Deposit() {
+  const user = useSelector((state) => state.user);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const user = useSelector((state) => state.user);
-
-  const getCurrentDate = () => {
-    const date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const year = date.getFullYear();
-
-    return `${day}-${month}-${year}`;
-  };
 
   const [amount, setAmount] = useState('');
   const [mode, setMode] = useState('');
   const [btc, setBtc] = useState('');
   const [eth, setETH] = useState('');
   const [usdt, setUSDT] = useState('');
-
   const [picturePath, setPicturePath] = useState('');
-
   const [result, setResult] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (amount > 100000) {
@@ -49,7 +43,7 @@ function Deposit() {
     formData.append('amount', amount);
     formData.append('mode', mode);
     formData.append('status', 'pending');
-    formData.append('date', getCurrentDate());
+    formData.append('date', new Date());
     formData.append('picture', picturePath);
 
     const config = {
@@ -63,10 +57,30 @@ function Deposit() {
       data: formData,
     };
 
+    const emailParams = {
+      to_name: user.username,
+      to_email: user.email,
+      message: `Dear ${user.username}, your deposit of ${amount} has been successfully lodged and is being processed.`,
+      from_name: 'Deposit',
+    };
+
     axios
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        emailjs
+          .send(
+            'service_xo5bbu9',
+            'template_20o0m89',
+            emailParams,
+            'KttVShQuK7ehuvHKB'
+          )
+          .then((response) => {
+            console.log('Confirmation email sent:', response.text);
+          })
+          .catch((error) => {
+            console.log('Error sending confirmation email:', error);
+          });
         alert('Deposit Successful!');
         handleClose();
       })
@@ -94,7 +108,7 @@ function Deposit() {
     };
 
     fetchData();
-  }, []);
+  }, [user._id, user.token]);
 
   return (
     <div className=''>

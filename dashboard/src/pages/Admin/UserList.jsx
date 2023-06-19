@@ -1,13 +1,18 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { AddRounded } from "@mui/icons-material";
-import { PrimaryButton } from "../../components/Button";
-import EditIcon from "@mui/icons-material/Edit";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { DataGrid } from '@mui/x-data-grid';
+import { DeleteOutline } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { AddRounded } from '@mui/icons-material';
+import { PrimaryButton } from '../../components/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import emailjs from '@emailjs/browser';
+
+emailjs.init('KttVShQuK7ehuvHKB');
+
 const UserList = () => {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
@@ -16,18 +21,20 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://server.goobull.com/api/admin/users",
+          'https://server.goobull.com/api/admin/users',
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
         );
-        const usersWithIds = response.data.users.map((user, index) => ({
-          ...user,
-          id: user._id, // Assign the `_id` field as the `id` property
-        }));
+        const usersWithIds = response.data.users.map(
+          (user, index) => ({
+            ...user,
+            id: user._id, // Assign the `_id` field as the `id` property
+          })
+        );
         setResult(usersWithIds);
       } catch (error) {
         console.log(error);
@@ -41,14 +48,14 @@ const UserList = () => {
     setResult(result.filter((item) => item.id === id));
   };
   const handleEdit = (id) => {
-  //   const {title, description, price, amount, images, category, properties, _id} = req.body;
-  //  await Product.updateOne({id}, {title, description, price, amount, images, category, properties});
-  //  res.json(true);
+    //   const {title, description, price, amount, images, category, properties, _id} = req.body;
+    //  await Product.updateOne({id}, {title, description, price, amount, images, category, properties});
+    //  res.json(true);
   };
 
   const handlesubmit = (userId) => {
     let config = {
-      method: "patch",
+      method: 'patch',
       maxBodyLength: Infinity,
       url: `https://server.goobull.com/api/admin/users/approve/${userId}`,
       headers: {
@@ -56,10 +63,29 @@ const UserList = () => {
       },
     };
 
+    const emailParams = {
+      to_name: user.username,
+      to_email: user.email,
+      message: `Dear ${user.username}, your account has been activated successfully.`,
+    };
+
     axios
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        emailjs
+          .send(
+            'service_xo5bbu9',
+            'template_agoq6hg',
+            emailParams,
+            'KttVShQuK7ehuvHKB'
+          )
+          .then((response) => {
+            console.log('Confirmation email sent:', response.text);
+          })
+          .catch((error) => {
+            console.log('Error sending confirmation email:', error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -67,43 +93,51 @@ const UserList = () => {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: '_id', headerName: 'ID', width: 90 },
     {
-      field: "user",
-      headerName: "User",
+      field: 'user',
+      headerName: 'User',
       width: 200,
       renderCell: (params) => {
-        return <div className="flex items-center">{params.row.username}</div>;
+        return (
+          <div className='flex items-center'>
+            {params.row.username}
+          </div>
+        );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: 'email', headerName: 'Email', width: 200 },
     {
-      field: "isApproved",
-      headerName: "Status",
+      field: 'isApproved',
+      headerName: 'Status',
       width: 120,
       renderCell: (params) => {
         return (
           <div>
             {params.row.isApproved ? (
-              <h1 className="text-green-500"> Approved</h1>
+              <h1 className='text-green-500'> Approved</h1>
             ) : (
-              <h1 className="text-red-600">Not Approved</h1>
+              <h1 className='text-red-600'>Not Approved</h1>
             )}
           </div>
         );
       },
     },
     {
-      field: "balance",
-      headerName: "Transaction Volume",
+      field: 'balance',
+      headerName: 'Transaction Volume',
       width: 160,
       renderCell: (params) => {
-        return <div className="flex items-center">{params.row.balance}</div>;
+        return (
+          <div className='flex items-center'>
+            {params.row.balance}
+          </div>
+        );
       },
     },
     {
-      field: "action",
-      headerName: "Action",
+      field: 'action',
+      headerName: 'Action',
       width: 300,
       renderCell: (params) => {
         return (
@@ -112,20 +146,24 @@ const UserList = () => {
               onClick={() => handlesubmit(params.row.id)}
               className={`border-none rounded-lg px-2 py-1 ${
                 params.row.isApproved
-                  ? "bg-gray-100  text-black"
-                  : "bg-green-400  text-white"
+                  ? 'bg-gray-100  text-black'
+                  : 'bg-green-400  text-white'
               } cursor-pointer mr-5`}
             >
-              {params.row.isApproved ? "Restrict User" : "Approve User"}
+              {params.row.isApproved
+                ? 'Restrict User'
+                : 'Approve User'}
             </button>
             <EditIcon
-              className="text-yellow-500 cursor-pointer"
+              className='text-yellow-500 cursor-pointer'
               onClick={() => handleEdit(params.row.id)}
-            />Edit &nbsp;
+            />
+            Edit &nbsp;
             <DeleteOutline
-              className="text-red-600 cursor-pointer"
+              className='text-red-600 cursor-pointer'
               onClick={() => handleDelete(params.row.id)}
-            />Delete
+            />
+            Delete
           </>
         );
       },
@@ -136,15 +174,18 @@ const UserList = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="w-fit font-semibold text-white">
-        <PrimaryButton className="">
-          <button className="w-full" onClick={()=>{}}>
+    <div className='flex flex-col gap-5'>
+      <div className='w-fit font-semibold text-white'>
+        <PrimaryButton className=''>
+          <button
+            className='w-full'
+            onClick={() => {}}
+          >
             <AddRounded /> Create User
           </button>
         </PrimaryButton>
       </div>
-      <div className="flex-[4] gap-12">
+      <div className='flex-[4] gap-12'>
         {result.length != 0 && (
           <DataGrid
             rows={result}
