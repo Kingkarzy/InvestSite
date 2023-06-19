@@ -12,7 +12,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorss, setError] = useState(false);
-  //   const [errMessage, setErrMessage] = useState('');
 
   const login = async (values) => {
     try {
@@ -33,7 +32,6 @@ const Login = () => {
       }
     } catch (err) {
       setError(!errorss);
-      //   setErrMessage('Invalid Credentials')
     }
   };
 

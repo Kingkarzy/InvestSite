@@ -1,20 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import {
   DangerButton,
   BlackButton,
   PrimaryButton,
-  // Button,
 } from '../../components/Button';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { AddRounded } from '@mui/icons-material';
-import {
-  Modal,
-  // TextField
-} from '@mui/material';
-// import { Link } from 'react-router-dom';
+import { Modal } from '@mui/material';
 import { CSVLink } from 'react-csv';
+import emailjs from '@emailjs/browser';
+
+emailjs.init('KttVShQuK7ehuvHKB');
+
 function WithDraw() {
   const user = useSelector((state) => state.user);
   const balance = user.balance;
@@ -55,9 +55,15 @@ function WithDraw() {
       amount: amount,
       mode: mode,
       status: 'pending',
-      date: getCurrentDate(),
+      date: new Date(),
     });
 
+    const emailParams = {
+      to_name: user.username,
+      to_email: user.email,
+      message: `Dear ${user.username}, your withdrawal of ${amount} has been successfully lodged and is being processed.`,
+      from_name: 'Withdrawal',
+    };
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
@@ -73,6 +79,19 @@ function WithDraw() {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        emailjs
+          .send(
+            'service_xo5bbu9',
+            'template_20o0m89',
+            emailParams,
+            'KttVShQuK7ehuvHKB'
+          )
+          .then((response) => {
+            console.log('Confirmation email sent:', response.text);
+          })
+          .catch((error) => {
+            console.log('Error sending confirmation email:', error);
+          });
         alert('Withdraw Successful!');
       })
       .catch((error) => {
@@ -199,18 +218,6 @@ function WithDraw() {
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder='Amount'
               />
-              {/* <TextField id='amount'
-              label='Enter Amount'
-              type='number'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{ min: 1, max: 1000000 }}
-              name='amount'
-              value={amount}
-              onChange={(event) => setAmount(parseInt(event.target.value))}
-              required
-            /> */}
             </div>
             <h4> Withdrawal Account: </h4>
             <form>

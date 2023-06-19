@@ -21,9 +21,6 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(cors());
-app.use('/', (req, res) => {
-  res.send("Hello World");
-})
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)

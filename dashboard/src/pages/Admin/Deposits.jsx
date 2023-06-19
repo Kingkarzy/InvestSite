@@ -74,10 +74,14 @@ const Deposits = () => {
                   <td className='text-center'>{index + 1}</td>
                   <td className='text-center'>{item.amount}</td>
                   <td className='text-center'>{item.mode}</td>
+                  <td className='text-center'>{item.status}</td>
                   <td className='text-center'>
-                    <Link to={item.imageUrl}>{item.status}</Link>
+                    <Link
+                      to={`https://server.goobull.com/assets/${item.picturePath}`}
+                    >
+                      {item.picturePath}
+                    </Link>
                   </td>
-                  <td className='text-center'>{item.picturePath}</td>
                   <td className='text-center'>
                     {new Date(item.date).toLocaleDateString('en-GB')}
                   </td>
