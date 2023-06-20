@@ -17,7 +17,7 @@ const performBalanceUpdate = async () => {
                 if (plan.status !== 'Completed') {
                     user.balance += plan.amount * (plan.gain / 100);
                     plan.duration--;
-
+                    user.profit += plan.amount * (plan.gain / 100)
                     if (plan.duration === 0) {
                         plan.status = 'Completed';
                         user.balance += plan.amount;

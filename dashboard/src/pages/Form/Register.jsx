@@ -2,6 +2,14 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { useNavigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+// EMAILJS KEYS
+const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
+const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
+const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
+emailjs.init(emailjs_apikey);
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -32,11 +40,20 @@ const Register = () => {
       firstName: firstName,
       lastName: lastName,
     });
-    console.log(data);
+
+    const emailParams = {
+      to_name: username,
+      to_email: email,
+      message:
+        'Your account has successfully been registered and is pending an approval.\nAn email confirming your accounts approval will be sent within 24 hours.',
+      subject: `Welcome To Goobull Investments, ${firstName}`,
+      from_email: 'no-reply@goobull.com',
+    };
+
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://server.goobull.com/api/auth/register',
+      url: `${baseUrl}/api/auth/register`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -47,6 +64,19 @@ const Register = () => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        emailjs
+          .send(
+            emailjs_servicekey,
+            emailjs_templatekey,
+            emailParams,
+            emailjs_apikey
+          )
+          .then((response) => {
+            console.log('Confirmation email sent:', response.text);
+          })
+          .catch((error) => {
+            console.log('Error sending confirmation email:', error);
+          });
         navigate('/login');
       })
       .catch((error) => {

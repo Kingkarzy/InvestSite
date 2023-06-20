@@ -42,10 +42,10 @@ export default function Sidebar() {
           onClick={handleClick}
         >
           {click ? <Menu /> : <Close />}
-        </button>{' '}
+        </button>
       </div>
       <div
-        className={`p-5 w-fit text-[#555] flex flex-col gap-10 justify-center  bg-yellow-450 top-0 bottom-0 left-0 ${
+        className={`p-5 w-fit text-[#555] flex flex-col gap-14 justify-center  bg-yellow-450 top-0 bottom-0 left-0 ${
           isSidebarOpen ? '' : 'hidden'
         }`}
       >
@@ -54,7 +54,7 @@ export default function Sidebar() {
             <h2>{user.username}</h2>
           </span>
         </div>
-        <div>
+        <div className='flex flex-col justify-evenly'>
           <div className='mb-[10px]'>
             <h3 className='text-sm text-[rgb(187,186,186)]'>
               Dashboard
@@ -116,7 +116,7 @@ export default function Sidebar() {
             </ul>
           </div>
           <div className='mb-[10px]'>
-            <h3 className='text-sm text-[rgb(187,186,186)]'>
+            {/* <h3 className='text-sm text-[rgb(187,186,186)]'>
               Notifications
             </h3>
             <ul className='p-[5px] list-none'>
@@ -133,7 +133,7 @@ export default function Sidebar() {
                 Messages
               </li>
             </ul>
-            <br />
+            <br /> */}
             <li className='p-[5px] flex items-center rounded-[10px] hover:bg-black'>
               <button
                 className='px-3 w-full h-full border border-black font-semibold text-gray-800'
@@ -147,14 +147,14 @@ export default function Sidebar() {
                 to='https://goobull.com'
                 className='hover:scale-110'
               >
-                <ArrowBackIcon /> {''}
+                <ArrowBackIcon />
                 return home
               </Link>
             </li>
           </div>
         </div>
       </div>
-      <div className='w-fit p-10 '>
+      <div className='w-fit lg:w-full p-8 justify-center flex'>
         <Outlet />
       </div>
     </div>

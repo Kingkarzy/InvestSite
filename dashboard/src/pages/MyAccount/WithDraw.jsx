@@ -13,7 +13,12 @@ import { Modal } from '@mui/material';
 import { CSVLink } from 'react-csv';
 import emailjs from '@emailjs/browser';
 
-emailjs.init('KttVShQuK7ehuvHKB');
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
+const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
+const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
+emailjs.init(emailjs_apikey);
 
 function WithDraw() {
   const user = useSelector((state) => state.user);
@@ -30,9 +35,7 @@ function WithDraw() {
 
   const [amount, setAmount] = useState(0);
   const [mode, setMode] = useState('BTC');
-  const [btc, setBtc] = useState('');
-  const [eth, setETH] = useState('');
-  const [usdt, setUSDT] = useState('');
+  const [wallet, setWallet] = useState('');
 
   const [result, setResult] = useState([]);
 
@@ -54,6 +57,7 @@ function WithDraw() {
       userId: user._id,
       amount: amount,
       mode: mode,
+      wallet: wallet,
       status: 'pending',
       date: new Date(),
     });
@@ -61,14 +65,13 @@ function WithDraw() {
     const emailParams = {
       to_name: user.username,
       to_email: user.email,
-      message: `Dear ${user.username}, your withdrawal of ${amount} has been successfully lodged and is being processed.`,
-      from_name: 'Withdrawal',
-      from_email: 'no-reply@goobull.com',
+      message: `Your withdrawal of $${amount} has been successfully lodged and is being processed.`,
+      subject: 'Withdrawal Confirmation',
     };
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://server.goobull.com/api/withdraw',
+      url: `${baseUrl}/api/withdraw`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
@@ -82,10 +85,10 @@ function WithDraw() {
         console.log(JSON.stringify(response.data));
         emailjs
           .send(
-            'service_xo5bbu9',
-            'template_20o0m89',
+            emailjs_servicekey,
+            emailjs_templatekey,
             emailParams,
-            'KttVShQuK7ehuvHKB'
+            emailjs_apikey
           )
           .then((response) => {
             console.log('Confirmation email sent:', response.text);
@@ -107,7 +110,7 @@ function WithDraw() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://server.goobull.com/api/withdraw/${user._id}`,
+          `${baseUrl}/api/withdraw/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -244,8 +247,8 @@ function WithDraw() {
                   <input
                     type='text'
                     className='bg-slate-100 p-3'
-                    value={btc}
-                    onChange={(e) => setBtc(e.target.value)}
+                    value={wallet}
+                    onChange={(e) => setWallet(e.target.value)}
                     placeholder='Wallet Address'
                     required
                   />
@@ -254,8 +257,8 @@ function WithDraw() {
                   <input
                     type='text'
                     className='bg-slate-100 p-3'
-                    value={eth}
-                    onChange={(e) => setETH(e.target.value)}
+                    value={wallet}
+                    onChange={(e) => setWallet(e.target.value)}
                     placeholder='Ethereum'
                     required
                   />
@@ -264,8 +267,8 @@ function WithDraw() {
                   <input
                     type='text'
                     className='bg-slate-100 p-2'
-                    value={usdt}
-                    onChange={(e) => setUSDT(e.target.value)}
+                    value={wallet}
+                    onChange={(e) => setWallet(e.target.value)}
                     placeholder='USDT'
                     required
                   />

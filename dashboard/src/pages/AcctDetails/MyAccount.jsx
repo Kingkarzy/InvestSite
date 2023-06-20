@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { PrimaryButton } from '../../components/Button';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const MyAccount = () => {
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
@@ -18,11 +20,25 @@ const MyAccount = () => {
         },
       };
 
-      await axios.put(
-        `/api/users/${user.id}`,
-        { username, password },
-        config
-      );
+      if (username !== '' && password !== '') {
+        await axios.put(
+          `${baseUrl}/api/users/${user._id}`,
+          { username, password },
+          config
+        );
+      } else if (username === '' && password !== '') {
+        await axios.put(
+          `${baseUrl}/api/users/${user._id}`,
+          { password },
+          config
+        );
+      } else if (username !== '' && password === '') {
+        await axios.put(
+          `${baseUrl}/api/users/${user._id}`,
+          { username },
+          config
+        );
+      }
       console.log('User updated successfully');
     } catch (err) {
       console.log(err);

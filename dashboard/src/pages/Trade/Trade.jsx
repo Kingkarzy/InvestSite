@@ -11,7 +11,7 @@ function Trade() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://server.goobull.com/api/plan/${user._id}`,
+          `${baseUrl}/api/plan/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

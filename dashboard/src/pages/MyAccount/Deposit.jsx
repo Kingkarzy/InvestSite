@@ -11,7 +11,12 @@ import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import emailjs from '@emailjs/browser';
 
-emailjs.init('KttVShQuK7ehuvHKB');
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
+const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
+const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
+emailjs.init(emailjs_apikey);
 
 function Deposit() {
   const user = useSelector((state) => state.user);
@@ -49,7 +54,7 @@ function Deposit() {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://server.goobull.com/api/deposit',
+      url: `${baseUrl}/api/deposit`,
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${user.token}`,
@@ -60,8 +65,8 @@ function Deposit() {
     const emailParams = {
       to_name: user.username,
       to_email: user.email,
-      message: `Your deposit of ${amount} has been successfully lodged and is being processed.`,
-      from_name: 'Deposit',
+      message: `Your deposit of $${amount} has been successfully lodged and is being processed.`,
+      subject: 'Deposit Confirmation',
       from_email: 'no-reply@goobull.com',
     };
 
@@ -71,10 +76,10 @@ function Deposit() {
         console.log(JSON.stringify(response.data));
         emailjs
           .send(
-            'service_xo5bbu9',
-            'template_20o0m89',
+            emailjs_servicekey,
+            emailjs_templatekey,
             emailParams,
-            'KttVShQuK7ehuvHKB'
+            emailjs_apikey
           )
           .then((response) => {
             console.log('Confirmation email sent:', response.text);
@@ -93,7 +98,7 @@ function Deposit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://server.goobull.com/api/deposit/${user._id}`,
+          `${baseUrl}/api/deposit/${user._id}`,
           {
             headers: {
               'Content-Type': 'application/json',

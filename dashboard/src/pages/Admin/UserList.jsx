@@ -10,7 +10,12 @@ import { PrimaryButton } from '../../components/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import emailjs from 'emailjs-com';
 
-emailjs.init('KttVShQuK7ehuvHKB');
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
+const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
+const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
+emailjs.init(emailjs_apikey);
 
 const UserList = () => {
   const user = useSelector((state) => state.user);
@@ -20,7 +25,7 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://server.goobull.com/api/admin/users',
+          `${baseUrl}/api/admin/users`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -56,7 +61,7 @@ const UserList = () => {
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `https://server.goobull.com/api/admin/users/approve/${userId}`,
+      url: `${baseUrl}/api/admin/users/approve/${userId}`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -65,7 +70,8 @@ const UserList = () => {
     const emailParams = {
       to_name: username,
       to_email: email,
-      message: `Dear ${username}, your account has been activated successfully.`,
+      subject: 'Account Approval',
+      message: `Dear ${username}, your account has been activated successfully. Happy investing!`,
       from_email: 'no-reply@goobull.com',
     };
 
@@ -75,10 +81,10 @@ const UserList = () => {
         console.log(JSON.stringify(response.data));
         emailjs
           .send(
-            'service_xo5bbu9',
-            'template_agoq6hg',
+            emailjs_servicekey,
+            emailjs_templatekey,
             emailParams,
-            'KttVShQuK7ehuvHKB'
+            emailjs_apikey
           )
           .then((response) => {
             console.log('Confirmation email sent:', response.text);
@@ -134,32 +140,41 @@ const UserList = () => {
                   <td className='text-left'>{item.email}</td>
                   <td className='text-left'>
                     {item.isApproved ? (
-                      <h1 className='text-green-500'>Approved</h1>
+                      <h1 className='text-green-700'>Approved</h1>
                     ) : (
                       <h1 className='text-red-600'>Not Approved</h1>
                     )}
                   </td>
                   <td className='text-left'>${item.balance}</td>
                   <td className='text-left'>
-                    <button
-                      onClick={(e) =>
-                        handleSubmit(
-                          item.id,
-                          item.username,
-                          item.email,
-                          e
-                        )
-                      }
-                      className={`border-none rounded-lg px-2 py-1 ${
-                        item.isApproved
-                          ? 'bg-gray-100 text-black'
-                          : 'bg-green-400 text-white'
-                      } cursor-pointer mr-5`}
-                    >
-                      {item.isApproved
-                        ? 'Restrict User'
-                        : 'Approve User'}
-                    </button>
+                    {item.isApproved ? (
+                      <button
+                        disabled
+                        className='border-solid border border-transparent rounded-lg px-2 py-1 bg-gray-100 text-black cursor-default mr-5'
+                      >
+                        Approve User
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) =>
+                          handleSubmit(
+                            item.id,
+                            item.username,
+                            item.email,
+                            e
+                          )
+                        }
+                        className={`rounded-lg px-2 py-1 ${
+                          item.isApproved
+                            ? 'bg-gray-100 text-black'
+                            : 'bg-green-700 text-white border border-solid border-transparent transition-all hover:bg-transparent hover:border-green-700 hover:text-green-700'
+                        } cursor-pointer mr-5`}
+                      >
+                        {item.isApproved
+                          ? 'Restrict User'
+                          : 'Approve User'}
+                      </button>
+                    )}
                   </td>
                   <td>
                     <div className='flex cursor-pointer'>

@@ -53,7 +53,6 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
 
 export const verifyUserToken = async (req, res, next) => {
     try {
-        header("Access-Control-Allow-Origin: *");
         let token = req.header("Authorization");
 
         if (!token) {

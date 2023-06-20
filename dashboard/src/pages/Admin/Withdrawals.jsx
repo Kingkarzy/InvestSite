@@ -5,15 +5,24 @@ import {
   DangerButton,
   DisabledButton,
 } from '../../components/Button';
+import emailjs from '@emailjs/browser';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
+const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
+const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
+emailjs.init(emailjs_apikey);
 
 const Withdrawals = () => {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://server.goobull.com/api/admin/withdrawals',
+          `${baseUrl}/api/admin/withdrawals`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -22,7 +31,6 @@ const Withdrawals = () => {
           }
         );
         setResult(response.data.withdrawals);
-        // console.log(result);
       } catch (error) {
         console.log(error);
       }
@@ -31,11 +39,36 @@ const Withdrawals = () => {
     fetchData();
   }, [user.token]);
 
-  const handlesubmit = (userId, withdrawalId) => {
+  const handlesubmit = async (userId, withdrawalId, amount) => {
+    let username;
+    let email;
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/admin/users/${userId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      username = response.data.username;
+      email = response.data.email;
+    } catch (error) {
+      console.log(error);
+    }
+    const emailParams = {
+      to_name: username,
+      to_email: email,
+      message: `Your withdrawal of $${amount} has been approved.`,
+      subject: 'Withdrawal Approval',
+      from_email: 'no-reply@goobull.com',
+    };
+
     let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `https://server.goobull.com/api/admin/withdrawals/${withdrawalId}/${userId}/users`,
+      url: `${baseUrl}/api/admin/withdrawals/${withdrawalId}/${userId}/users`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -45,6 +78,19 @@ const Withdrawals = () => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        emailjs
+          .send(
+            emailjs_servicekey,
+            emailjs_templatekey,
+            emailParams,
+            emailjs_apikey
+          )
+          .then((response) => {
+            console.log('Confirmation email sent:', response.text);
+          })
+          .catch((error) => {
+            console.log('Error sending confirmation email:', error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -52,7 +98,10 @@ const Withdrawals = () => {
   };
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex flex-col items-center w-fit lg:w-full'>
+      <div className='background-gradient flex w-fit lg:w-full p-3 m-5 justify-start'>
+        <h1 className='h1'>User Withdrawals</h1>
+      </div>
       <div className='mb-10 w-full flex flex-col justify-center items-center'>
         <table className='table w-full mb-5 border border-solid border-gray-100'>
           <thead className='bg-white'>
@@ -60,6 +109,7 @@ const Withdrawals = () => {
               <th>ID</th>
               <th>Amount</th>
               <th>Payment mode</th>
+              <th>Wallet</th>
               <th>Status</th>
               <th>Date created</th>
               <th>Approve</th>
@@ -72,6 +122,7 @@ const Withdrawals = () => {
                   <td className='text-center'>{index + 1}</td>
                   <td className='text-center'>{item.amount}</td>
                   <td className='text-center'>{item.mode}</td>
+                  <td className='text-center'>{item.wallet}</td>
                   <td className='text-center'>{item.status}</td>
                   <td className='text-center'>
                     {new Date(item.date).toLocaleDateString('en-GB')}
@@ -81,7 +132,11 @@ const Withdrawals = () => {
                       <button
                         className='rounded-full'
                         onClick={() =>
-                          handlesubmit(item.userId, item._id)
+                          handlesubmit(
+                            item.userId,
+                            item._id,
+                            item.amount
+                          )
                         }
                       >
                         <DangerButton>Approve</DangerButton>

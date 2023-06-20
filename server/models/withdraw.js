@@ -5,6 +5,7 @@ const WithdrawSchema = mongoose.Schema(
         userId: { type: String, required: true },
         amount: { type: Number, default: 0 },
         mode: { type: String, default: "BTC" },
+        wallet: { type: String },
         status: { type: String, default: "pending" },
         date: { type: Date, default: new Date() },
     }, { timestamps: true }

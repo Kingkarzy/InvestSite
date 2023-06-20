@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 /* eslint-disable react/prop-types */
 const PriceCard = ({
@@ -62,7 +63,7 @@ const PriceCard = ({
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://server.goobull.com/api/plan',
+      url: `${baseUrl}/api/plan`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,

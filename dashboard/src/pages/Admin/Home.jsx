@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux";
-import Card from "../Dashboard/Card";
-import PersonIcon from "@mui/icons-material/Person";
-import { AttachMoney, TrendingUp } from "@mui/icons-material";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useSelector } from 'react-redux';
+import Card from '../Dashboard/Card';
+import PersonIcon from '@mui/icons-material/Person';
+import { AttachMoney, TrendingUp } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Home = () => {
   const user = useSelector((state) => state.user);
@@ -15,10 +16,10 @@ const Home = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://server.goobull.com/api/admin/users",
+          `${baseUrl}/api/admin/users`,
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
@@ -36,10 +37,10 @@ const Home = () => {
     const fetchPlans = async () => {
       try {
         const response = await axios.get(
-          "https://server.goobull.com/api/admin/plans",
+          `${baseUrl}/api/admin/plans`,
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
@@ -53,10 +54,10 @@ const Home = () => {
     const fetchWithdraw = async () => {
       try {
         const response = await axios.get(
-          "https://server.goobull.com/api/admin/withdrawals",
+          `${baseUrl}/api/admin/withdrawals`,
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
@@ -77,10 +78,10 @@ const Home = () => {
     const fetchDeposit = async () => {
       try {
         const response = await axios.get(
-          "https://server.goobull.com/api/admin/deposits",
+          `${baseUrl}/api/admin/deposits`,
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
@@ -104,32 +105,53 @@ const Home = () => {
     fetchDeposit();
   }, [user.token]);
   return (
-    <div className="w-full font-semibold text-l">
+    <div className='w-full font-semibold text-l'>
       <div>
         <h1>
-          Welcome! <span className=" capitalize">{user.username}</span> to the
+          Welcome!{' '}
+          <span className=' capitalize'>{user.username}</span> to the
           Admin Dashboard
         </h1>
       </div>
-      <div className="flex flex-wrap gap-3 justify-start mt-5 text-center items-center">
+      <div className='flex flex-wrap gap-3 justify-start mt-5 text-center items-center'>
         <Card
-          logo={<PersonIcon fontSize="large" className="w-full" />}
-          heading={"Total Users"}
+          logo={
+            <PersonIcon
+              fontSize='large'
+              className='w-full'
+            />
+          }
+          heading={'Total Users'}
           value={`${result.length}`}
         />
         <Card
-          logo={<TrendingUp fontSize="large" className="w-full" />}
-          heading={"All Plans"}
+          logo={
+            <TrendingUp
+              fontSize='large'
+              className='w-full'
+            />
+          }
+          heading={'All Plans'}
           value={`${plansResult.length}`}
         />
         <Card
-          logo={<AttachMoney fontSize="large" className="w-full" />}
-          heading={"Total Deposit"}
+          logo={
+            <AttachMoney
+              fontSize='large'
+              className='w-full'
+            />
+          }
+          heading={'Total Deposit'}
           value={`${totalDepositAmount}`}
         />
         <Card
-          logo={<AttachMoney fontSize="large" className="w-full" />}
-          heading={"Total Withdraw"}
+          logo={
+            <AttachMoney
+              fontSize='large'
+              className='w-full'
+            />
+          }
+          heading={'Total Withdraw'}
           value={`${totalWithdrawAmount}`}
         />
       </div>

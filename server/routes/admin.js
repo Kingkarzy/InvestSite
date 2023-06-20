@@ -1,5 +1,5 @@
 import express from 'express'
-import { verifyTokenAndAdmin } from './verifyToken.js'
+import { verifyTokenAndAdmin, verifyUserToken } from './verifyToken.js'
 
 import Deposit from '../models/deposit.js'
 import Withdraw from '../models/withdraw.js'
@@ -87,7 +87,7 @@ router.patch('/withdrawals/:withdrawalsId/:userId/users', verifyTokenAndAdmin, a
         const user = await User.findById(userId);
         const withdraws = await Withdraw.findById(withdrawalsId);
 
-        if (withdraws.status === 'Ccompleted') {
+        if (withdraws.status === 'pending') {
             withdraws.status = 'Approved';
             user.balance -= withdraws.amount;
             user.withdrawn += withdraws.amount;
@@ -150,7 +150,7 @@ router.get('/users', verifyTokenAndAdmin, async (req, res) => {
 
 
 // GET USER
-router.get('/users/:id', verifyTokenAndAdmin, async (req, res) => {
+router.get('/users/:id', verifyUserToken, async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         delete user._doc.password;

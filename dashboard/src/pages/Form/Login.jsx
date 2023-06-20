@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { setLogin } from '../../state/index';
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
   const login = async (values) => {
     try {
       const response = await axios.post(
-        'https://server.goobull.com/api/auth/login',
+        `${baseUrl}/api/auth/login`,
         values
       );
       const loggedIn = response.data;
