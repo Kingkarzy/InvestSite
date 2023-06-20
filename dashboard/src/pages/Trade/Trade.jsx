@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import PriceCard from './PricingCard';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 function Trade() {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);

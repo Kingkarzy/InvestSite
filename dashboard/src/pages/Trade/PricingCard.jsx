@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -16,6 +16,31 @@ const PriceCard = ({
 }) => {
   // IMPORT USER STATE
   const user = useSelector((state) => state.user);
+
+  const userId = user._id;
+
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${baseUrl}/api/admin/users/${userId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setResult(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [user.token, userId]);
 
   // SET STATES
   const [amount, setAmount] = useState(0);
@@ -49,7 +74,7 @@ const PriceCard = ({
       alert('Amount is required.');
       return;
     }
-    if (price > user.balance) {
+    if (price > result.balance) {
       return alert('Current Balance Not Enough For This Plan');
     }
     const data = JSON.stringify({
