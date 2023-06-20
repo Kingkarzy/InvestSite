@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
-import { setLogin } from '../../state/index';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -17,43 +15,44 @@ const Register = () => {
     useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [errorss, setError] = useState(false);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const handleRegister = async () => {
-    console.log(username);
+  const handleRegister = async (e) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
       setPasswordMatch(false);
       return;
     }
-    console.log(password);
-    console.log(email);
 
-    try {
-      const response = await axios.post(
-        'https://server.goobull.com/api/auth/register',
-        {
-          username,
-          email,
-          firstName,
-          lastName,
-          password,
-        }
-      );
-      const loggedIn = response.data;
+    let data = JSON.stringify({
+      username: username,
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+    });
+    console.log(data);
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://server.goobull.com/api/auth/register',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
 
-      if (loggedIn) {
-        dispatch(
-          setLogin({
-            user: loggedIn,
-            token: loggedIn.token,
-          })
-        );
-        navigate('/');
-      }
-    } catch (err) {
-      setError(!errorss);
-    }
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(!errorss);
+      });
   };
 
   const handleTogglePassword = () => {
@@ -99,7 +98,9 @@ const Register = () => {
             type='text'
             placeholder='Last Name'
             required
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) =>
+              setLastName(e.target.value.toUpperCase())
+            }
           />
           <div className='relative flex-1 mr-2 pr-2'>
             <input

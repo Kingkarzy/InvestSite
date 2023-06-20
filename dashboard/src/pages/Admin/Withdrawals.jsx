@@ -5,7 +5,6 @@ import {
   DangerButton,
   DisabledButton,
 } from '../../components/Button';
-import { Link } from 'react-router-dom';
 
 const Withdrawals = () => {
   const user = useSelector((state) => state.user);
@@ -62,7 +61,6 @@ const Withdrawals = () => {
               <th>Amount</th>
               <th>Payment mode</th>
               <th>Status</th>
-              <th>Image</th>
               <th>Date created</th>
               <th>Approve</th>
             </tr>
@@ -74,10 +72,7 @@ const Withdrawals = () => {
                   <td className='text-center'>{index + 1}</td>
                   <td className='text-center'>{item.amount}</td>
                   <td className='text-center'>{item.mode}</td>
-                  <td className='text-center'>
-                    <Link to={item.imageUrl}>{item.status}</Link>
-                  </td>
-                  <td className='text-center'>{item.picturePath}</td>
+                  <td className='text-center'>{item.status}</td>
                   <td className='text-center'>
                     {new Date(item.date).toLocaleDateString('en-GB')}
                   </td>

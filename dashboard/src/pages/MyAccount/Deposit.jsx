@@ -60,8 +60,9 @@ function Deposit() {
     const emailParams = {
       to_name: user.username,
       to_email: user.email,
-      message: `Dear ${user.username}, your deposit of ${amount} has been successfully lodged and is being processed.`,
+      message: `Your deposit of ${amount} has been successfully lodged and is being processed.`,
       from_name: 'Deposit',
+      from_email: 'no-reply@goobull.com',
     };
 
     axios

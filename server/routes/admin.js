@@ -137,9 +137,9 @@ router.get('/users', verifyTokenAndAdmin, async (req, res) => {
         if (query) {
             users = await User.find()
                 .sort({ _id: -1 })
-                .select('id username email firstName lastName isApproved');
+                .select('id username email firstName lastName isApproved balance');
         } else {
-            users = await User.find().select('id username email firstName lastName isApproved');
+            users = await User.find().select('id username email firstName lastName isApproved balance');
         }
 
         res.status(200).json({ users });

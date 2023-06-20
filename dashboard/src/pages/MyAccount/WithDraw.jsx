@@ -63,6 +63,7 @@ function WithDraw() {
       to_email: user.email,
       message: `Dear ${user.username}, your withdrawal of ${amount} has been successfully lodged and is being processed.`,
       from_name: 'Withdrawal',
+      from_email: 'no-reply@goobull.com',
     };
     const config = {
       method: 'post',
