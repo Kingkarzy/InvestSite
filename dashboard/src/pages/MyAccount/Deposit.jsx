@@ -21,6 +21,8 @@ emailjs.init(emailjs_apikey);
 function Deposit() {
   const user = useSelector((state) => state.user);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,7 +43,7 @@ function Deposit() {
     if (amount < 500) {
       return alert('Deposit amount less than $500');
     }
-
+    setIsLoading(true);
     // Create a FormData object to handle the file upload
     const formData = new FormData();
     formData.append('userId', user._id);
@@ -87,6 +89,7 @@ function Deposit() {
           .catch((error) => {
             console.log('Error sending confirmation email:', error);
           });
+        setIsLoading(false);
         alert('Deposit Successful!');
         handleClose();
       })
@@ -116,10 +119,26 @@ function Deposit() {
     fetchData();
   }, [user._id, user.token]);
 
+  if (isLoading) {
+    return (
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='items-center justify-center flex h-screen font-semibold text-3xl'>
+          Loading<span className='dot-1'>.</span>
+          <span className='dot-2'>.</span>
+          <span className='dot-3'>.</span>
+        </div>
+      </Modal>
+    );
+  }
   return (
     <div className=''>
       <div className='black-gradient flex p-5 justify-center'>
-        <h1 className='text-3xl blue-text-gradient '>Deposit</h1>
+        <h1 className='text-3xl blue-text-gradient'>Deposit</h1>
       </div>
       <div
         className='w-fit my-6'

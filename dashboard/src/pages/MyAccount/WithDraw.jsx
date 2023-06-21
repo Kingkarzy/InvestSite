@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import {
   DangerButton,
@@ -7,6 +7,7 @@ import {
   PrimaryButton,
 } from '../../components/Button';
 import axios from 'axios';
+import { LoadingContext } from '../../state/LoadingContext';
 import { useSelector } from 'react-redux';
 import { AddRounded } from '@mui/icons-material';
 import { Modal } from '@mui/material';
@@ -22,27 +23,59 @@ emailjs.init(emailjs_apikey);
 
 function WithDraw() {
   const user = useSelector((state) => state.user);
-  const balance = user.balance;
-
-  const getCurrentDate = () => {
-    const date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const year = date.getFullYear();
-
-    return `${day}-${month}-${year}`;
-  };
-
   const [amount, setAmount] = useState(0);
   const [mode, setMode] = useState('BTC');
   const [wallet, setWallet] = useState('');
-
   const [result, setResult] = useState([]);
+  const [balance, setBalance] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  // MUI MODAL
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const fetchUserData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/admin/users/${user._id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setBalance(response.data.balance);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user._id, user.token]);
+
+  const fetchWithdrawData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/withdraw/${user._id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setResult(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user._id, user.token]);
+
+  useEffect(() => {
+    fetchWithdrawData();
+    fetchUserData();
+  }, [fetchUserData, fetchWithdrawData, user._id, user.token]);
+
+  // HANDLE SUBMIT FUNCTION
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,7 +85,7 @@ function WithDraw() {
     if (amount < 100) {
       return alert('Withdrawal amount less than $100');
     }
-
+    setIsLoading(true);
     const data = JSON.stringify({
       userId: user._id,
       amount: amount,
@@ -96,36 +129,32 @@ function WithDraw() {
           .catch((error) => {
             console.log('Error sending confirmation email:', error);
           });
+        setIsLoading(false);
         alert('Withdraw Successful!');
+        handleClose();
+        setAmount(0);
       })
       .catch((error) => {
         console.log(error);
       });
-
-    handleClose();
-    setAmount(0);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${baseUrl}/api/withdraw/${user._id}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        setResult(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, [user._id, user.token]);
+  if (isLoading) {
+    return (
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='items-center justify-center flex h-screen font-semibold text-3xl'>
+          Loading<span className='dot-1'>.</span>
+          <span className='dot-2'>.</span>
+          <span className='dot-3'>.</span>
+        </div>
+      </Modal>
+    );
+  }
 
   return (
     <div className='overflow-y-scroll h-[70vh]'>

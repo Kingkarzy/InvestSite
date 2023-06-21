@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { useContext, useState } from 'react';
 import {
   BrowserRouter,
   Navigate,
@@ -26,24 +27,11 @@ import Deposits from './pages/Admin/Deposits';
 import Sidebar from './pages/Admin/Sidebar';
 import Withdrawals from './pages/Admin/Withdrawals';
 import Plans from './pages/Admin/Plans';
-import { useState } from 'react';
 
 function App() {
   const isAuth = useSelector((state) => Boolean(state.token));
   const user = useSelector((state) => state.user);
   const isAdmin = user && user.isAdmin;
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  if (isLoading) {
-    return (
-      <div className='items-center justify-center flex h-screen font-semibold text-3xl'>
-        Loading<span className='dot-1'>.</span>
-        <span className='dot-2'>.</span>
-        <span className='dot-3'>.</span>
-      </div>
-    );
-  }
 
   return (
     <div className='app'>

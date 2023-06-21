@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import authReducer from './state/index';
+import { LoadingProvider } from './state/LoadingContext';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import {
@@ -45,7 +46,9 @@ root.render(
         loading={null}
         persistor={persistStore(store)}
       >
-        <App />
+        <LoadingProvider>
+          <App />
+        </LoadingProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

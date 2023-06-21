@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import { Close, Menu } from '@mui/icons-material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../state/index';
 import logo from '../assets/images/3-removebg-preview.png';
@@ -20,29 +20,27 @@ function Navbar({ onToggleSidebar }) {
 
   const isNonMobileScreens = useMediaQuery('(min-width: 1024px)');
 
-  useEffect(() => {
-    {
-      isNonMobileScreens ? setClick(false) : setClick(true);
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/admin/users/${userId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setResult(response.data);
+    } catch (error) {
+      console.log(error);
     }
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${baseUrl}/api/admin/users/${userId}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        setResult(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  }, [userId, user.token]);
 
+  useEffect(() => {
+    isNonMobileScreens ? setClick(false) : setClick(true);
     fetchData();
-  }, [isNonMobileScreens, user.token, userId]);
+  }, [isNonMobileScreens, fetchData]);
 
   const handleClick = () => {
     setClick(!click);

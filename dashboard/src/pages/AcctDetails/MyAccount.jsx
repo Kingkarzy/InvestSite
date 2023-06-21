@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { PrimaryButton } from '../../components/Button';
+import { Modal } from '@mui/material';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -10,10 +11,17 @@ const MyAccount = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    handleOpen();
     try {
+      setIsLoading(true);
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -27,7 +35,7 @@ const MyAccount = () => {
           { username, password },
           config
         );
-        console.log('Username and Password updated successfully');
+        setIsLoading(false);
         setMessage('Username and Password updated successfully');
       } else if (username === '' && password !== '') {
         await axios.put(
@@ -35,7 +43,7 @@ const MyAccount = () => {
           { password },
           config
         );
-        console.log('Password updated successfully');
+        setIsLoading(false);
         setMessage('Password updated successfully');
       } else if (username !== '' && password === '') {
         await axios.put(
@@ -43,7 +51,7 @@ const MyAccount = () => {
           { username },
           config
         );
-        console.log('Username updated successfully');
+        setIsLoading(false);
         setMessage('Username updated successfully');
       }
       console.log('User updated successfully');
@@ -54,6 +62,22 @@ const MyAccount = () => {
       setMessage('Erorr!!');
     }
   };
+  if (isLoading) {
+    return (
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='items-center justify-center flex h-screen font-semibold text-3xl'>
+          Loading<span className='dot-1'>.</span>
+          <span className='dot-2'>.</span>
+          <span className='dot-3'>.</span>
+        </div>
+      </Modal>
+    );
+  }
 
   return (
     <div>
