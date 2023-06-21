@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import PriceCard from './PricingCard';
+import { plans } from '../../utils/data';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -31,7 +32,7 @@ function Trade() {
   }, [user._id, user.token]);
 
   return (
-    <div className='flex flex-col gap-10 lg:px-10 h-[80vh] overflow-y-scroll'>
+    <div className='flex flex-col gap-10 lg:px-10 h-[82vh] overflow-y-scroll'>
       <div className='background-indigo-gradient flex flex-col p-4 items-start'>
         <h1 className='h1'>Current Plans</h1>
       </div>
@@ -51,73 +52,21 @@ function Trade() {
           No matter the size of your pocket, there is always a Plan
           for you. Explore our investment plans today!
         </p>
-        <div className='w-[90%] grid grid-cols-1 sm:w-full md:grid-cols-2 lg:grid-cols-3 justify-between gap-5 mx-0 md:mx-auto'>
-          <PriceCard
-            heading={'Bronze'}
-            price={1000}
-            percent={25}
-            duration={5}
-            refer='2% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
-          <PriceCard
-            heading={'Silver'}
-            price={5000}
-            percent={35}
-            duration={7}
-            refer='2% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
-          <PriceCard
-            heading={'Gold'}
-            price={10000}
-            percent={40}
-            duration={10}
-            refer='5% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
-          <PriceCard
-            heading={'Diamond'}
-            price={25000}
-            percent={50}
-            duration={14}
-            refer='5% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
-          <PriceCard
-            heading={'Emerald'}
-            price={50000}
-            percent={55}
-            duration={20}
-            refer='8% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
-          <PriceCard
-            heading={'Ruby'}
-            price={100000}
-            percent={75}
-            duration={25}
-            refer='8% referral bonus'
-            content={`Capital accessible after investment elapses.`}
-            // bgColor='#4182AB'
-            width='18rem'
-            height={400}
-          />
+        <div className='w-[90%] grid grid-cols-1 sm:w-full md:grid-cols-2 lg:grid-cols-3 justify-between gap-5 mx-0 md:mx-auto mb-3'>
+          {plans.map((item) => (
+            <PriceCard
+              key={item.id}
+              heading={item.heading}
+              price={item.price}
+              percent={item.percent}
+              duration={item.duration}
+              refer='2% referral bonus'
+              content={`Capital accessible after investment elapses.`}
+              // bgColor='#4182AB'
+              width='18rem'
+              height={400}
+            />
+          ))}
         </div>
       </div>
     </div>

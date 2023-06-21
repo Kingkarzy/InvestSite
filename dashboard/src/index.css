@@ -36,7 +36,7 @@ th,
 td {
   @apply py-2 px-3;
 }
-.sidebarlinks{
+.sidebarlinks {
   @apply hover:font-bold;
 }
 
@@ -139,4 +139,31 @@ td {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes dotAnimation {
+  0%,
+  40%,
+  100% {
+    opacity: 0.2;
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
+.dot-1,
+.dot-2,
+.dot-3 {
+  animation: dotAnimation 1s infinite;
+  display: inline-block;
+}
+
+.dot-2 {
+  animation-delay: 0.2s;
+}
+
+.dot-3 {
+  animation-delay: 0.4s;
 }

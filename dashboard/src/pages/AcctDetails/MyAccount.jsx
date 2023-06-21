@@ -9,6 +9,7 @@ const MyAccount = () => {
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -26,22 +27,31 @@ const MyAccount = () => {
           { username, password },
           config
         );
+        console.log('Username and Password updated successfully');
+        setMessage('Username and Password updated successfully');
       } else if (username === '' && password !== '') {
         await axios.put(
           `${baseUrl}/api/users/${user._id}`,
           { password },
           config
         );
+        console.log('Password updated successfully');
+        setMessage('Password updated successfully');
       } else if (username !== '' && password === '') {
         await axios.put(
           `${baseUrl}/api/users/${user._id}`,
           { username },
           config
         );
+        console.log('Username updated successfully');
+        setMessage('Username updated successfully');
       }
       console.log('User updated successfully');
+      setUsername('');
+      setPassword('');
     } catch (err) {
       console.log(err);
+      setMessage('Erorr!!');
     }
   };
 
@@ -73,6 +83,17 @@ const MyAccount = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {message !== '' && (
+            <h1
+              className={`${
+                message === 'Erorr!!'
+                  ? 'text-red-600'
+                  : 'text-green-500'
+              }`}
+            >
+              {message}
+            </h1>
+          )}
           <button
             type='submit'
             className='text-white w-7/12 flex items-center justify-center rounded-t-xl rounded-br-xl object-cover'

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 export const NewCard = ({ logo, heading, value, check }) => {
   return (
-    <div className="">
+    <div className=''>
       <div>{logo}</div>
-      <h1 className="uppercase">{heading}</h1>
-      <div className="mt-3 text-base">{value}</div>
+      <h1 className='uppercase'>{heading}</h1>
+      <div className='mt-3 text-base'>{value}</div>
       <div>{check}</div>
     </div>
   );
@@ -12,12 +12,11 @@ export const NewCard = ({ logo, heading, value, check }) => {
 
 const Card = ({ logo, heading, value }) => {
   return (
-    <div className="w-1/4 flex flex-col justify-center items-center gap-3 bg-white rounded-lg shadow-2xl m-3 p-3">
+    <div className='w-[35%] flex flex-col justify-center items-center gap-3 bg-white rounded-lg shadow-2xl m-3 p-3'>
       <div>{logo}</div>
-      <h1 className="uppercase">{heading}</h1>
-      <div className="mt-3 text-base">{value}</div>
+      <h1 className='uppercase'>{heading}</h1>
+      <div className='mt-2 text-base'>{value}</div>
     </div>
   );
 };
 export default Card;
-

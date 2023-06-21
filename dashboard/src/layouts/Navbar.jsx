@@ -1,17 +1,48 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import { Link } from "react-router-dom";
-import { Close, Menu, Settings } from "@mui/icons-material";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "../state/index";
-import logo from "../assets/images/3-removebg-preview.png";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { Link } from 'react-router-dom';
+import { Close, Menu } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogout } from '../state/index';
+import logo from '../assets/images/3-removebg-preview.png';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useMediaQuery } from '@mui/material';
+import axios from 'axios';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function Navbar({ onToggleSidebar }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const userId = user._id;
   const [click, setClick] = useState(false);
+  const [result, setResult] = useState([]);
+
+  const isNonMobileScreens = useMediaQuery('(min-width: 1024px)');
+
+  useEffect(() => {
+    {
+      isNonMobileScreens ? setClick(false) : setClick(true);
+    }
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${baseUrl}/api/admin/users/${userId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setResult(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [isNonMobileScreens, user.token, userId]);
 
   const handleClick = () => {
     setClick(!click);
@@ -19,24 +50,28 @@ function Navbar({ onToggleSidebar }) {
   };
 
   return (
-    <nav className="flex justify-between px-5 py-5 bg-white">
-      <button className="" onClick={handleClick}>
+    <nav className='flex justify-between px-5 py-5 bg-white h-[8vh] z-[999]'>
+      <button
+        className=''
+        onClick={handleClick}
+      >
         {click ? <Menu /> : <Close />}
       </button>
       <div>
-        <Link to="https://goobull.com">
-          <img src={logo} className="w-[25px]" alt="logo" />
+        <Link to='https://goobull.com'>
+          <img
+            src={logo}
+            className='w-[25px]'
+            alt='logo'
+          />
         </Link>
       </div>
-      <div className="flex gap-5">
-        <Link to="/settings" className="flex gap-5 hover:scale-95">
-          <Settings />
-        </Link>{" "}
-        <span className="">
-          <h2>{user.username}</h2>
+      <div className='flex gap-5'>
+        <span className=''>
+          <h2>{result.username}</h2>
         </span>
         <button
-          className="px-3 hover:font-semibold hover:text-red-500"
+          className='px-3 hover:font-semibold hover:text-red-500'
           onClick={() => dispatch(setLogout())}
         >
           Logout <LogoutIcon />

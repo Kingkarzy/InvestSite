@@ -57,7 +57,7 @@ const Dashboard = () => {
               className='w-12'
             />
           }
-          heading={'Total Deposit'}
+          heading={'DEPOSITS'}
           value={`$${result.deposited > 0 ? result.deposited : 0}`}
         />
         <Card

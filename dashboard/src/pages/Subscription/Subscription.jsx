@@ -10,11 +10,13 @@ function Subscription() {
   return (
     <div className='flex flex-col gap-10 md:px-10 h-[75vh] overflow-x-hidden md:w-full overflow-y-scroll'>
       <div className='black-gradient flex flex-col p-4 items-start'>
-        <h1 className='h1 orange-text-gradient'>Subscription Trade</h1>
+        <h1 className='h1 orange-text-gradient'>
+          Subscription Trade
+        </h1>
       </div>
       <div className='bg-white flex flex-col px-5 py-7 w-full lg:w-11/12 shadow-3xl'>
         <h2 className='font-semibold'>
-            Goobull Investment Trading Services Account Manager
+          Goobull Investment Trading Services Account Manager
         </h2>
         <br />
         <p className='lg:w-2/3 font-light'>
@@ -35,7 +37,7 @@ function Subscription() {
         </p>
       </div>
       <div className='w-2/4 gap-5 flex'>
-        <div>
+        <div onClick={handleOpen}>
           <PrimaryButton className='w-1/12'>
             Subscribe Now
           </PrimaryButton>
@@ -50,7 +52,9 @@ function Subscription() {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <div className='text-center font-semibold text-black bg-yellow-500 p-5'>Not available</div>
+        <div className='text-center font-semibold text-black bg-yellow-500 p-5'>
+          Not available
+        </div>
       </Modal>
     </div>
   );
