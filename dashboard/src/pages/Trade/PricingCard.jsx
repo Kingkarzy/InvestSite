@@ -16,9 +16,7 @@ const PriceCard = ({
 }) => {
   // IMPORT USER STATE
   const user = useSelector((state) => state.user);
-
   const userId = user._id;
-
   const [result, setResult] = useState([]);
 
   useEffect(() => {
@@ -49,15 +47,17 @@ const PriceCard = ({
   const handleChange = (e) => {
     const inputValue = parseInt(e.target.value);
     const max =
-      heading === 'Bronze'
+      heading == 'Bronze'
         ? 4999
-        : heading === 'Silver'
+        : heading == 'Silver'
         ? 9999
-        : heading === 'Gold'
+        : heading == 'Gold'
         ? 24999
-        : heading === 'Diamond'
+        : heading == 'Emerald'
         ? 49999
-        : 99999;
+        : heading == 'Ruby'
+        ? 99999
+        : 999999;
     if (inputValue > max) {
       setAmount(max);
     } else if (inputValue < price) {
@@ -138,9 +138,11 @@ const PriceCard = ({
             ? 9999
             : heading == 'Gold'
             ? 24999
-            : heading == 'Diamond'
+            : heading == 'Emerald'
             ? 49999
-            : 99999
+            : heading == 'Ruby'
+            ? 99999
+            : 999999
         }`}
         name='amount'
         placeholder={price}

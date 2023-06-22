@@ -60,6 +60,7 @@ const MyAccount = () => {
     } catch (err) {
       console.log(err);
       setMessage('Erorr!!');
+      setIsLoading(false);
     }
   };
   if (isLoading) {
@@ -90,7 +91,7 @@ const MyAccount = () => {
       {/******* FORM TO EDIT USER *******/}
       <div className='flex p-10 items-center justify-center'>
         <form
-          className='w-7/12 flex flex-col gap-5 bg-white p-10 flex-wrap justify-center items-center mt-5'
+          className='w-full lg:w-7/12 flex flex-col gap-5 bg-white p-10 flex-wrap justify-center items-center mt-5'
           onSubmit={handleUpdate}
         >
           <input
@@ -120,7 +121,7 @@ const MyAccount = () => {
           )}
           <button
             type='submit'
-            className='text-white w-7/12 flex items-center justify-center rounded-t-xl rounded-br-xl object-cover'
+            className='text-white md:w-7/12 flex items-center justify-center rounded-t-xl rounded-br-xl object-cover'
           >
             <PrimaryButton>Update User</PrimaryButton>
           </button>

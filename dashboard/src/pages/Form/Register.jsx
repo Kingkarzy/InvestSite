@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import Loading from '../../components/Loading';
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // EMAILJS KEYS
@@ -24,15 +25,24 @@ const Register = () => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [errorss, setError] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    handleOpen();
+
     if (password !== confirmPassword) {
       setPasswordMatch(false);
+      setIsLoading(false);
       return;
     }
-
+    setIsLoading(true);
     let data = JSON.stringify({
       username: username,
       email: email,
@@ -77,10 +87,12 @@ const Register = () => {
           .catch((error) => {
             console.log('Error sending confirmation email:', error);
           });
+        setIsLoading(false);
         navigate('/login');
       })
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
         setError(!errorss);
       });
   };
@@ -92,7 +104,14 @@ const Register = () => {
   const handleToggleConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-
+  if (isLoading) {
+    return (
+      <Loading
+        handleClose={handleClose}
+        open={open}
+      />
+    );
+  }
   return (
     <div className='w-screen h-screen overflow-hidden flex items-center justify-center bg-gradient-to-r from-[#e0e0e0] to-[#9b51e0] bg-cover'>
       <div className='m-8 lg:m-0 p-6 lg:p-16 w-10/12 md:w-7/12 lg:w-5/12 lg:landscape:w-5/12 landscape:w-full lg:landscape:scale-100 landscape:scale-50 bg-white shadow-2xl rounded-t-3xl rounded-br-3xl'>

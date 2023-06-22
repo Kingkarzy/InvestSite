@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { setLogin } from '../../state/index';
+// import { Modal } from '@mui/material';
+import Loading from '../../components/Loading';
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Login = () => {
@@ -13,6 +15,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorss, setError] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const login = async (values) => {
     try {
@@ -29,15 +36,19 @@ const Login = () => {
             token: loggedIn.token,
           })
         );
+        setIsLoading(false);
         navigate('/');
       }
     } catch (err) {
       setError(!errorss);
+      setIsLoading(false);
     }
   };
 
   const handleClick = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    handleOpen();
     login({
       username,
       password,
@@ -47,6 +58,16 @@ const Login = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  if (isLoading) {
+    return (
+      <Loading
+        handleClose={handleClose}
+        open={open}
+      />
+    );
+  }
+
   return (
     <div className='w-screen h-screen flex items-center justify-center background-gradient bg-cover'>
       <div className='m-8 lg:m-0 p-6 lg:p-16 w-10/12 md:w-7/12 lg:w-5/12 bg-white shadow-2xl rounded-t-3xl rounded-br-3xl'>

@@ -11,7 +11,7 @@ import referralRoute from './routes/referral.js';
 import cors from 'cors'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import cron from 'node-cron';
+// import cron from 'node-cron';
 import performBalanceUpdate from './cron/balanceUpdate.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,13 +30,14 @@ app.use('/api/plan', planRoute)
 app.use('/api/referral', referralRoute)
 app.use('/api/admin', adminRoute)
 app.use(express.static('public'));
+app.get('/api/cron-update', performBalanceUpdate)
 
-cron.schedule('0 0 * * *', () => {
+/* cron.schedule('0 0 * * *', () => {
   // Run the balance update task
   console.log('Running scheduled task...');
   performBalanceUpdate();
   console.log('Ran scheduled task...');
-});
+}); */
 
 const PORT = process.env.PORT || 5501;
 mongoose.set('strictQuery', false);

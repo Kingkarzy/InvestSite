@@ -25,15 +25,15 @@ function Layout() {
       <Navbar onToggleSidebar={handleToggleSidebar} />
       <div className='flex h-4/5 min-h-[92vh] relative'>
         <div
-          className={`border-amber-500 p-5 w-56 z-50 absolute bg-white left-0 lg:relative ${
+          className={`border-amber-500 p-5 w-2/4 md:w-2/5 lg:w-1/5 z-50 absolute bg-white left-0 lg:relative ${
             isSidebarOpen ? '' : 'hidden'
           } h-[92vh] `}
         >
           <Sidebar />
         </div>
-        <div className='flex-grow border-cyan-950 p-3 rounded-xl'>
+        <div className='flex-grow border-cyan-950 p-3 h-[92vh] rounded-xl justify-between flex flex-col'>
           <Outlet />
-          <div className='py-5 '>
+          <div className='py-5'>
             <Footer />
           </div>
         </div>

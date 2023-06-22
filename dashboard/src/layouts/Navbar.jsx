@@ -55,7 +55,7 @@ function Navbar({ onToggleSidebar }) {
       >
         {click ? <Menu /> : <Close />}
       </button>
-      <div>
+      <div className='flex justify-center items-center'>
         <Link to='https://goobull.com'>
           <img
             src={logo}
@@ -64,7 +64,7 @@ function Navbar({ onToggleSidebar }) {
           />
         </Link>
       </div>
-      <div className='flex gap-5'>
+      <div className='flex gap-5 items-center justify-center'>
         <span className=''>
           <h2>{result.username}</h2>
         </span>

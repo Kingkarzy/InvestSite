@@ -3,15 +3,18 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import PriceCard from './PricingCard';
 import { plans } from '../../utils/data';
+import Load from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function Trade() {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${baseUrl}/api/plan/${user._id}`,
@@ -23,8 +26,10 @@ function Trade() {
           }
         );
         setResult(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     };
 
@@ -36,13 +41,53 @@ function Trade() {
       <div className='background-indigo-gradient flex flex-col p-4 items-start'>
         <h1 className='h1'>Current Plans</h1>
       </div>
-      {result.map((item) => (
-        <div key={item._id}>
-          <h1>{item.planType}</h1>
-          <h1>{item.amount}</h1>
-          <h2>{item.duration} days</h2>
-        </div>
-      ))}
+      <div className='flex flex-wrap gap-5 w-full justify-between items-center'>
+        {isLoading ? (
+          <Load />
+        ) : (
+          result.map((item, index) => (
+            <div
+              key={index}
+              className={`flex flex-1 flex-col min-w-fit max-w-fit p-2 md:p-4 justify-start items-center rounded-t-xl rounded-br-xl shadow-3xl ${
+                item.planType === 'Bronze'
+                  ? 'bg-[#CD7F32]'
+                  : item.planType === 'Silver'
+                  ? 'bg-[#C0C0C0]'
+                  : item.planType === 'Gold'
+                  ? 'bg-[#FFD700]'
+                  : item.planType === 'Emerald'
+                  ? 'bg-[#50C878]'
+                  : item.planType === 'Ruby'
+                  ? // ? 'bg-[#9b111e]'
+                    'bg-[#E0115F]'
+                  : item.planType === 'Diamond'
+                  ? 'bg-[#b9f2ff]'
+                  : 'bg-white'
+              }`}
+            >
+              <h1 className='text-base'>
+                <strong>Plan:&nbsp;</strong>
+                {item.planType}
+              </h1>
+              <h1 className='text-base'>
+                <strong>Amount:&nbsp;</strong>
+                {item.amount}
+              </h1>
+              <h2 className='text-base'>
+                <strong>Days Left:&nbsp;</strong>
+                {item.duration} days
+              </h2>
+              <h2 className='text-base'>
+                <strong>Status:&nbsp;</strong>
+                {item.duration > 0 ? 'Ongoing' : 'Completed'}
+              </h2>
+              <h1 className='mt-2 text-sm font-medium italic'>
+                #{index + 1}
+              </h1>
+            </div>
+          ))
+        )}
+      </div>
 
       <div className='background-gradient flex flex-col p-4 items-end'>
         <h1 className='h1'>Investment Plans</h1>

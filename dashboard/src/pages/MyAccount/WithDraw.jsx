@@ -13,6 +13,7 @@ import { AddRounded } from '@mui/icons-material';
 import { Modal } from '@mui/material';
 import { CSVLink } from 'react-csv';
 import emailjs from '@emailjs/browser';
+import Load from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -30,50 +31,52 @@ function WithDraw() {
   const [balance, setBalance] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isTableLoading, setIsTableLoading] = useState(false);
 
   // MUI MODAL
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const fetchUserData = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${baseUrl}/api/admin/users/${user._id}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setBalance(response.data.balance);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [user._id, user.token]);
-
-  const fetchWithdrawData = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${baseUrl}/api/withdraw/${user._id}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setResult(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [user._id, user.token]);
-
   useEffect(() => {
+    const fetchWithdrawData = async () => {
+      try {
+        setIsTableLoading(true);
+        const response = await axios.get(
+          `${baseUrl}/api/withdraw/${user._id}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setResult(response.data);
+        setIsTableLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `${baseUrl}/api/admin/users/${user._id}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setBalance(response.data.balance);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchWithdrawData();
     fetchUserData();
-  }, [fetchUserData, fetchWithdrawData, user._id, user.token]);
+  }, [user._id, user.token]);
 
   // HANDLE SUBMIT FUNCTION
   const handleSubmit = (e) => {
@@ -334,30 +337,34 @@ function WithDraw() {
             </CSVLink>
           </div>
         </div>
-        <table className='table w-full my-5 border text-center border-solid border-gray-100'>
-          <thead className='bg-white'>
-            <tr>
-              <th>ID</th>
-              <th>Amount</th>
-              <th>Payment mode</th>
-              <th>Status</th>
-              <th>Date created</th>
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((item, index) => (
-              <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>{item.amount}</td>
-                <td>{item.mode}</td>
-                <td>{item.status}</td>
-                <td>
-                  {new Date(item.date).toLocaleDateString('en-GB')}
-                </td>
+        {isTableLoading ? (
+          <Load />
+        ) : (
+          <table className='table w-full my-5 border text-center border-solid border-gray-100'>
+            <thead className='bg-white'>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Payment mode</th>
+                <th>Status</th>
+                <th>Date created</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {result.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.mode}</td>
+                  <td>{item.status}</td>
+                  <td>
+                    {new Date(item.date).toLocaleDateString('en-GB')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

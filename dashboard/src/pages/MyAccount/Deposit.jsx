@@ -10,6 +10,8 @@ import { Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import emailjs from '@emailjs/browser';
+import Load from '../../components/Load';
+import Loading from '../../components/Loading';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -22,6 +24,7 @@ function Deposit() {
   const user = useSelector((state) => state.user);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isTableLoading, setIsTableLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -37,10 +40,10 @@ function Deposit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (amount > 100000) {
+    if (amount > 10000000) {
       return alert('Deposit amount greater than $100,000');
     }
-    if (amount < 500) {
+    if (amount < 10) {
       return alert('Deposit amount less than $500');
     }
     setIsLoading(true);
@@ -99,6 +102,7 @@ function Deposit() {
   };
   useEffect(() => {
     const fetchData = async () => {
+      setIsTableLoading(true);
       try {
         const response = await axios.get(
           `${baseUrl}/api/deposit/${user._id}`,
@@ -110,7 +114,7 @@ function Deposit() {
           }
         );
         setResult(response.data);
-        console.log(response.data);
+        setIsTableLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -121,18 +125,10 @@ function Deposit() {
 
   if (isLoading) {
     return (
-      <Modal
+      <Loading
+        handleClose={handleClose}
         open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <div className='items-center justify-center flex h-screen font-semibold text-3xl'>
-          Loading<span className='dot-1'>.</span>
-          <span className='dot-2'>.</span>
-          <span className='dot-3'>.</span>
-        </div>
-      </Modal>
+      />
     );
   }
   return (
@@ -265,30 +261,34 @@ function Deposit() {
         </div>
       </Modal>
       <div>
-        <table className='table w-full mb-5 border border-solid border-gray-100'>
-          <thead className='bg-white'>
-            <tr>
-              <th>ID</th>
-              <th>Amount</th>
-              <th>Payment mode</th>
-              <th>Status</th>
-              <th>Date created</th>
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((item, index) => (
-              <tr key={item._id}>
-                <td className='text-center'>{index + 1}</td>
-                <td className='text-center'>{item.amount}</td>
-                <td className='text-center'>{item.mode}</td>
-                <td className='text-center'>{item.status}</td>
-                <td className='text-center'>
-                  {new Date(item.date).toLocaleDateString('en-GB')}
-                </td>
+        {isTableLoading ? (
+          <Load />
+        ) : (
+          <table className='table w-full mb-5 border border-solid border-gray-100'>
+            <thead className='bg-white'>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Payment mode</th>
+                <th>Status</th>
+                <th>Date created</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {result.map((item, index) => (
+                <tr key={item._id}>
+                  <td className='text-center'>{index + 1}</td>
+                  <td className='text-center'>{item.amount}</td>
+                  <td className='text-center'>{item.mode}</td>
+                  <td className='text-center'>{item.status}</td>
+                  <td className='text-center'>
+                    {new Date(item.date).toLocaleDateString('en-GB')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

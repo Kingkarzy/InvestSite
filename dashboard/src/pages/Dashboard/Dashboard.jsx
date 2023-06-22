@@ -52,13 +52,13 @@ const Dashboard = () => {
         <Card
           logo={
             <img
-              src={depositImg}
-              alt='deposit'
+              src={balanceImg}
+              alt='balance'
               className='w-12'
             />
           }
-          heading={'DEPOSITS'}
-          value={`$${result.deposited > 0 ? result.deposited : 0}`}
+          heading={'BALANCE'}
+          value={`$${result.balance > 0 ? result.balance : 0}`}
         />
         <Card
           logo={
@@ -74,24 +74,24 @@ const Dashboard = () => {
         <Card
           logo={
             <img
-              src={bonusImg}
-              alt='bonus'
+              src={depositImg}
+              alt='deposit'
               className='w-12'
             />
           }
-          heading={'BONUS'}
-          value={'$0.00'}
+          heading={'DEPOSITS'}
+          value={`$${result.deposited > 0 ? result.deposited : 0}`}
         />
         <Card
           logo={
             <img
-              src={balanceImg}
-              alt='balance'
+              src={withdrawImg}
+              alt='withdraw'
               className='w-12'
             />
           }
-          heading={'BALANCE'}
-          value={`$${result.balance > 0 ? result.balance : 0}`}
+          heading={'WITHDRAWN'}
+          value={`$${result.withdrawn > 0 ? result.withdrawn : 0}`}
         />
         <Card
           logo={
@@ -107,13 +107,13 @@ const Dashboard = () => {
         <Card
           logo={
             <img
-              src={withdrawImg}
-              alt='withdraw'
+              src={bonusImg}
+              alt='bonus'
               className='w-12'
             />
           }
-          heading={'WITHDRAWN'}
-          value={`$${result.withdrawn > 0 ? result.withdrawn : 0}`}
+          heading={'BONUS'}
+          value={'$0'}
         />
       </div>
       <div className='w-[80%] bg-white gap-5 justify-evenly flex flex-wrap mx-auto my-5 p-5'>

@@ -13,6 +13,7 @@ router.post("/", verifyUserToken, async (req, res) => {
     const user = await User.findById(req.body.userId);
     user.balance -= newPlan.amount;
     try {
+        await user.save();
         const savedPlan = await newPlan.save()
         res.status(200).json(savedPlan)
     } catch (error) {

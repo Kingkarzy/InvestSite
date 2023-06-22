@@ -4,7 +4,7 @@ import {
   ExpandMore,
   ExpandLess,
   Settings,
-  ArrowLeftRounded,
+  ChevronLeftRounded,
 } from '@mui/icons-material';
 function Sidebar() {
   const [click, setClick] = useState(false);
@@ -12,7 +12,7 @@ function Sidebar() {
     setClick(!click);
   };
   return (
-    <nav className='bg-white'>
+    <nav className='bg-white w-full p-5'>
       <ul className='flex flex-col justify-evenly h-[75vh]'>
         <li>
           <Link
@@ -99,8 +99,11 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to='https://goobull.com'>
-            <ArrowLeftRounded sx={{ fontSize: '2rem' }} />
+          <Link
+            to='https://goobull.com'
+            className='flex items-center'
+          >
+            <ChevronLeftRounded sx={{ fontSize: '2rem' }} />
             Return Home
           </Link>
         </li>

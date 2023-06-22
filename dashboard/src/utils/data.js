@@ -2,7 +2,7 @@ export const plans = [
     {
         id: 1,
         heading: 'Bronze',
-        price: 1000,
+        price: 500,
         percent: 25,
         duration: 5,
     },
