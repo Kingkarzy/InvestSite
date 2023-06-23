@@ -1,7 +1,7 @@
 import Plans from './Home/Plans'
 const Packages = () => {
   return (
-    <div>
+    <div className="">
       <Plans />
     </div>
   );

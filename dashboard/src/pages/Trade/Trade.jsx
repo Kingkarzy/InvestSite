@@ -103,6 +103,7 @@ function Trade() {
               key={item.id}
               heading={item.heading}
               price={item.price}
+              range={item.range}
               percent={item.percent}
               duration={item.duration}
               refer='2% referral bonus'
