@@ -10,7 +10,7 @@ import { Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import emailjs from '@emailjs/browser';
-import Load from '../../components/Load';
+import { Load } from '../../components/Load';
 import Loading from '../../components/Loading';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;

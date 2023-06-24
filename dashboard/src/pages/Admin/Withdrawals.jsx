@@ -7,7 +7,7 @@ import {
 } from '../../components/Button';
 import emailjs from '@emailjs/browser';
 import Loading from '../../components/Loading';
-import Load from '../../components/Load';
+import { Load } from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

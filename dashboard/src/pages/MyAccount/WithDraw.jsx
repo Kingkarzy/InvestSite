@@ -13,7 +13,7 @@ import { AddRounded } from '@mui/icons-material';
 import { Modal } from '@mui/material';
 import { CSVLink } from 'react-csv';
 import emailjs from '@emailjs/browser';
-import Load from '../../components/Load';
+import { Load } from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

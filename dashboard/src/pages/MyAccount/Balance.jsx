@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import balanceImg from '../../assets/images/money.png';
 import NewCard from '../../components/NewCard';
+import { LoadSmall } from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -11,9 +12,11 @@ function Balance() {
   const userId = user._id;
 
   const [result, setResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${baseUrl}/api/admin/users/${userId}`,
@@ -28,19 +31,32 @@ function Balance() {
       } catch (error) {
         console.log(error);
       }
+      setIsLoading(false);
     };
 
     fetchData();
   }, [user.token, userId]);
   return (
-    <div className="w-3/4 bg-purple-200 mx-auto p-3 rounded-xl">
-      <div className="w-full bg-green-200 flex justify-center py-5">
+    <div className='w-3/4 bg-purple-200 mx-auto p-3 rounded-xl'>
+      <div className='w-full bg-green-200 flex justify-center py-5'>
         <NewCard
-          className="w-full"
-          logo={<img src={balanceImg} alt="balance" className="w-36" />}
-          heading={"ACCOUNT BALANCE"}
-          value={`$${result.balance > 0 ? result.balance.toFixed(2) : 0}`}
-          checkout={"Invest in your dream"}
+          className='w-full'
+          logo={
+            <img
+              src={balanceImg}
+              alt='balance'
+              className='w-36'
+            />
+          }
+          heading={'ACCOUNT BALANCE'}
+          value={
+            isLoading ? (
+              <LoadSmall />
+            ) : (
+              `$${result.balance > 0 ? result.balance.toFixed(2) : 0}`
+            )
+          }
+          checkout={'Invest in your dream'}
         />
       </div>
     </div>

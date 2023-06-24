@@ -9,7 +9,7 @@ import { PrimaryButton } from '../../components/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import emailjs from 'emailjs-com';
 import Loading from '../../components/Loading';
-import Load from '../../components/Load';
+import { Load } from '../../components/Load';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

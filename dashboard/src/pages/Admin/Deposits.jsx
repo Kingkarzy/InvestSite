@@ -7,7 +7,7 @@ import {
 } from '../../components/Button';
 import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
-import Load from '../../components/Load';
+import { Load } from '../../components/Load';
 import Loading from '../../components/Loading';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
