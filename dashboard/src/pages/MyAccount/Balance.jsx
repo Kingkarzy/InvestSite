@@ -33,20 +33,14 @@ function Balance() {
     fetchData();
   }, [user.token, userId]);
   return (
-    <div className='w-3/4 bg-purple-200 mx-auto p-3 rounded-xl'>
-      <div className='w-full bg-green-200 flex justify-center py-5'>
+    <div className="w-3/4 bg-purple-200 mx-auto p-3 rounded-xl">
+      <div className="w-full bg-green-200 flex justify-center py-5">
         <NewCard
-          className='w-full'
-          logo={
-            <img
-              src={balanceImg}
-              alt='balance'
-              className='w-36'
-            />
-          }
-          heading={'ACCOUNT BALANCE'}
-          value={`$${result.balance > 0 ? result.balance : 0}`}
-          checkout={'Invest in your dream'}
+          className="w-full"
+          logo={<img src={balanceImg} alt="balance" className="w-36" />}
+          heading={"ACCOUNT BALANCE"}
+          value={`$${result.balance > 0 ? result.balance.toFixed(2) : 0}`}
+          checkout={"Invest in your dream"}
         />
       </div>
     </div>

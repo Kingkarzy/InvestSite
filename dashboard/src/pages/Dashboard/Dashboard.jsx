@@ -63,22 +63,22 @@ const Dashboard = () => {
         <Card
           logo={<img src={balanceImg} alt="balance" className="w-12" />}
           heading={"BALANCE"}
-          value={`$${result.balance > 0 ? result.balance : 0}`}
+          value={`$${result.balance > 0 ? result.balance.toFixed(2) : 0}`}
         />
         <Card
           logo={<img src={profitImg} alt="profit" className="w-12" />}
           heading={"PROFIT"}
-          value={`$${result.profit > 0 ? result.profit : 0}`}
+          value={`$${result.profit > 0 ? result.profit.toFixed(2) : 0}`}
         />
         <Card
           logo={<img src={depositImg} alt="deposit" className="w-12" />}
           heading={"DEPOSITS"}
-          value={`$${result.deposited > 0 ? result.deposited : 0}`}
+          value={`$${result.deposited > 0 ? result.deposited.toFixed(2) : 0}`}
         />
         <Card
           logo={<img src={withdrawImg} alt="withdraw" className="w-12" />}
           heading={"WITHDRAWN"}
-          value={`$${result.withdrawn > 0 ? result.withdrawn : 0}`}
+          value={`$${result.withdrawn > 0 ? result.withdrawn.toFixed(2) : 0}`}
         />
         <Card
           logo={<img src={planImg} alt="plan" className="w-12" />}
