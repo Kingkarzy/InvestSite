@@ -56,5 +56,37 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.post("/forget-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      throw new Error("User does not exist");
+    }
+    const oldtoken = await token.findOne({ id: user._id });
+    if (oldtoken) {
+      await token.deleteOne();
+    }
+    const resetToken = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "3d" }
+    );
+    // const hash = await bcrypt.hash(resetToken, salt);
+    await new Token({
+      userId: user._id,
+    //   token: hash,
+      createdAt: Date.now(),
+    }).save();
+    const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+    sendEmail(user.email, "Password Reset Request", {name: user.name, link: link}, "./template/requestRestPassword.handlebars");
+    return link;
+  } catch (err) {
+    res.json(500).json({ error: err.message });
+  }
+})
 export default router
 
