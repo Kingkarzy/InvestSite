@@ -91,12 +91,13 @@ const PriceCard = ({
       setLoad(false);
       return alert('Current Balance Not Enough For This Plan');
     }
+    const gain = (percent * amount) / (100 * duration);
     const data = JSON.stringify({
       userId: user._id,
       planType: heading,
       amount: amount,
       duration: duration,
-      gain: percent,
+      gain: gain,
     });
 
     const config = {
@@ -172,7 +173,13 @@ const PriceCard = ({
             : 'Not Valid'
         }`}
         name='amount'
-        placeholder={price}
+        placeholder={
+          heading === 'Silver'
+            ? 100
+            : heading === 'Gold'
+            ? 1001
+            : 5000
+        }
         className='block w-9/12 h-9 py-1 px-3 text-sm text-gray-600 bg-white border border-solid border-gray-300'
         onChange={handleChange}
       />
