@@ -110,7 +110,7 @@ const Login = () => {
                 <span className="text-red-600 ">
                   Invalid username or password.{" "}
                 </span>
-                <Link to={"/"} className="text-blue">
+                <Link to={"/forgot-password"} className="text-blue">
                   Forgot Password?
                 </Link>
               </div>
