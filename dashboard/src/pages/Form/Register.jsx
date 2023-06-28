@@ -211,7 +211,7 @@ const Register = () => {
                 Password should be longer than 8 characters, use
                 uppercase and lowercase letters, and have a number.
               </p>
-            ) : passwordMatch ? (
+            ) : !passwordMatch ? (
               <span className='text-red-400 mx-2 text-sm lg:text-base'>
                 Passwords do not match
               </span>

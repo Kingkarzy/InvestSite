@@ -69,7 +69,9 @@ function Navbar({ onToggleSidebar }) {
       </div>
       <div className='flex gap-5 items-center justify-center'>
         <span className=''>
-          <h2>{result.username}</h2>
+          <h2>
+            {result.firstName}&nbsp;{result.lastName}
+          </h2>
         </span>
         <button
           className='px-3 hover:font-semibold hover:text-red-500'
