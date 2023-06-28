@@ -34,8 +34,11 @@ function Navbar({ onToggleSidebar }) {
       setResult(response.data);
     } catch (error) {
       console.log(error);
+      if (error.response.data.error === 'jwt expired') {
+        dispatch(setLogout());
+      }
     }
-  }, [userId, user.token]);
+  }, [userId, user.token, dispatch]);
 
   useEffect(() => {
     isNonMobileScreens ? setClick(false) : setClick(true);

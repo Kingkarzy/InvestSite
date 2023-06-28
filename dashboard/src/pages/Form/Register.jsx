@@ -2,15 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { useNavigate } from 'react-router-dom';
-import emailjs from '@emailjs/browser';
 import Loading from '../../components/Loading';
 const baseUrl = import.meta.env.VITE_BASE_URL;
-
-// EMAILJS KEYS
-const emailjs_apikey = import.meta.env.VITE_EMAILJS_API_KEY;
-const emailjs_templatekey = import.meta.env.VITE_EMAILJS_TEMPLATE_KEY;
-const emailjs_servicekey = import.meta.env.VITE_EMAILJS_SERVICE_KEY;
-emailjs.init(emailjs_apikey);
+const passwordRegex =
+  // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.!@#$%^&*]).{8,}$/;
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -24,6 +20,8 @@ const Register = () => {
     useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [errorss, setError] = useState(false);
+  const errors = [];
+  const [failedReq, setFailedReq] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -34,14 +32,22 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     handleOpen();
 
     if (password !== confirmPassword) {
       setPasswordMatch(false);
-      setIsLoading(false);
       return;
     }
+
+    // Check password against the regex pattern
+    if (!passwordRegex.test(password)) {
+      // Password doesn't meet the requirements
+      // Display an error message or handle it as desired
+      setFailedReq(true);
+      errors.push("Password doesn't meet the requirements");
+      return;
+    }
+
     setIsLoading(true);
     let data = JSON.stringify({
       username: username,
@@ -50,15 +56,6 @@ const Register = () => {
       firstName: firstName,
       lastName: lastName,
     });
-
-    const emailParams = {
-      to_name: username,
-      to_email: email,
-      message:
-        'Your account has successfully been registered and is pending an approval.\nAn email confirming your accounts approval will be sent within 24 hours.',
-      subject: `Welcome To Goobull Investments, ${firstName}`,
-      from_email: 'no-reply@goobull.com',
-    };
 
     let config = {
       method: 'post',
@@ -74,19 +71,6 @@ const Register = () => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        emailjs
-          .send(
-            emailjs_servicekey,
-            emailjs_templatekey,
-            emailParams,
-            emailjs_apikey
-          )
-          .then((response) => {
-            console.log('Confirmation email sent:', response.text);
-          })
-          .catch((error) => {
-            console.log('Error sending confirmation email:', error);
-          });
         setIsLoading(false);
         navigate('/login');
       })
@@ -157,6 +141,7 @@ const Register = () => {
               type={showPassword ? 'text' : 'password'}
               placeholder='Password'
               required
+              pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
@@ -172,12 +157,20 @@ const Register = () => {
               )}
             </button>
           </div>
+          {/* {failedReq && (
+            <p className='text-[0.5rem] mx-2 text-red-500'>
+              Password should be longer than 8 characters, use
+              uppercase and lowercase letters, and have a number.
+              // and a special character (.!@#$%^&*).
+            </p>
+          )} */}
           <div className='relative flex-1 mr-2 pr-2'>
             <input
               className='flex-1 min-w-[40%] w-full m-2 p-2 border border-solid border-gray-300 focus:border-blue-900 text-sm md:text-base pr-[2.5rem]'
               type={showConfirmPassword ? 'text' : 'password'}
               placeholder='Confirm Password'
               required
+              pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <button
@@ -193,11 +186,11 @@ const Register = () => {
               )}
             </button>
           </div>
-          {!passwordMatch && (
+          {/* {!passwordMatch && (
             <span className='text-red-400 mx-2 text-sm lg:text-base'>
               Passwords do not match
             </span>
-          )}
+          )} */}
           <p className='text-xs m-4'>
             By creating an account, I consent to the processing of my
             personal data in accordance with the <b>PRIVACY POLICY</b>
@@ -209,10 +202,21 @@ const Register = () => {
             >
               REGISTER
             </button>
-            {errorss && (
-              <span className='text-red-400 text-sm lg:text-base'>
+            {errorss ? (
+              <span className='text-red-500 text-sm lg:text-base'>
                 Something went wrong...
               </span>
+            ) : failedReq ? (
+              <p className='text-[0.5rem] mx-2 text-red-500'>
+                Password should be longer than 8 characters, use
+                uppercase and lowercase letters, and have a number.
+              </p>
+            ) : passwordMatch ? (
+              <span className='text-red-400 mx-2 text-sm lg:text-base'>
+                Passwords do not match
+              </span>
+            ) : (
+              <div></div>
             )}
             <a
               className='m-1 text-xs underline cursor-pointer'
